@@ -1,0 +1,16 @@
+""" timekpr directories """
+# Note: Unlike in source setup.cfg, actual variables contain:
+#       root_dir (i.e. "/") + dir (e.g. "var/log/timekpr.log")
+#       => /var/log/timekpr.log
+
+### timekpr-related files/dirs
+log_file = {log_file}
+settings_dir = {settings_dir}
+work_dir = {work_dir}
+shared_dir = {shared_dir}
+daemon_dir = {daemon_dir}
+
+### system files/dirs, used by timekpr
+login_defs = {login_defs}
+pam_time_conf = {pam_time_conf}
+pam_access_conf = {pam_access_conf}

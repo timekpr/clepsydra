@@ -1,0 +1,7 @@
+setup.cfg
+setup.py
+src/timekpr.py
+src/timekprd.py
+data/*
+LICENSE
+COPYRIGHT
