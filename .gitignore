@@ -1,4 +1,6 @@
 *~
+clepsydra
 Makefile
 *.ui.autosave
+*.o
 *.pro.user
