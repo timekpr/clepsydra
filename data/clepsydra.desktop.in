@@ -1,8 +1,8 @@
 [Desktop Entry]
 Encoding=UTF-8
-_Name=timekpr
+_Name=Clepsydra
 _Comment=Timekpr Client
-Icon=timekpr
+Icon=clepsydra
 Exec=timekpr-client
 Terminal=true
 Type=Application
