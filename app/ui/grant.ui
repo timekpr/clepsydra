@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>385</width>
-    <height>196</height>
+    <height>249</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,13 +40,6 @@
      </property>
     </spacer>
    </item>
-   <item row="1" column="1" colspan="2">
-    <widget class="KPushButton" name="btnClearAllRestriction">
-     <property name="text">
-      <string>Clear</string>
-     </property>
-    </widget>
-   </item>
    <item row="2" column="1" colspan="2">
     <spacer name="verticalSpacer_4">
      <property name="orientation">
@@ -62,20 +55,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="3" column="1">
-    <widget class="KPushButton" name="btnBypass">
-     <property name="text">
-      <string>Bypass</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="2">
-    <widget class="KPushButton" name="btnClearBypass">
-     <property name="text">
-      <string>Unbypass</string>
-     </property>
-    </widget>
    </item>
    <item row="4" column="1" colspan="2">
     <spacer name="verticalSpacer_6">
@@ -103,20 +82,6 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="1">
-    <widget class="KPushButton" name="btnLockAccount">
-     <property name="text">
-      <string>Lock</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="2">
-    <widget class="KPushButton" name="btnUnlockAccount">
-     <property name="text">
-      <string>Unlock</string>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="1" colspan="2">
     <spacer name="verticalSpacer_5">
      <property name="orientation">
@@ -140,19 +105,6 @@
      </property>
      <property name="alignment">
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="7" column="1">
-    <widget class="KPushButton" name="btnAddTime">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Add</string>
      </property>
     </widget>
    </item>
@@ -195,19 +147,6 @@
      </item>
     </layout>
    </item>
-   <item row="8" column="1">
-    <widget class="KPushButton" name="btnResetTime">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="text">
-      <string>Reset</string>
-     </property>
-    </widget>
-   </item>
    <item row="9" column="1" colspan="2">
     <spacer name="verticalSpacer">
      <property name="orientation">
@@ -221,14 +160,70 @@
      </property>
     </spacer>
    </item>
+   <item row="1" column="1" colspan="2">
+    <widget class="QPushButton" name="btnClearAllRestriction">
+     <property name="text">
+      <string>Clear</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="btnBypass">
+     <property name="text">
+      <string>Bypass</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="btnClearBypass">
+     <property name="text">
+      <string>Unbypass</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="btnLockAccount">
+     <property name="text">
+      <string>Lock</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="btnUnlockAccount">
+     <property name="text">
+      <string>Unlock</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="1">
+    <widget class="QPushButton" name="btnAddTime">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Add</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
+    <widget class="QPushButton" name="btnResetTime">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="text">
+      <string>Reset</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>KPushButton</class>
-   <extends>QPushButton</extends>
-   <header>kpushbutton.h</header>
-  </customwidget>
   <customwidget>
    <class>KIntSpinBox</class>
    <extends>QSpinBox</extends>
