@@ -1,4 +1,6 @@
 #include <QApplication>
+#include "users.h"
+
 #include "ui_main.h"
 
  int main(int argc, char *argv[])
@@ -8,6 +10,9 @@
      QWidget *widget = new QWidget;
      Ui::Form ui;
      ui.setupUi(widget);
+
+     Users *user = new Users();
+     user->getStandardUsers();
 
      widget->show();
 
