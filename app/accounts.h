@@ -2,6 +2,7 @@
 #define ACCOUNTS_H
 
 #include <QObject>
+#include <QList>
 #include "user.h"
 
 class Accounts : public QObject
@@ -11,9 +12,11 @@ public:
     explicit Accounts(QObject *parent = 0);
     
     // Get users
-    QList<User> getUsers ();
+    void getUsers ();
 
 public:
+    static inline const char *staticInterfaceName()
+    { return "org.freedesktop.Accounts"; }
 
 private:
 

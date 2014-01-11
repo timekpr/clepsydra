@@ -1,12 +1,12 @@
 #include <QtDBus>
-#include "users.h"
+#include "user.h"
 
-Users::Users(QObject *parent) :
+User::User(QObject *parent) :
     QObject(parent)
 {
 }
 
-void Users::getStandardUsers()
+void User::getStandardUsers()
 {
 
 //    QDBusConnection::sessionBus().connect("org.gnome.SessionManager", "/org/gnome/SessionManager/Presence", "org.gnome.SessionManager.Presence" ,"StatusChanged", this, SLOT(MySlot(uint)));
