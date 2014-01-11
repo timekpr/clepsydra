@@ -1,5 +1,6 @@
 #include <QApplication>
-#include "users.h"
+#include "user.h"
+#include "accounts.h"
 
 #include "ui_main.h"
 
@@ -11,7 +12,7 @@
      Ui::Form ui;
      ui.setupUi(widget);
 
-     Users *user = new Users();
+     Users *user = new Accounts();
      user->getStandardUsers();
 
      widget->show();

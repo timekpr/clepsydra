@@ -8,8 +8,11 @@ RCC_DIR = tmp
 OBJECTS_DIR = tmp
 MOC_DIR = tmp
 
-HEADERS += users.h
+HEADERS += \
+    accounts.h \
+    user.h
 
 SOURCES += \
     main.cpp \
-    users.cpp
+    accounts.cpp \
+    user.cpp
