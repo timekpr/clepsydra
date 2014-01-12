@@ -11,6 +11,8 @@ class Accounts : public QObject
 public:
     explicit Accounts(QObject *parent = 0);
     
+    ~Accounts ();
+
     // Get users
     void getUsers ();
 
@@ -18,7 +20,10 @@ public:
     static inline const char *staticInterfaceName()
     { return "org.freedesktop.Accounts"; }
 
+
+
 private:
+    QList<User*>*    m_users;
 
 };
 

@@ -6,18 +6,20 @@ User::User(QObject *parent) :
 {
 }
 
-void User::getStandardUsers()
+void User::setObjectPath(const QString& path)
 {
+    m_path = path;
+    loadUserInfo();
+}
 
-//    QDBusConnection::sessionBus().connect("org.gnome.SessionManager", "/org/gnome/SessionManager/Presence", "org.gnome.SessionManager.Presence" ,"StatusChanged", this, SLOT(MySlot(uint)));
-//    // https://github.com/mauios/qtaccountsservice
+void User::loadUserInfo()
+{
     QDBusConnection bus = QDBusConnection::systemBus();
     QDBusInterface adbus_iface("org.freedesktop.Accounts",
-       "/org/freedesktop/Accounts/User1000",
-       "org.freedesktop.Accounts.User", bus);
+       m_path,"org.freedesktop.Accounts.User", bus);
 
-    qDebug() << "username" <<  adbus_iface.property("UserName").toString();
-    qDebug() << "account type" <<  adbus_iface.property("AccountType").toInt();
-    qDebug() << "Shell" <<  adbus_iface.property("Shell").toString();
-
+    m_userName = adbus_iface.property("UserName").toString();
+    m_uid = adbus_iface.property("Uid").toString();
+    m_accountType = adbus_iface.property("AccountType").toInt();
+    qDebug() << m_userName;
 }
