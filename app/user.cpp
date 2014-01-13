@@ -6,6 +6,11 @@ User::User(QObject *parent) :
 {
 }
 
+User::~User()
+{
+    qDebug() << "delete";
+}
+
 void User::setObjectPath(const QString& path)
 {
     m_path = path;

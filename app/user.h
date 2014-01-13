@@ -9,6 +9,8 @@ class User : public QObject
 
 public:
     explicit User(QObject *parent = 0);
+
+    ~User ();
     
     // Set object path and init default values for it.
     void setObjectPath(const QString&);

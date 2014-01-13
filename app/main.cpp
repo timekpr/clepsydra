@@ -18,6 +18,8 @@
 
      widget->show();
 
+     delete accounts;
+
      return app.exec();
  }
 

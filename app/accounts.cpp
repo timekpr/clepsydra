@@ -11,12 +11,12 @@ Accounts::Accounts(QObject *parent) :
 
 Accounts::~Accounts ()
 {
+    m_users->clear();
     delete m_users;
 }
 
 void  Accounts::getUsers()
 {
-    // QList<User> users;
     QDBusConnection bus = QDBusConnection::systemBus();
     QDBusInterface adbus_iface("org.freedesktop.Accounts",
        "/org/freedesktop/Accounts",
@@ -26,10 +26,7 @@ void  Accounts::getUsers()
 
     QList<QVariant> outArgs = msg.arguments();
     QVariant first = outArgs.at(0);
-    QDBusArgument dbvFirst = first.value<QDBusArgument>();
-    //    qDebug() << "QDBusArgument current type is" << dbvFirst.currentType();
-    //    qDebug() << "QDBusArgument current type is" << dbvFirst.currentSignature();
-
+    const QDBusArgument& dbvFirst = first.value<QDBusArgument>();
     QDBusObjectPath path;
     dbvFirst.beginArray();
     while (!dbvFirst.atEnd())  {
