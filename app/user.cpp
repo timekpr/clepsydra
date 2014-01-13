@@ -26,5 +26,4 @@ void User::loadUserInfo()
     m_userName = adbus_iface.property("UserName").toString();
     m_uid = adbus_iface.property("Uid").toString();
     m_accountType = adbus_iface.property("AccountType").toInt();
-    qDebug() << m_userName;
 }
