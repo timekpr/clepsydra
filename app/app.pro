@@ -10,9 +10,11 @@ MOC_DIR = tmp
 
 HEADERS += \
     accounts.h \
-    user.h
+    user.h \
+    mainwindow.h
 
 SOURCES += \
     main.cpp \
     accounts.cpp \
-    user.cpp
+    user.cpp \
+    mainwindow.cpp

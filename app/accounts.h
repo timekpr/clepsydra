@@ -21,7 +21,6 @@ public:
     { return "org.freedesktop.Accounts"; }
 
 
-
 private:
     QList<User*>*    m_users;
 

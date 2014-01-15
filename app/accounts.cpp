@@ -18,7 +18,7 @@ Accounts::~Accounts ()
 void  Accounts::getUsers()
 {
     QDBusConnection bus = QDBusConnection::systemBus();
-    QDBusInterface adbus_iface("org.freedesktop.Accounts",
+    QDBusInterface adbus_iface(staticInterfaceName(),
        "/org/freedesktop/Accounts",
        "org.freedesktop.Accounts", bus);
     QList<QVariant> argumentList;
