@@ -31,6 +31,10 @@ public:
 public slots:
 
 private:
+
+    void addGrantForm();
+
+private:
     Ui::Form *ui;
 
 };

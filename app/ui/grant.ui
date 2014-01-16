@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Form</class>
- <widget class="QWidget" name="Form">
+ <class>grantForm</class>
+ <widget class="QWidget" name="grantForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -130,7 +130,7 @@
       </widget>
      </item>
      <item>
-      <widget class="KIntSpinBox" name="sbAddTime">
+      <widget class="QSpinBox" name="sbAddTime">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -138,7 +138,7 @@
         </sizepolicy>
        </property>
        <property name="minimum">
-        <number>-1440</number>
+        <number>0</number>
        </property>
        <property name="maximum">
         <number>1440</number>
@@ -223,13 +223,6 @@
    </item>
   </layout>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>KIntSpinBox</class>
-   <extends>QSpinBox</extends>
-   <header>knuminput.h</header>
-  </customwidget>
- </customwidgets>
  <resources/>
  <connections/>
 </ui>

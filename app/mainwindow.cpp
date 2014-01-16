@@ -15,9 +15,36 @@
 
 #include "mainwindow.h"
 #include "ui_main.h"
+#include "ui_limits.h"
+#include "ui_grant.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), ui(new Ui::Form)
 {
     ui->setupUi(this);
+
+    QWidget* grantWidget = new QWidget(this);
+    Ui::grantForm uiG;
+    uiG.setupUi(grantWidget);
+
+    QWidget* limitWidget = new QWidget(this);
+    Ui::limitForm uiLimit;
+    uiLimit.setupUi(limitWidget);
+
+    // Probably we need separate limits and bounds to different tabs ...
+    ui->tab->addTab(grantWidget, tr("Grant"));
+    ui->tab->addTab(limitWidget, tr("Limits and Bounds"));
+
+    // yes,  both first two tabs ...
+    ui->tab->removeTab(0);
+    ui->tab->removeTab(0);
+
+
+
 }
+
+void MainWindow::addGrantForm()
+{
+
+}
+
