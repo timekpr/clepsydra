@@ -11,10 +11,13 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QDebug>
+#include <QProgressBar>
 #include "mainwindow.h"
 
 #include "mainwindow.h"
 #include "ui_main.h"
+#include "ui_status.h"
 #include "ui_limits.h"
 #include "ui_grant.h"
 
@@ -39,7 +42,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tab->removeTab(0);
     ui->tab->removeTab(0);
 
+    Ui::statusForm statusForm;
+    QFrame* statusFrame  = ui->frStatus;
+    //statusFramestatusFrame->setParent(statusForm);
 
+    // todo temp remove ..
+    QProgressBar *bar = new QProgressBar(statusFrame);
+    bar->setMaximumHeight(10);
+    bar->setMaximumWidth(100);
 
 }
 
