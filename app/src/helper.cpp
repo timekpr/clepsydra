@@ -11,10 +11,6 @@ See the COPYRIGHT file for full details. You should have received the COPYRIGHT 
 #include <QTextStream>
 #include <QDir>
 #include <QRegExp>
-//#include <KConfig>
-//#include <KConfigGroup>
-//#include <KStandardDirs>
-
 #include <iostream>
 
 #include <QDebug>
@@ -54,13 +50,7 @@ bool Helper::save(const QVariantMap &args)
         reply = savelimits(args);
     else
         reply = managepermissions(args);
-
     return reply;
-    
-//    if(reply)
-//        return ActionReply(ActionReply::SuccessReply);
-//    else
-//        return ActionReply(ActionReply::HelperErrorReply);
 }
 
 bool Helper::savelimits(const QVariantMap &args)
@@ -231,9 +221,9 @@ bool Helper::lockUnlock(QString user, int op)
     
     QString regex;
     if(op == 1)
-	regex = "(## TIMEKPR END)";
+    regex = "(## CLEPSYDRA END)";
     else
-	regex = "## TIMEKPR START\\n.*(-:" + user + ":ALL\\n)";
+    regex = "## CLEPSYDRA START\\n.*(-:" + user + ":ALL\\n)";
     
     QRegExp re(regex);
     
@@ -258,4 +248,3 @@ bool Helper::lockUnlock(QString user, int op)
     return true;
 }
 
-//KDE4_AUTH_HELPER_MAIN("org.kde.kcontrol.kcmtimekpr", Helper)
