@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) :
         }
         ui->cbActiveUser->setCurrentIndex(0);
     }
+    connect(ui->cbActiveUser, SIGNAL(currentIndexChanged (const QString&)), this,
+            SLOT(currentIndexChanged(QString)));
 
     QWidget* grantWidget = new QWidget(this);
     Ui::grantForm uiG;
@@ -60,6 +62,11 @@ MainWindow::MainWindow(QWidget *parent) :
 //    QFrame* statusFrame  = ui->frStatus;
     //statusFramestatusFrame->setParent(statusForm);
 
+}
+
+void MainWindow::currentIndexChanged (const QString& newsUser)
+{
+    qDebug() << newsUser ;
 }
 
 void MainWindow::addGrantForm()

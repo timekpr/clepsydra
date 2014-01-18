@@ -32,6 +32,8 @@ public:
 
 public slots:
 
+    void currentIndexChanged (const QString&);
+
 private:
 
     void addGrantForm();

@@ -21,13 +21,21 @@ User::User(QObject *parent) :
 
 User::~User()
 {
-    qDebug() << "delete";
 }
 
 void User::setObjectPath(const QString& path)
 {
     m_path = path;
     loadUserInfo();
+}
+
+
+bool User::isAdmin()
+{
+    bool reply = false;
+    if (m_accountType!=0)
+        reply = true;
+    return reply;
 }
 
 QString User::UserName() const
