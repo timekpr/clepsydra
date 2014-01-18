@@ -17,6 +17,8 @@
 #include <QObject>
 #include <QMainWindow>
 
+#include "accounts.h"
+
 namespace Ui {
 class Form;
 }
@@ -36,6 +38,7 @@ private:
 
 private:
     Ui::Form *ui;
+    Accounts* m_accounts;
 
 };
 

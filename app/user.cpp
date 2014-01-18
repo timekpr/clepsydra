@@ -30,6 +30,11 @@ void User::setObjectPath(const QString& path)
     loadUserInfo();
 }
 
+QString User::UserName() const
+{
+    return m_userName;
+}
+
 void User::loadUserInfo()
 {
     QDBusConnection bus = QDBusConnection::systemBus();

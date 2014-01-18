@@ -12,7 +12,9 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
+#include <QList>
 #include <QProgressBar>
+#include "user.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"
@@ -25,6 +27,18 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), ui(new Ui::Form)
 {
     ui->setupUi(this);
+
+    m_accounts = new Accounts(this);
+
+    QList<User*> users = m_accounts->getUsers();
+    int count = users.count();
+    if (count)  {
+        for (int i=0; i < count; i++) {
+            User* auser =users.at(i);
+            ui->cbActiveUser->insertItem(0, auser->UserName());
+        }
+        ui->cbActiveUser->setCurrentIndex(0);
+    }
 
     QWidget* grantWidget = new QWidget(this);
     Ui::grantForm uiG;
@@ -42,14 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tab->removeTab(0);
     ui->tab->removeTab(0);
 
-    Ui::statusForm statusForm;
-    QFrame* statusFrame  = ui->frStatus;
+//    Ui::statusForm statusForm;
+//    QFrame* statusFrame  = ui->frStatus;
     //statusFramestatusFrame->setParent(statusForm);
-
-    // todo temp remove ..
-    QProgressBar *bar = new QProgressBar(statusFrame);
-    bar->setMaximumHeight(10);
-    bar->setMaximumWidth(100);
 
 }
 

@@ -2,7 +2,7 @@
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
+// the FWITHOUTree Software Foundation, either version 3 of the License, or
 // (at your option) any later version.
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -18,16 +18,21 @@
 Accounts::Accounts(QObject *parent) :
     QObject(parent)
 {
-    m_users = new QList<User*>();
+    init();
 }
 
 Accounts::~Accounts ()
 {
-    m_users->clear();
-    delete m_users;
+    qDeleteAll(m_users);
+    m_users.clear();
 }
 
-void  Accounts::getUsers()
+QList<User*>    Accounts::getUsers () const
+{
+    return m_users;
+}
+
+void  Accounts::init ()
 {
     QDBusConnection bus = QDBusConnection::systemBus();
     QDBusInterface adbus_iface(staticInterfaceName(),
@@ -45,7 +50,7 @@ void  Accounts::getUsers()
         User *user = new User();
         dbvFirst >> path;
         user->setObjectPath(path.path());
-        m_users->append(user);
+        m_users.append(user);
       }
     dbvFirst.endArray();
 }

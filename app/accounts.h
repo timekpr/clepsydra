@@ -27,15 +27,18 @@ public:
     ~Accounts ();
 
     // Get users
-    void getUsers ();
+    QList<User*>   getUsers () const;
 
 public:
     static inline const char *staticInterfaceName()
     { return "org.freedesktop.Accounts"; }
 
+private:
+
+    void init ();
 
 private:
-    QList<User*>*    m_users;
+    QList<User*>    m_users;
 
 };
 
