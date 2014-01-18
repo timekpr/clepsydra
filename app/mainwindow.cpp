@@ -36,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
         for (int i=0; i < count; i++) {
             User* auser =users.at(i);
             ui->cbActiveUser->insertItem(0, auser->UserName());
+            qDebug() << auser->isAdmin() << auser->UserName();
         }
         ui->cbActiveUser->setCurrentIndex(0);
     }
