@@ -5,15 +5,14 @@ This file is licensed under the General Public License version 3 or later.
 See the COPYRIGHT file for full details. You should have received the COPYRIGHT file along with the program
 */
 
-#ifndef KDM_HELPER_H
-#define KDM_HELPER_H
+#ifndef HELPER_H
+#define HELPER_H
 
-#include <kauth.h>
-#include <QString> //needed?
+#include <QObject>
+#include <QVariantMap>
+#include <QString>
 
 enum Operation {ADD, REMOVE};
-
-//using namespace KAuth;
 
 const QString extension[] = {".logout",".late",".allow"};
 
@@ -21,7 +20,7 @@ class Helper : public QObject {
     Q_OBJECT
 
 public slots:
-    /*ActionReply*/bool save(const QVariantMap &map);
+    bool save(const QVariantMap &map);
     
 private:
     bool savelimits(const QVariantMap &args);
@@ -36,4 +35,4 @@ private:
     enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
 };
 
-#endif
+#endif      // HELPER_H
