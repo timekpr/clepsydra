@@ -1,6 +1,8 @@
 *~
 clepsydra
 Makefile
+ui_*
+/app/tmp/
 *.ui.autosave
 *.o
 *.pro.user
