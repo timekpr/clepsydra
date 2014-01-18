@@ -45,7 +45,7 @@ bool secureCopy(const QString &from, const QString &to)
     return true;
 }
 
-/*ActionReply*/ void Helper::save(const QVariantMap &args)
+bool Helper::save(const QVariantMap &args)
 {
     bool reply;
     QString action = args.value("action").toString();
@@ -54,6 +54,8 @@ bool secureCopy(const QString &from, const QString &to)
         reply = savelimits(args);
     else
         reply = managepermissions(args);
+
+    return reply;
     
 //    if(reply)
 //        return ActionReply(ActionReply::SuccessReply);
@@ -122,9 +124,9 @@ bool Helper::addAndRemoveUserLimits(QString user, Operation op, QString line)
     
     QString regex;
     if(op == ADD)
-        regex = "(## TIMEKPR END)";
+        regex = "(## CLEPSYDRA END)";
     else
-        regex = "## TIMEKPR START\\n.*(\\*;\\*;" + user + ";[^\\n]*\\n)";
+        regex = "## CLEPSYDRA START\\n.*(\\*;\\*;" + user + ";[^\\n]*\\n)";
     
     QRegExp re(regex);
     
@@ -152,7 +154,7 @@ bool Helper::addAndRemoveUserLimits(QString user, Operation op, QString line)
 bool Helper::clearAllRestriction(QString root,QString user)
 {
     QString filename;
-    //root = var["TIMEKPRWORK"].toString() + "/" + user;
+    //root = var["CLEPSYDRA"].toString() + "/" + user;
     for (int i = 0; i < 3; i++ )
     {
 	filename =  root + extension[i];

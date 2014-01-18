@@ -21,7 +21,7 @@ class Helper : public QObject {
     Q_OBJECT
 
 public slots:
-    /*ActionReply*/void save(const QVariantMap &map);
+    /*ActionReply*/bool save(const QVariantMap &map);
     
 private:
     bool savelimits(const QVariantMap &args);
