@@ -16,7 +16,6 @@ CONFIG += debug_and_release
 CONFIG += ordered
 SUBDIRS =  app
 
-
-OTHER_FILES += etc/timekpr/* \
+OTHER_FILES += etc/clepsydra/* \
            etc/logrotate.d/*
 

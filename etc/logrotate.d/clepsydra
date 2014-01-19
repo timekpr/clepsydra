@@ -1,4 +1,4 @@
-/var/log/timekpr.log {
+/var/log/clepsydra.log {
         daily
         rotate 7
         notifempty
