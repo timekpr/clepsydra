@@ -16,3 +16,6 @@ CONFIG += debug_and_release
 CONFIG += ordered
 SUBDIRS =  app
 
+
+OTHER_FILES += etc/timekpr/*
+
