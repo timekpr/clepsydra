@@ -19,3 +19,13 @@ SUBDIRS =  app
 OTHER_FILES += etc/clepsydra/* \
            etc/logrotate.d/*
 
+isEmpty(ETC_PREFIX) {
+    ETC_PREFIX = /etc
+}
+
+LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
+
+logrotate_target.path = $$LOGRORATEDIR
+logrotate_target.files = etc/logrotate.d/clepsydra
+
+INSTALLS = logrotate_target
