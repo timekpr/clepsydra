@@ -23,9 +23,13 @@ isEmpty(ETC_PREFIX) {
     ETC_PREFIX = /etc
 }
 
+FILESETTINGDIR = $$ETC_PREFIX/clepsydra
 LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
+
+settings_target.path = $$FILESETTINGDIR
+settings_target.files = etc/clepsydra/clepsydra.conf etc/clepsydra/clepsydradefault
 
 logrotate_target.path = $$LOGRORATEDIR
 logrotate_target.files = etc/logrotate.d/clepsydra
 
-INSTALLS = logrotate_target
+INSTALLS = settings_target logrotate_target
