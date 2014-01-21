@@ -26,7 +26,8 @@ HEADERS += \
     accounts.h \
     user.h \
     src/helper.h \
-    mainwindow.h
+    mainwindow.h \
+    settings.h
 
 SOURCES += \
     main.cpp \
@@ -34,5 +35,6 @@ SOURCES += \
     user.cpp \
     src/helper.cpp \
     mainwindow.cpp  \
+    settings.cpp
 
 

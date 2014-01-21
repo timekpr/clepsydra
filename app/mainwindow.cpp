@@ -15,6 +15,7 @@
 #include <QList>
 #include <QProgressBar>
 #include "user.h"
+#include "settings.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"
@@ -58,6 +59,9 @@ MainWindow::MainWindow(QWidget *parent) :
     // yes,  both first two tabs ...
     ui->tab->removeTab(0);
     ui->tab->removeTab(0);
+
+    Settings* settings = new Settings (this);
+    delete settings;
 
 //    Ui::statusForm statusForm;
 //    QFrame* statusFrame  = ui->frStatus;
