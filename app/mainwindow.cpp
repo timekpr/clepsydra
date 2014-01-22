@@ -51,26 +51,26 @@ MainWindow::MainWindow(QWidget *parent) :
     Ui::limitForm uiLimit;
     uiLimit.setupUi(limitWidget);
 
+    QWidget* statusWidget = new QWidget(this);
+    Ui::statusForm uiStatus;
+    uiStatus.setupUi(statusWidget);
+
+    ui->tab->insertTab(0, statusWidget, tr ("Status"));
     // Probably we need separate limits and bounds to different tabs ...
-    ui->tab->addTab(grantWidget, tr("Grant"));
-    ui->tab->addTab(limitWidget, tr("Limits and Bounds"));
+    ui->tab->insertTab(1,grantWidget, tr("Grant"));
+    ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
 
     // yes,  both first two tabs ...
-    ui->tab->removeTab(0);
-    ui->tab->removeTab(0);
+    ui->tab->removeTab(3);
+    ui->tab->removeTab(3);
+    ui->tab->removeTab(3);
+
+    ui->tab->setCurrentIndex(0);
 
     Settings* settings = new Settings (this);
     QString workdir(settings->workdir());
     qDebug() << workdir;
     delete settings;
-
-    QWidget* statusFrWidget = new QWidget(this);
-    Ui::statusForm statusForm;
-
-    statusForm.setupUi(statusFrWidget);
-    QFrame* statusFrame  = ui->frStatus;
-    statusFrWidget->setParent(statusFrame);
-
     }
 
 void MainWindow::currentIndexChanged (const QString& newsUser)

@@ -64,6 +64,9 @@
      <layout class="QVBoxLayout" name="lyStatus">
       <item>
        <widget class="QLabel" name="lbStatus">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
           <horstretch>0</horstretch>
@@ -97,6 +100,14 @@
      <widget class="QWidget" name="tbLimitBound">
       <attribute name="title">
        <string>Limits and Bounds</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tbStatus">
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <attribute name="title">
+       <string>Status</string>
       </attribute>
      </widget>
     </widget>
