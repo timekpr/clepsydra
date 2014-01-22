@@ -18,6 +18,14 @@
 Settings::Settings(QObject *parent) :
     QObject(parent)
 {
-    m_settings = new QSettings (staticSettingsFile(), QSettings::IniFormat);
-    qDebug() << m_settings->allKeys();
+    m_settings = new QSettings (staticSettingsFile(), QSettings::IniFormat, this);
+    m_allkeys = m_settings->allKeys();
+}
+
+const QString& Settings::workdir()
+{
+    qDebug() << m_allkeys;
+    QString key;
+    // return key;
+    return m_settings->value ("directories/CLEPSYDRAWORK").toString();
 }

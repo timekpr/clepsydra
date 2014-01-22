@@ -16,6 +16,7 @@
 
 #include <QObject>
 #include <QSettings>
+#include <QStringList>
 
 class Settings : public QObject
 {
@@ -23,11 +24,14 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
 
+    const QString&  workdir ();
+
 static inline const char *staticSettingsFile ()
     { return "/etc/clepsydra/clepsydra.conf"; }
 
 private:
 
+    QStringList m_allkeys;
     QSettings*  m_settings;
     
 };

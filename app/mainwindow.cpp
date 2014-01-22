@@ -37,7 +37,6 @@ MainWindow::MainWindow(QWidget *parent) :
         for (int i=0; i < count; i++) {
             User* auser =users.at(i);
             ui->cbActiveUser->insertItem(0, auser->UserName());
-            qDebug() << auser->UserName() << "is admin:" << auser->isAdmin();
         }
         ui->cbActiveUser->setCurrentIndex(0);
     }
@@ -61,13 +60,18 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tab->removeTab(0);
 
     Settings* settings = new Settings (this);
+    QString workdir(settings->workdir());
+    qDebug() << workdir;
     delete settings;
 
-//    Ui::statusForm statusForm;
-//    QFrame* statusFrame  = ui->frStatus;
-    //statusFramestatusFrame->setParent(statusForm);
+    QWidget* statusFrWidget = new QWidget(this);
+    Ui::statusForm statusForm;
 
-}
+    statusForm.setupUi(statusFrWidget);
+    QFrame* statusFrame  = ui->frStatus;
+    statusFrWidget->setParent(statusFrame);
+
+    }
 
 void MainWindow::currentIndexChanged (const QString& newsUser)
 {

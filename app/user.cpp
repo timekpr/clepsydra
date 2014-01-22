@@ -29,7 +29,6 @@ void User::setObjectPath(const QString& path)
     loadUserInfo();
 }
 
-
 bool User::isAdmin()
 {
     bool reply = false;
