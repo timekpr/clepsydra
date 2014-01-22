@@ -56,11 +56,11 @@ MainWindow::MainWindow(QWidget *parent) :
     uiStatus.setupUi(statusWidget);
 
     ui->tab->insertTab(0, statusWidget, tr ("Status"));
-    // Probably we need separate limits and bounds to different tabs ...
     ui->tab->insertTab(1,grantWidget, tr("Grant"));
+    // Probably we need separate limits and bounds to different tabs ...
     ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
 
-    // yes,  both first two tabs ...
+    // yes,  all rest stub tabs
     ui->tab->removeTab(3);
     ui->tab->removeTab(3);
     ui->tab->removeTab(3);
