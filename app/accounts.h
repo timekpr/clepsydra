@@ -29,6 +29,8 @@ public:
     // Get users
     QList<User*>   getUsers () const;
 
+    User*   getUser (int) const;
+
 public:
     static inline const char *staticInterfaceName()
     { return "org.freedesktop.Accounts"; }

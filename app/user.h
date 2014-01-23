@@ -41,6 +41,7 @@ private:
 private:
     QString m_path;
     QString m_userName;
+    bool    m_isLocked;
     QString m_uid;
     quint32 m_accountType;  // If true, user is member of 'Sudoers'.
 

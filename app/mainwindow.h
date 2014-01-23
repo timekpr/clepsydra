@@ -32,7 +32,7 @@ public:
 
 public slots:
 
-    void currentIndexChanged (const QString&);
+    void currentIndexChanged (int);
 
 private:
 

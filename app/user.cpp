@@ -37,6 +37,11 @@ bool User::isAdmin()
     return reply;
 }
 
+bool User::isLocked()
+{
+    return m_isLocked;
+}
+
 QString User::UserName() const
 {
     return m_userName;
@@ -50,5 +55,6 @@ void User::loadUserInfo()
 
     m_userName = adbus_iface.property("UserName").toString();
     m_uid = adbus_iface.property("Uid").toString();
+    m_isLocked = adbus_iface.property("Locked").toBool();
     m_accountType = adbus_iface.property("AccountType").toInt();
 }

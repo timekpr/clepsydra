@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent) :
         }
         ui->cbActiveUser->setCurrentIndex(0);
     }
-    connect(ui->cbActiveUser, SIGNAL(currentIndexChanged (const QString&)), this,
-            SLOT(currentIndexChanged(QString)));
+    connect(ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
+            SLOT(currentIndexChanged(int)));
 
     QWidget* grantWidget = new QWidget(this);
     Ui::grantForm uiG;
@@ -73,9 +73,9 @@ MainWindow::MainWindow(QWidget *parent) :
     delete settings;
     }
 
-void MainWindow::currentIndexChanged (const QString& newsUser)
+void MainWindow::currentIndexChanged (int index)
 {
-    qDebug() << newsUser ;
+    qDebug() << m_accounts->getUser(index)->isLocked();
 }
 
 void MainWindow::addGrantForm()

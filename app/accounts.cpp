@@ -32,6 +32,11 @@ QList<User*>    Accounts::getUsers () const
     return m_users;
 }
 
+User*   Accounts::getUser(int index) const
+{
+    return m_users.at(index);
+}
+
 void  Accounts::init ()
 {
     QDBusConnection bus = QDBusConnection::systemBus();
