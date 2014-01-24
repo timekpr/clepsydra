@@ -21,7 +21,6 @@
 #include "mainwindow.h"
 #include "ui_main.h"
 #include "ui_status.h"
-#include "ui_limits.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
@@ -47,8 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_uiG->setupUi(grantWidget);
 
     QWidget* limitWidget = new QWidget(this);
-    Ui::limitForm uiLimit;
-    uiLimit.setupUi(limitWidget);
+    m_uilimit = new Ui::limitForm();
+    m_uilimit->setupUi(limitWidget);
 
     QWidget* statusWidget = new QWidget(this);
     Ui::statusForm uiStatus;
@@ -67,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->tab->setCurrentIndex(0);
 
     setGrantTbCbs ();
+    setLimitTbCbs ();
 
     Settings* settings = new Settings (this);
     QString workdir(settings->workdir());
@@ -103,6 +103,16 @@ void MainWindow::setGrantTbCbs ()
 
 void MainWindow::setLimitTbCbs ()
 {
+
+    connect(m_uilimit->ckLimit, SIGNAL(stateChanged (int)), this,
+            SLOT(ckLimitStateChanged(int)));
+    connect(m_uilimit->ckLimitDay, SIGNAL(stateChanged (int)), this,
+            SLOT(ckLimitDayStateChanged(int)));
+    connect(m_uilimit->ckBound, SIGNAL(stateChanged (int)), this,
+            SLOT(ckBoundStateChanged(int)));
+    connect(m_uilimit->ckBoundDay, SIGNAL(stateChanged (int)), this,
+            SLOT(ckBoundDayStateChanged(int)));
+
 }
 
 void MainWindow::btnClearAllRestrictionClicked ()
@@ -138,5 +148,25 @@ void MainWindow::btnAddTimeClicked ()
 void MainWindow::btnResetTimeClicked ()
 {
     qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
+}
+
+void MainWindow::ckLimitStateChanged(int /*state*/)
+{
+    qDebug() << "TODO : ckLimitStateChanged, wait for implementation";
+}
+
+void MainWindow::ckLimitDayStateChanged(int /*state*/)
+{
+    qDebug() << "TODO : ckLimitDayStateChanged, wait for implementation";
+}
+
+void MainWindow::ckBoundStateChanged(int /*state*/)
+{
+    qDebug() << "TODO : ckckBoundStateChanged, wait for implementation";
+}
+
+void MainWindow::ckBoundDayStateChanged(int /*state*/)
+{
+    qDebug() << "TODO : ckckBoundDayStateChanged, wait for implementation";
 }
 

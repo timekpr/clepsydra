@@ -19,6 +19,7 @@
 
 #include "accounts.h"
 #include "ui_grant.h"
+#include "ui_limits.h"
 
 namespace Ui {
 class Form;
@@ -39,7 +40,7 @@ public slots:
     //
     void currentIndexChanged (int);
 
-// grant UI tab
+// grant tab
 public slots:
     //
     void btnClearAllRestrictionClicked();
@@ -50,6 +51,13 @@ public slots:
     void btnAddTimeClicked ();
     void btnResetTimeClicked ();
 
+// limit tab
+public slots:
+    void ckLimitStateChanged (int);
+    void ckLimitDayStateChanged (int);
+    void ckBoundStateChanged (int);
+    void ckBoundDayStateChanged (int);
+
 private:
     //
     void addGrantForm();
@@ -57,6 +65,7 @@ private:
 private:
     Ui::Form *m_ui;
     Ui::grantForm *m_uiG;
+    Ui::limitForm *m_uilimit;
     Accounts* m_accounts;
 
 };
