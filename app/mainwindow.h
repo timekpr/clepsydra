@@ -18,6 +18,7 @@
 #include <QMainWindow>
 
 #include "accounts.h"
+#include "ui_grant.h"
 
 namespace Ui {
 class Form;
@@ -29,17 +30,33 @@ class MainWindow : public QWidget
 public:
     explicit MainWindow(QWidget *parent = 0);
     
+private:
+    //
+    void setGrantTbCbs ();
+    void setLimitTbCbs();
 
 public slots:
-
+    //
     void currentIndexChanged (int);
 
-private:
+// grant UI tab
+public slots:
+    //
+    void btnClearAllRestrictionClicked();
+    void btnBypassClicked ();
+    void btnClearBypassClicked ();
+    void btnLockAccountClicked();
+    void btnUnlockAccountClicked ();
+    void btnAddTimeClicked ();
+    void btnResetTimeClicked ();
 
+private:
+    //
     void addGrantForm();
 
 private:
-    Ui::Form *ui;
+    Ui::Form *m_ui;
+    Ui::grantForm *m_uiG;
     Accounts* m_accounts;
 
 };

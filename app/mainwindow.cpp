@@ -22,12 +22,11 @@
 #include "ui_main.h"
 #include "ui_status.h"
 #include "ui_limits.h"
-#include "ui_grant.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-    QWidget(parent), ui(new Ui::Form)
+    QWidget(parent), m_ui(new Ui::Form)
 {
-    ui->setupUi(this);
+    m_ui->setupUi(this);
 
     m_accounts = new Accounts(this);
 
@@ -36,16 +35,16 @@ MainWindow::MainWindow(QWidget *parent) :
     if (count)  {
         for (int i=0; i < count; i++) {
             User* auser =users.at(i);
-            ui->cbActiveUser->insertItem(0, auser->UserName());
+            m_ui->cbActiveUser->insertItem(0, auser->UserName());
         }
-        ui->cbActiveUser->setCurrentIndex(0);
+        m_ui->cbActiveUser->setCurrentIndex(0);
     }
-    connect(ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
+    connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
 
     QWidget* grantWidget = new QWidget(this);
-    Ui::grantForm uiG;
-    uiG.setupUi(grantWidget);
+    m_uiG = new Ui::grantForm();
+    m_uiG->setupUi(grantWidget);
 
     QWidget* limitWidget = new QWidget(this);
     Ui::limitForm uiLimit;
@@ -55,17 +54,19 @@ MainWindow::MainWindow(QWidget *parent) :
     Ui::statusForm uiStatus;
     uiStatus.setupUi(statusWidget);
 
-    ui->tab->insertTab(0, statusWidget, tr ("Status"));
-    ui->tab->insertTab(1,grantWidget, tr("Grant"));
+    m_ui->tab->insertTab(0, statusWidget, tr ("Status"));
+    m_ui->tab->insertTab(1, grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
-    ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
+    m_ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
 
     // yes,  all rest stub tabs
-    ui->tab->removeTab(3);
-    ui->tab->removeTab(3);
-    ui->tab->removeTab(3);
+    m_ui->tab->removeTab(3);
+    m_ui->tab->removeTab(3);
+    m_ui->tab->removeTab(3);
 
-    ui->tab->setCurrentIndex(0);
+    m_ui->tab->setCurrentIndex(0);
+
+    setGrantTbCbs ();
 
     Settings* settings = new Settings (this);
     QString workdir(settings->workdir());
@@ -80,6 +81,62 @@ void MainWindow::currentIndexChanged (int index)
 
 void MainWindow::addGrantForm()
 {
+}
 
+void MainWindow::setGrantTbCbs ()
+{
+    connect(m_uiG->btnClearAllRestriction, SIGNAL(clicked ()), this,
+            SLOT(btnClearAllRestrictionClicked()));
+    connect(m_uiG->btnBypass, SIGNAL(clicked ()), this,
+            SLOT(btnBypassClicked()));
+    connect(m_uiG->btnClearBypass, SIGNAL(clicked ()), this,
+            SLOT(btnClearBypassClicked()));
+    connect(m_uiG->btnLockAccount, SIGNAL(clicked ()), this,
+            SLOT(btnLockAccountClicked()));
+    connect(m_uiG->btnUnlockAccount, SIGNAL(clicked ()), this,
+            SLOT(btnUnlockAccountClicked()));
+    connect(m_uiG->btnAddTime, SIGNAL(clicked ()), this,
+            SLOT(btnAddTimeClicked()));
+    connect(m_uiG->btnResetTime, SIGNAL(clicked ()), this,
+            SLOT(btnResetTimeClicked()));
+}
+
+void MainWindow::setLimitTbCbs ()
+{
+}
+
+void MainWindow::btnClearAllRestrictionClicked ()
+{
+    qDebug() << "TODO : btnClearAllRestrictionClicked, wait for implementation";
+}
+
+void MainWindow::btnBypassClicked()
+{
+    qDebug() << "TODO : btnBypassClicked, wait for implementation";
+}
+
+void MainWindow::btnClearBypassClicked()
+{
+    qDebug() << "TODO : btnClearBypassClicked, wait for implementation";
+}
+
+void MainWindow::btnLockAccountClicked ()
+{
+    qDebug() << "TODO : btnLockAccountClicked, wait for implementation";
+}
+
+void MainWindow::btnUnlockAccountClicked ()
+{
+    qDebug() << "TODO : btnUnlockAccountClicked, wait for implementation";
+}
+
+void MainWindow::btnAddTimeClicked ()
+{
+    qDebug() << "TODO : btnAddTimeClicked, wait for implementation";
+}
+
+void MainWindow::btnResetTimeClicked ()
+{
+    qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
 }
 
