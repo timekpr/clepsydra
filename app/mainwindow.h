@@ -59,10 +59,6 @@ public slots:
     void ckBoundDayStateChanged (int);
 
 private:
-    //
-    void addGrantForm();
-
-private:
     Ui::Form *m_ui;
     Ui::grantForm *m_uiG;
     Ui::limitForm *m_uilimit;

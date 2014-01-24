@@ -79,10 +79,6 @@ void MainWindow::currentIndexChanged (int index)
     qDebug() << m_accounts->getUser(index)->isLocked();
 }
 
-void MainWindow::addGrantForm()
-{
-}
-
 void MainWindow::setGrantTbCbs ()
 {
     connect(m_uiG->btnClearAllRestriction, SIGNAL(clicked ()), this,
