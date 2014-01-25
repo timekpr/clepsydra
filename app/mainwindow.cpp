@@ -69,8 +69,19 @@ MainWindow::MainWindow(QWidget *parent) :
     setLimitTbCbs ();
 
     Settings* settings = new Settings (this);
+
     QString workdir(settings->workdir());
     qDebug() << workdir;
+
+    QString logfile(settings->logDir());
+    qDebug() << logfile;
+
+    QString version(settings->version());
+    qDebug() << version;
+
+    QString clepsydraD(settings->clepsydraDir());
+    qDebug () << clepsydraD;
+
     delete settings;
     }
 

@@ -24,7 +24,15 @@ class Settings : public QObject
 public:
     explicit Settings(QObject *parent = 0);
 
+    const QString&  version ();
+
     const QString&  workdir ();
+    const QString&  logDir ();
+    const QString&  clepsydraDir ();
+
+    int gracePeriod ();
+    int polltime ();
+    int lockLasts();
 
 static inline const char *staticSettingsFile ()
     { return "/etc/clepsydra/clepsydra.conf"; }

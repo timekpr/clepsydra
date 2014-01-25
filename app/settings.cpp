@@ -20,12 +20,31 @@ Settings::Settings(QObject *parent) :
 {
     m_settings = new QSettings (staticSettingsFile(), QSettings::IniFormat, this);
     m_allkeys = m_settings->allKeys();
+    qDebug() << m_allkeys;
+}
+
+// ("VERSION", "directories/CLEPSYDRADIR", "directories/CLEPSYDRAWORK", "directories/LOGFILE",
+//"variables/GRACEPERIOD", "variables/LOCKLASTS", "variables/POLLTIME")
+//"/var/lib/clepsydra"
+
+
+const QString&  Settings::version ()
+{
+    return m_settings->value ("VERSION").toString();
+}
+
+const QString&  Settings::logDir ()
+{
+    return m_settings->value ("directories/LOGFILE").toString();
+}
+
+const QString&  Settings::clepsydraDir ()
+{
+    return m_settings->value ("directories/CLEPSYDRADIR").toString();
 }
 
 const QString& Settings::workdir()
 {
-    qDebug() << m_allkeys;
-    QString key;
-    // return key;
     return m_settings->value ("directories/CLEPSYDRAWORK").toString();
 }
+
