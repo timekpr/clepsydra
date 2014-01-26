@@ -23,11 +23,6 @@ Settings::Settings(QObject *parent) :
     qDebug() << m_allkeys;
 }
 
-// ("VERSION", "directories/CLEPSYDRADIR", "directories/CLEPSYDRAWORK", "directories/LOGFILE",
-//"variables/GRACEPERIOD", "variables/LOCKLASTS", "variables/POLLTIME")
-//"/var/lib/clepsydra"
-
-
 const QString&  Settings::version ()
 {
     return m_settings->value ("VERSION").toString();
@@ -46,5 +41,20 @@ const QString&  Settings::clepsydraDir ()
 const QString& Settings::workdir()
 {
     return m_settings->value ("directories/CLEPSYDRAWORK").toString();
+}
+
+int Settings::gracePeriod ()
+{
+    return m_settings->value ("variables/GRACEPERIOD").toInt();
+}
+
+int Settings::polltime ()
+{
+    return m_settings->value ("variables/POLLTIME").toInt();
+}
+
+const QString& Settings::lockLasts()
+{
+    return m_settings->value ("variables/LOCKLASTS").toString();
 }
 

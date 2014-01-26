@@ -82,6 +82,12 @@ MainWindow::MainWindow(QWidget *parent) :
     QString clepsydraD(settings->clepsydraDir());
     qDebug () << clepsydraD;
 
+    qDebug () << settings->gracePeriod();
+    qDebug () << settings->polltime();
+
+    QString lockLasts(settings->lockLasts());
+    qDebug () << lockLasts;
+
     delete settings;
     }
 

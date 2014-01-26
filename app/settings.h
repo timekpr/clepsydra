@@ -29,10 +29,10 @@ public:
     const QString&  workdir ();
     const QString&  logDir ();
     const QString&  clepsydraDir ();
+    const QString&  lockLasts();
 
     int gracePeriod ();
     int polltime ();
-    int lockLasts();
 
 static inline const char *staticSettingsFile ()
     { return "/etc/clepsydra/clepsydra.conf"; }
