@@ -93,7 +93,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::currentIndexChanged (int index)
 {
-    qDebug() << m_accounts->getUser(index)->isLocked();
+    if (m_accounts->getUser(index)->isAdmin() ) {
+        // Disable all buttons and other controls since we should not
+        // admin accounts.
+        qDebug() << "Admin" << m_accounts->getUser(index)->UserName();
+    } else {
+        qDebug() << "Not admin"  << m_accounts->getUser(index)->UserName();
+    }
+
 }
 
 void MainWindow::setGrantTbCbs ()
