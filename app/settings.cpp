@@ -20,7 +20,6 @@ Settings::Settings(QObject *parent) :
 {
     m_settings = new QSettings (staticSettingsFile(), QSettings::IniFormat, this);
     m_allkeys = m_settings->allKeys();
-    qDebug() << m_allkeys;
 }
 
 const QString&  Settings::version ()

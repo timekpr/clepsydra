@@ -29,7 +29,7 @@ Accounts::~Accounts ()
 
 int Accounts::usersCount()
 {
-    m_users.count();
+    return m_users.count();
 }
 
 User*   Accounts::getUser(int index) const
@@ -60,7 +60,6 @@ void  Accounts::init ()
         dbvFirst >> path;
         user->setObjectPath(path.path());        
         m_users.append(user);
-        qDebug() << user->UserName();
       }
     dbvFirst.endArray();
 }

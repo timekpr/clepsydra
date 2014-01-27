@@ -29,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_accounts = new Accounts(this);
 
-    // QList<User*> users = m_accounts->getUsers();
     int count = m_accounts->usersCount();
     if (count)  {
         for (int i=0; i < count; i++) {
@@ -72,30 +71,29 @@ MainWindow::MainWindow(QWidget *parent) :
 
     Settings* settings = new Settings (this);
 
-    QString workdir(settings->workdir());
-    qDebug() << workdir;
+    //    QString workdir(settings->workdir());
+    //    qDebug() << workdir;
 
-    QString logfile(settings->logDir());
-    qDebug() << logfile;
+    //    QString logfile(settings->logDir());
+    //    qDebug() << logfile;
 
-    QString version(settings->version());
-    qDebug() << version;
+    //    QString version(settings->version());
+    //    qDebug() << version;
 
-    QString clepsydraD(settings->clepsydraDir());
-    qDebug () << clepsydraD;
+    //    QString clepsydraD(settings->clepsydraDir());
+    //    qDebug () << clepsydraD;
 
-    qDebug () << settings->gracePeriod();
-    qDebug () << settings->polltime();
+    //    qDebug () << settings->gracePeriod();
+    //    qDebug () << settings->polltime();
 
-    QString lockLasts(settings->lockLasts());
-    qDebug () << lockLasts;
+    //    QString lockLasts(settings->lockLasts());
+    //    qDebug () << lockLasts;
 
     delete settings;
     }
 
 void MainWindow::currentIndexChanged (int index)
 {
-    qDebug() << index;
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // admin accounts.
