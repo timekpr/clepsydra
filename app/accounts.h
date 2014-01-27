@@ -26,10 +26,8 @@ public:
     
     ~Accounts ();
 
-    // Get users
-    QList<User*>   getUsers () const;
-
     User*   getUser (int) const;
+    int usersCount();
 
 public:
     static inline const char *staticInterfaceName()

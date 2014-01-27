@@ -29,12 +29,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_accounts = new Accounts(this);
 
-    QList<User*> users = m_accounts->getUsers();
-    int count = users.count();
+    // QList<User*> users = m_accounts->getUsers();
+    int count = m_accounts->usersCount();
     if (count)  {
         for (int i=0; i < count; i++) {
-            User* auser =users.at(i);
-            m_ui->cbActiveUser->insertItem(0, auser->UserName());
+            User* auser = m_accounts->getUser(i);
+            if (auser)  {
+                m_ui->cbActiveUser->addItem(auser->UserName());
+            }
         }
         m_ui->cbActiveUser->setCurrentIndex(0);
     }
@@ -93,6 +95,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::currentIndexChanged (int index)
 {
+    qDebug() << index;
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // admin accounts.

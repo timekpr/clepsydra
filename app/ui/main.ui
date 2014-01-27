@@ -37,7 +37,11 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="cbActiveUser"/>
+      <widget class="QComboBox" name="cbActiveUser">
+       <property name="insertPolicy">
+        <enum>QComboBox::NoInsert</enum>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
