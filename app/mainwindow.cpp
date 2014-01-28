@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
+    m_grantWidget = new GrantTabWidget(this);
 
     m_accounts = new Accounts(this);
 
@@ -42,10 +43,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
 
-    QWidget* grantWidget = new QWidget(this);
-    m_uiG = new Ui::grantForm();
-    m_uiG->setupUi(grantWidget);
-
     QWidget* limitWidget = new QWidget(this);
     m_uilimit = new Ui::limitForm();
     m_uilimit->setupUi(limitWidget);
@@ -55,7 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
     uiStatus.setupUi(statusWidget);
 
     m_ui->tab->insertTab(0, statusWidget, tr ("Status"));
-    m_ui->tab->insertTab(1, grantWidget, tr("Grant"));
+    m_ui->tab->insertTab(1, m_grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
     m_ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
 
@@ -66,29 +63,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ui->tab->setCurrentIndex(0);
 
-    setGrantTbCbs ();
+//    setGrantTbCbs ();
     setLimitTbCbs ();
 
     Settings* settings = new Settings (this);
-
-    //    QString workdir(settings->workdir());
-    //    qDebug() << workdir;
-
-    //    QString logfile(settings->logDir());
-    //    qDebug() << logfile;
-
-    //    QString version(settings->version());
-    //    qDebug() << version;
-
-    //    QString clepsydraD(settings->clepsydraDir());
-    //    qDebug () << clepsydraD;
-
-    //    qDebug () << settings->gracePeriod();
-    //    qDebug () << settings->polltime();
-
-    //    QString lockLasts(settings->lockLasts());
-    //    qDebug () << lockLasts;
-
     delete settings;
     }
 
@@ -101,25 +79,6 @@ void MainWindow::currentIndexChanged (int index)
     } else {
         qDebug() << "Not admin"  << m_accounts->getUser(index)->UserName();
     }
-
-}
-
-void MainWindow::setGrantTbCbs ()
-{
-    connect(m_uiG->btnClearAllRestriction, SIGNAL(clicked ()), this,
-            SLOT(btnClearAllRestrictionClicked()));
-    connect(m_uiG->btnBypass, SIGNAL(clicked ()), this,
-            SLOT(btnBypassClicked()));
-    connect(m_uiG->btnClearBypass, SIGNAL(clicked ()), this,
-            SLOT(btnClearBypassClicked()));
-    connect(m_uiG->btnLockAccount, SIGNAL(clicked ()), this,
-            SLOT(btnLockAccountClicked()));
-    connect(m_uiG->btnUnlockAccount, SIGNAL(clicked ()), this,
-            SLOT(btnUnlockAccountClicked()));
-    connect(m_uiG->btnAddTime, SIGNAL(clicked ()), this,
-            SLOT(btnAddTimeClicked()));
-    connect(m_uiG->btnResetTime, SIGNAL(clicked ()), this,
-            SLOT(btnResetTimeClicked()));
 }
 
 void MainWindow::setLimitTbCbs ()

@@ -17,6 +17,7 @@
 #include <QObject>
 #include <QMainWindow>
 
+#include "granttabwidget.h"
 #include "accounts.h"
 #include "ui_grant.h"
 #include "ui_limits.h"
@@ -60,6 +61,7 @@ public slots:
 
 private:
     Ui::Form *m_ui;
+    GrantTabWidget*  m_grantWidget;
     Ui::grantForm *m_uiG;
     Ui::limitForm *m_uilimit;
     Accounts* m_accounts;

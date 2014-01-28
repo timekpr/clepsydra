@@ -27,7 +27,8 @@ HEADERS += \
     user.h \
     src/helper.h \
     mainwindow.h \
-    settings.h
+    settings.h \
+    granttabwidget.h
 
 SOURCES += \
     main.cpp \
@@ -35,6 +36,7 @@ SOURCES += \
     user.cpp \
     src/helper.cpp \
     mainwindow.cpp  \
-    settings.cpp
+    settings.cpp \
+    granttabwidget.cpp
 
 
