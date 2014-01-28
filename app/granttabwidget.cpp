@@ -24,7 +24,7 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
 void GrantTabWidget::setGrantTbCbs ()
 {
 
-    connect(m_grantTab->btnClearAllRestriction, SIGNAL(clicked ()), (MainWindow*)parent(),
+    connect(m_grantTab->btnClearAllRestriction, SIGNAL(clicked ()), parent(),
             SLOT(btnClearAllRestrictionClicked()));
     connect(m_grantTab->btnBypass, SIGNAL(clicked ()), parent(),
             SLOT(btnBypassClicked()));

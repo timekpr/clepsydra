@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     m_ui->setupUi(this);
     m_grantWidget = new GrantTabWidget(this);
+    m_statusWidget = new StatusTabWidget(this);
 
     m_accounts = new Accounts(this);
 
@@ -47,11 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_uilimit = new Ui::limitForm();
     m_uilimit->setupUi(limitWidget);
 
-    QWidget* statusWidget = new QWidget(this);
-    Ui::statusForm uiStatus;
-    uiStatus.setupUi(statusWidget);
-
-    m_ui->tab->insertTab(0, statusWidget, tr ("Status"));
+    m_ui->tab->insertTab(0, m_statusWidget, tr ("Status"));
     m_ui->tab->insertTab(1, m_grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
     m_ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
