@@ -18,3 +18,10 @@ StatusTabWidget::StatusTabWidget(QWidget *parent) :
 {
     m_statusTab->setupUi(this);
 }
+
+void StatusTabWidget::disableControls(bool toDisable)
+{
+    if (toDisable)  {
+    } else {
+    }
+}

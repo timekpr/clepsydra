@@ -24,6 +24,11 @@ public:
     explicit LimitsTabWidget(QWidget *parent = 0);
 
     void  setLimitTbCbs();
+
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
+
 private:
     Ui_limitForm *m_limitTab;
 

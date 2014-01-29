@@ -23,6 +23,10 @@ class StatusTabWidget : public QWidget
 public:
     explicit StatusTabWidget(QWidget *parent = 0);
 
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
+
 private:
     Ui_statusForm *m_statusTab;
 };

@@ -11,6 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QDebug>
 #include "mainwindow.h"
 #include "granttabwidget.h"
 
@@ -19,6 +20,16 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
 {
     m_grantTab->setupUi(this);
     setGrantTbCbs();
+}
+
+void GrantTabWidget::disableControls(bool toDisable)
+{
+    if (toDisable)  {
+        qDebug() << "disable" << toDisable;
+    }
+    else {
+        qDebug() << "enable " << toDisable;
+    }
 }
 
 void GrantTabWidget::setGrantTbCbs ()

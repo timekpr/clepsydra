@@ -29,6 +29,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_grantWidget = new GrantTabWidget(this);
     m_statusWidget = new StatusTabWidget(this);
     m_limitWidget =  new LimitsTabWidget(this);
+    connect(this, SIGNAL(disableControls(bool) ),m_limitWidget, SLOT(disableControls(bool)));
+    connect(this, SIGNAL(disableControls(bool) ),m_grantWidget, SLOT(disableControls(bool)));
+    connect(this, SIGNAL(disableControls(bool) ),m_statusWidget, SLOT(disableControls(bool)));
 
     m_accounts = new Accounts(this);
 
@@ -70,8 +73,10 @@ void MainWindow::currentIndexChanged (int index)
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // admin accounts.
+        emit disableControls(true);
         qDebug() << "Admin" << m_accounts->getUser(index)->UserName();
     } else {
+        emit disableControls(false);
         qDebug() << "Not admin"  << m_accounts->getUser(index)->UserName();
     }
 }

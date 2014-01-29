@@ -23,6 +23,10 @@ class GrantTabWidget : public QWidget
 public:
     explicit GrantTabWidget(QWidget *parent = 0);
 
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
+
 public:
     //
     void setGrantTbCbs ();
