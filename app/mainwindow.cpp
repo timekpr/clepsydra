@@ -47,11 +47,6 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
-
-//    QWidget* limitWidget = new QWidget(this);
-//    m_uilimit = new Ui::limitForm();
-//    m_uilimit->setupUi(limitWidget);
-
     m_ui->tab->insertTab(0, m_statusWidget, tr ("Status"));
     m_ui->tab->insertTab(1, m_grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
