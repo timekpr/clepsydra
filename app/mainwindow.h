@@ -66,8 +66,6 @@ private:
     GrantTabWidget*  m_grantWidget;
     StatusTabWidget* m_statusWidget;
     LimitsTabWidget* m_limitWidget;
-    //Ui::grantForm *m_uiG;
-    //Ui::limitForm *m_uilimit;
     Accounts* m_accounts;
 
 };
