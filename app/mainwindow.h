@@ -18,10 +18,10 @@
 #include <QMainWindow>
 
 #include "granttabwidget.h"
+#include "limitstabwidget.h"
 #include "statustabwidget.h"
 #include "accounts.h"
-#include "ui_grant.h"
-#include "ui_limits.h"
+//#include "ui_grant.h"
 
 namespace Ui {
 class Form;
@@ -64,8 +64,9 @@ private:
     Ui::Form *m_ui;
     GrantTabWidget*  m_grantWidget;
     StatusTabWidget* m_statusWidget;
-    Ui::grantForm *m_uiG;
-    Ui::limitForm *m_uilimit;
+    LimitsTabWidget* m_limitWidget;
+    //Ui::grantForm *m_uiG;
+    //Ui::limitForm *m_uilimit;
     Accounts* m_accounts;
 
 };

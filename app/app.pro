@@ -29,7 +29,8 @@ HEADERS += \
     mainwindow.h \
     settings.h \
     granttabwidget.h \
-    statustabwidget.h
+    statustabwidget.h \
+    limitstabwidget.h
 
 SOURCES += \
     main.cpp \
@@ -39,6 +40,7 @@ SOURCES += \
     mainwindow.cpp  \
     settings.cpp \
     granttabwidget.cpp \
-    statustabwidget.cpp
+    statustabwidget.cpp \
+    limitstabwidget.cpp
 
 

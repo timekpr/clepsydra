@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->setupUi(this);
     m_grantWidget = new GrantTabWidget(this);
     m_statusWidget = new StatusTabWidget(this);
+    m_limitWidget =  new LimitsTabWidget(this);
 
     m_accounts = new Accounts(this);
 
@@ -44,14 +45,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
 
-    QWidget* limitWidget = new QWidget(this);
-    m_uilimit = new Ui::limitForm();
-    m_uilimit->setupUi(limitWidget);
+//    QWidget* limitWidget = new QWidget(this);
+//    m_uilimit = new Ui::limitForm();
+//    m_uilimit->setupUi(limitWidget);
 
     m_ui->tab->insertTab(0, m_statusWidget, tr ("Status"));
     m_ui->tab->insertTab(1, m_grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
-    m_ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
+    m_ui->tab->insertTab(2, m_limitWidget, tr("Limits and Bounds"));
 
     // yes,  all rest stub tabs
     m_ui->tab->removeTab(3);
@@ -59,9 +60,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->tab->removeTab(3);
 
     m_ui->tab->setCurrentIndex(0);
-
-//    setGrantTbCbs ();
-    setLimitTbCbs ();
 
     Settings* settings = new Settings (this);
     delete settings;
@@ -78,19 +76,7 @@ void MainWindow::currentIndexChanged (int index)
     }
 }
 
-void MainWindow::setLimitTbCbs ()
-{
 
-    connect(m_uilimit->ckLimit, SIGNAL(stateChanged (int)), this,
-            SLOT(ckLimitStateChanged(int)));
-    connect(m_uilimit->ckLimitDay, SIGNAL(stateChanged (int)), this,
-            SLOT(ckLimitDayStateChanged(int)));
-    connect(m_uilimit->ckBound, SIGNAL(stateChanged (int)), this,
-            SLOT(ckBoundStateChanged(int)));
-    connect(m_uilimit->ckBoundDay, SIGNAL(stateChanged (int)), this,
-            SLOT(ckBoundDayStateChanged(int)));
-
-}
 
 void MainWindow::btnClearAllRestrictionClicked ()
 {
