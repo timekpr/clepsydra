@@ -24,11 +24,42 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 
 void LimitsTabWidget::disableControls(bool toDisable)
 {
-    if (toDisable)  {
-        qDebug() << "disable" << toDisable;
-    }
-    else {
-        qDebug() << "enable " << toDisable;
+    if (m_controlsDisabled != toDisable)  {
+        m_limitTab->ckLimit->setDisabled(toDisable);
+        m_limitTab->ckLimitDay->setDisabled(toDisable);
+        m_limitTab->ckBound->setDisabled(toDisable);
+        m_limitTab->ckBoundDay->setDisabled(toDisable);
+
+        // limit  ..
+        m_limitTab->sbLimit_0->setDisabled(toDisable);
+        m_limitTab->sbLimit_1->setDisabled(toDisable);
+        m_limitTab->sbLimit_2->setDisabled(toDisable);
+        m_limitTab->sbLimit_3->setDisabled(toDisable);
+        m_limitTab->sbLimit_4->setDisabled(toDisable);
+        m_limitTab->sbLimit_5->setDisabled(toDisable);
+        m_limitTab->sbLimit_6->setDisabled(toDisable);
+        m_limitTab->sbLimit_7->setDisabled(toDisable);
+
+        // from  ... to
+        m_limitTab->sbFrom_0->setDisabled(toDisable);
+        m_limitTab->sbFrom_1->setDisabled(toDisable);
+        m_limitTab->sbFrom_2->setDisabled(toDisable);
+        m_limitTab->sbFrom_3->setDisabled(toDisable);
+        m_limitTab->sbFrom_4->setDisabled(toDisable);
+        m_limitTab->sbFrom_5->setDisabled(toDisable);
+        m_limitTab->sbFrom_6->setDisabled(toDisable);
+        m_limitTab->sbFrom_7->setDisabled(toDisable);
+
+        m_limitTab->sbTo_0->setDisabled(toDisable);
+        m_limitTab->sbTo_1->setDisabled(toDisable);
+        m_limitTab->sbTo_2->setDisabled(toDisable);
+        m_limitTab->sbTo_3->setDisabled(toDisable);
+        m_limitTab->sbTo_4->setDisabled(toDisable);
+        m_limitTab->sbTo_5->setDisabled(toDisable);
+        m_limitTab->sbTo_6->setDisabled(toDisable);
+        m_limitTab->sbTo_7->setDisabled(toDisable);
+
+        m_controlsDisabled = toDisable;
     }
 }
 

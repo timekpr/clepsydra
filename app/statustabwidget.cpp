@@ -21,7 +21,5 @@ StatusTabWidget::StatusTabWidget(QWidget *parent) :
 
 void StatusTabWidget::disableControls(bool toDisable)
 {
-    if (toDisable)  {
-    } else {
-    }
+
 }

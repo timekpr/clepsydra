@@ -20,15 +20,21 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
 {
     m_grantTab->setupUi(this);
     setGrantTbCbs();
+    m_controlsDisabled = false;
 }
 
 void GrantTabWidget::disableControls(bool toDisable)
 {
-    if (toDisable)  {
-        qDebug() << "disable" << toDisable;
-    }
-    else {
-        qDebug() << "enable " << toDisable;
+    if (m_controlsDisabled != toDisable)  {
+        m_grantTab->btnClearAllRestriction->setDisabled(toDisable);
+        m_grantTab->btnBypass->setDisabled(toDisable);
+        m_grantTab->btnClearBypass->setDisabled(toDisable);
+        m_grantTab->btnLockAccount->setDisabled(toDisable);
+        m_grantTab->btnUnlockAccount->setDisabled(toDisable);
+        m_grantTab->btnAddTime->setDisabled(toDisable);
+        m_grantTab->btnResetTime->setDisabled(toDisable);
+        m_grantTab->sbAddTime->setDisabled(toDisable);
+        m_controlsDisabled = toDisable;
     }
 }
 

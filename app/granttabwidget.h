@@ -33,6 +33,7 @@ public:
 
 private:
     Ui_grantForm *m_grantTab;
+    bool m_controlsDisabled;
 
 };
 
