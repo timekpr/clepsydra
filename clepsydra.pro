@@ -17,7 +17,8 @@ CONFIG += ordered
 SUBDIRS =  app
 
 OTHER_FILES += etc/clepsydra/* \
-           etc/logrotate.d/*
+           etc/logrotate.d/* \
+          timekprc_example
 
 isEmpty(ETC_PREFIX) {
     ETC_PREFIX = /etc
