@@ -14,6 +14,8 @@
 #include <QtDBus>
 #include "user.h"
 
+#define KEY_ACCOUNT_LOCKED "AccountLocked"
+
 User::User(QObject *parent) :
     QObject(parent)
 {
@@ -39,7 +41,7 @@ bool User::isAdmin()
 
 bool User::isLocked()
 {
-    return m_isLocked;
+    return m_accountLimits.key(KEY_ACCOUNT_LOCKED).toInt();
 }
 
 QString User::UserName() const
@@ -55,6 +57,6 @@ void User::loadUserInfo()
 
     m_userName = adbus_iface.property("UserName").toString();
     m_uid = adbus_iface.property("Uid").toString();
-    m_isLocked = adbus_iface.property("Locked").toBool();
+    m_accountLimits.insert(KEY_ACCOUNT_LOCKED, adbus_iface.property("Locked").toBool() );
     m_accountType = adbus_iface.property("AccountType").toInt();
 }
