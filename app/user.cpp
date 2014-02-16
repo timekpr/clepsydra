@@ -13,8 +13,7 @@
 
 #include <QtDBus>
 #include "user.h"
-
-#define KEY_ACCOUNT_LOCKED "AccountLocked"
+#include "config.h"
 
 User::User(QObject *parent) :
     QObject(parent)

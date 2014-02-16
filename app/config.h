@@ -1,0 +1,10 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define KEY_ACCOUNT_LOCKED "AccountLocked"
+
+#define CLEPSYDRADIR        "CLEPSYDRADIR"
+#define CLEPSYDRARWORK      "CLEPSYDRAWORK"
+#define CLEPSYDRALOGDIR    "CLEPSYDRALOGDIR"
+
+#endif // CONFIG_H

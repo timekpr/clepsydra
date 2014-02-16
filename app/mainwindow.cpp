@@ -14,7 +14,9 @@
 #include <QDebug>
 #include <QList>
 #include <QProgressBar>
+
 #include "user.h"
+#include "config.h"
 #include "settings.h"
 #include "mainwindow.h"
 
@@ -58,8 +60,19 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ui->tab->setCurrentIndex(0);
 
+    QVariantMap settingsMap;
+    QString value;
     Settings* settings = new Settings (this);
+
+    value = settings->workdir();
+    settingsMap.insert(CLEPSYDRARWORK, value);
+
+    value = settings->logDir();
+    settingsMap.insert(CLEPSYDRALOGDIR, value);
+
     delete settings;
+    m_maps.insert("settingsMap", settingsMap);
+    qDebug() << m_maps;
     }
 
 void MainWindow::currentIndexChanged (int index)

@@ -15,6 +15,7 @@
 #define MAINWINDOW_H
 
 #include <QObject>
+#include <QVariantMap>
 #include <QMainWindow>
 
 #include "granttabwidget.h"
@@ -67,6 +68,7 @@ private:
     StatusTabWidget* m_statusWidget;
     LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
+    QVariantMap m_maps;
 
 };
 

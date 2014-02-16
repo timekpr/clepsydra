@@ -8,12 +8,14 @@ See the COPYRIGHT file for full details. You should have received the COPYRIGHT 
 
 
 #include <QFile>
+#include <QDebug>
 #include <QTextStream>
 #include <QDir>
 #include <QRegExp>
 #include <iostream>
 
-#include <QDebug>
+#include "config.h"
+
 
 bool secureCopy(const QString &from, const QString &to)
 {
@@ -57,7 +59,8 @@ bool Helper::savelimits(const QVariantMap &args)
 {
     bool code;
     QMap<QString,QVariant> var = args.value("var").toMap();
-    QString timekprdir(var["TIMEKPRDIR"].toString());
+
+    QString timekprdir(var[CLEPSYDRADIR].toString());
     
     code = addAndRemoveUserLimits(args["user"].toString(),REMOVE);
     code = code && addAndRemoveUserLimits(args["user"].toString(),ADD,args["bound"].toString());
@@ -74,7 +77,7 @@ bool Helper::managepermissions(const QVariantMap &args)
     int subaction = args.value("subaction").toInt();
     QString user = args.value("user").toString();
     QMap<QString,QVariant> var = args.value("var").toMap();
-    QString root(var["TIMEKPRWORK"].toString() + "/" + user);
+    QString root(var[CLEPSYDRARWORK].toString() + "/" + user);
 
     switch (subaction) {
 	case ClearAllRestriction:

@@ -30,7 +30,8 @@ HEADERS += \
     settings.h \
     granttabwidget.h \
     statustabwidget.h \
-    limitstabwidget.h
+    limitstabwidget.h \
+    config.h
 
 SOURCES += \
     main.cpp \
