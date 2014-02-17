@@ -76,6 +76,14 @@ MainWindow::MainWindow(QWidget *parent) :
     delete settings;
     m_maps.insert(MAP_SETTINGS_INFO, settingsMap);
 
+    // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
+    //     'user' ---> user name in string format, QString ('user'), QString('joe')
+    //     'bound' ---> Bound info?, format, QString, QString?
+    //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
+    //     'operation'
+    //     'time'
+
+
     qDebug() << m_maps;
     }
 
