@@ -60,13 +60,13 @@ bool Helper::savelimits(const QVariantMap &args)
     bool code;
     QMap<QString,QVariant> var = args.value("var").toMap();
 
-    QString timekprdir(var[CLEPSYDRADIR].toString());
+    QString timekprdir(var[CLEPSYDRA_WORK].toString());
     
     code = addAndRemoveUserLimits(args["user"].toString(),REMOVE);
     code = code && addAndRemoveUserLimits(args["user"].toString(),ADD,args["bound"].toString());
     QString tempConfigName = args.value("temprcfile").toString();
     
-    code = code && secureCopy(tempConfigName,timekprdir + "/timekprrc");
+    code = code && secureCopy(tempConfigName,timekprdir + "/clepsydrarc");
     
     return code;
 }
@@ -77,7 +77,7 @@ bool Helper::managepermissions(const QVariantMap &args)
     int subaction = args.value("subaction").toInt();
     QString user = args.value("user").toString();
     QMap<QString,QVariant> var = args.value("var").toMap();
-    QString root(var[CLEPSYDRARWORK].toString() + "/" + user);
+    QString root(var[CLEPSYDRA_WORK].toString() + "/" + user);
 
     switch (subaction) {
 	case ClearAllRestriction:

@@ -65,13 +65,17 @@ MainWindow::MainWindow(QWidget *parent) :
     Settings* settings = new Settings (this);
 
     value = settings->workdir();
-    settingsMap.insert(CLEPSYDRARWORK, value);
+    settingsMap.insert(CLEPSYDRA_WORK, value);
 
     value = settings->logDir();
-    settingsMap.insert(CLEPSYDRALOGDIR, value);
+    settingsMap.insert(CLEPSYDRA_LOGDIR, value);
+
+    int gracePeriod = settings->gracePeriod();
+    settingsMap.insert(CLEPSYDRA_GRACEPERIOD, gracePeriod);
 
     delete settings;
-    m_maps.insert("settingsMap", settingsMap);
+    m_maps.insert(MAP_SETTINGS_INFO, settingsMap);
+
     qDebug() << m_maps;
     }
 

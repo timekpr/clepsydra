@@ -1,10 +1,13 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define KEY_ACCOUNT_LOCKED "AccountLocked"
+#define MAP_SETTINGS_INFO       "var"
 
-#define CLEPSYDRADIR        "CLEPSYDRADIR"
-#define CLEPSYDRARWORK      "CLEPSYDRAWORK"
-#define CLEPSYDRALOGDIR    "CLEPSYDRALOGDIR"
+#define KEY_ACCOUNT_LOCKED      "AccountLocked"
+
+#define CLEPSYDRADIR            "CLEPSYDRADIR"          // i.e etc/clepsydra
+#define CLEPSYDRA_WORK          "CLEPSYDRAWORK"
+#define CLEPSYDRA_LOGDIR        "CLEPSYDRALOGDIR"
+#define CLEPSYDRA_GRACEPERIOD   "CLEPSYDRAGRACEPERIOD"
 
 #endif // CONFIG_H
