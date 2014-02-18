@@ -11,36 +11,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef CLEPSYDRADEFAULTS_H
+#define CLEPSYDRADEFAULTS_H
 
 #include <QObject>
-#include <QSettings>
-#include <QStringList>
 
-class Settings : public QObject
+class ClepsydraDefaults : public QObject
 {
     Q_OBJECT
 public:
-    explicit Settings(QObject *parent = 0);
-
-    const QString&  version ();
-
-    const QString&  workdir ();
-    const QString&  logDir ();
-    const QString&  clepsydraDir ();
-    const QString&  lockLasts();
-
-    int gracePeriod ();
-    int polltime ();
-
-static inline const char *staticSettingsFile ()
-    { return "/etc/clepsydra/clepsydra.conf"; }
-
-private:
-    QStringList m_allkeys;
-    QSettings*  m_settings;
+    explicit ClepsydraDefaults(QObject *parent = 0);
+    
+    void getDefaults ();
     
 };
 
-#endif // SETTINGS_H
+#endif // CLEPSYDRADEFAULTS_H
