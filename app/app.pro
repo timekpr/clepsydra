@@ -32,7 +32,7 @@ HEADERS += \
     statustabwidget.h \
     limitstabwidget.h \
     config.h \
-    src/clepsydradefaults.h
+    src/limitsmapper.h
 
 SOURCES += \
     main.cpp \
@@ -44,6 +44,6 @@ SOURCES += \
     granttabwidget.cpp \
     statustabwidget.cpp \
     limitstabwidget.cpp \
-    src/clepsydradefaults.cpp
+    src/limitsmapper.cpp
 
 

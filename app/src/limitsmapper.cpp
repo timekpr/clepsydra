@@ -11,21 +11,24 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QFile>
-#include "clepsydradefaults.h"
+#include <QSettings>
+#include <QStringList>
+#include <QDebug>
+#include "limitsmapper.h"
 
-ClepsydraDefaults::ClepsydraDefaults(QObject *parent) :
+LimitsMapper::LimitsMapper(QObject *parent) :
     QObject(parent)
 {
 }
 
-void ClepsydraDefaults::getDefaults(const QString& location)
+void LimitsMapper::getLimits(const QString& location, const QString& groupName)
 {
-    QFile cdefault(location);
-    if (!cdefault.open(QIODevice::ReadOnly))
-        return false;
-    QTextStream timeconfr(&cdefault);
+    QSettings* limits = new QSettings (location, QSettings::IniFormat, this);
+    limits->beginGroup(groupName);
+    QStringList keylist = limits->allKeys();
 
-    timeconfr.close ();
+    foreach (const QString& key, keylist) {
+        qDebug () << key;
+    }
 }
 

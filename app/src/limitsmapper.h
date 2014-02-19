@@ -11,19 +11,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef CLEPSYDRADEFAULTS_H
-#define CLEPSYDRADEFAULTS_H
+#ifndef LIMITSMAPPER_H
+#define LIMITSMAPPER_H
 
+#include <QVariantMap>
 #include <QObject>
 
-class ClepsydraDefaults : public QObject
+class LimitsMapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit ClepsydraDefaults(QObject *parent = 0);
+    explicit LimitsMapper(QObject *parent = 0);
+
+    void readLimits (const QString&);
     
-    void getDefaults ();
+    void getLimits (const QString&, const QString&);
+
+private:
+    QVariantMap  m_LimitsMap;
     
 };
 
-#endif // CLEPSYDRADEFAULTS_H
+#endif // LIMITSMAPPER_H

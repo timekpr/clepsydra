@@ -17,6 +17,7 @@
 
 #include "user.h"
 #include "config.h"
+#include "src/limitsmapper.h"
 #include "settings.h"
 #include "mainwindow.h"
 
@@ -75,6 +76,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     delete settings;
     m_maps.insert(MAP_SETTINGS_INFO, settingsMap);
+
+    LimitsMapper* limits = new LimitsMapper(this);
+    limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
 
     // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
     //     'user' ---> user name in string format, QString ('user'), QString('joe')
