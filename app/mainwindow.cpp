@@ -79,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     LimitsMapper* limits = new LimitsMapper(this);
     limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
+    limits->readGroups2Map("/etc/clepsydra/clepsydra.conf");
 
     // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
     //     'user' ---> user name in string format, QString ('user'), QString('joe')
@@ -87,8 +88,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'operation'
     //     'time'
 
-
-    qDebug() << m_maps;
+    delete limits;
+    // qDebug() << m_maps;
     }
 
 void MainWindow::currentIndexChanged (int index)

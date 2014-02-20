@@ -31,5 +31,28 @@ void LimitsMapper::getLimits(const QString& location, const QString& groupName)
     foreach (const QString& key, keylist) {
         m_LimitsMap.insert(key, limits->value(key));
     }
+    delete limits;
 }
+
+void LimitsMapper::readGroups2Map(const QString &file)
+{
+    m_groupMaps.clear();
+    QSettings* limits = new QSettings (file, QSettings::IniFormat, this);
+    QStringList groups = limits->childGroups();
+    if (!groups.count())
+        return;
+    foreach (const QString& group, groups) {
+        QVariantMap variantMap;
+        limits->beginGroup(group);
+        QStringList keylist = limits->allKeys();
+        foreach (const QString& key, keylist) {
+            variantMap.insert(key, limits->value(key));
+        }
+        m_groupMaps.insert(group, variantMap);
+        limits->endGroup();
+    }
+    qDebug() << m_groupMaps.keys();
+    delete limits;
+}
+
 

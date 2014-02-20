@@ -21,14 +21,15 @@ class LimitsMapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit LimitsMapper(QObject *parent = 0);
+    explicit LimitsMapper(QObject *parent = 0);  
 
-    void readLimits (const QString&);
-    
+public:
     void getLimits (const QString&, const QString&);
+    void readGroups2Map (const QString&);
 
 private:
     QVariantMap  m_LimitsMap;
+    QVariantMap m_groupMaps;
     
 };
 
