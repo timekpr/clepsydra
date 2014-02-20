@@ -23,12 +23,13 @@ LimitsMapper::LimitsMapper(QObject *parent) :
 
 void LimitsMapper::getLimits(const QString& location, const QString& groupName)
 {
+    m_LimitsMap.clear();
+    m_LimitsMap.insert("user", groupName);
     QSettings* limits = new QSettings (location, QSettings::IniFormat, this);
     limits->beginGroup(groupName);
     QStringList keylist = limits->allKeys();
-
     foreach (const QString& key, keylist) {
-        qDebug () << key;
+        m_LimitsMap.insert(key, limits->value(key));
     }
 }
 
