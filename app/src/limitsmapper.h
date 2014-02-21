@@ -25,7 +25,7 @@ public:
 
 public:
     void getLimits (const QString&, const QString&);
-    void readGroups2Map (const QString&);
+    void readGroups2Map (QVariantMap&, const QString&);
 
 private:
     QVariantMap  m_LimitsMap;

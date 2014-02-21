@@ -68,7 +68,8 @@ private:
     StatusTabWidget* m_statusWidget;
     LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
-    QVariantMap m_maps;
+    QVariantMap m_settingsMap;
+    QVariantMap m_defaultLimitsMap;
 
 };
 

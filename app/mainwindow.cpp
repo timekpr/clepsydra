@@ -61,25 +61,17 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ui->tab->setCurrentIndex(0);
 
-    QVariantMap settingsMap;
-    QString value;
-    Settings* settings = new Settings (this);
-
-    value = settings->workdir();
-    settingsMap.insert(CLEPSYDRA_WORK, value);
-
-    value = settings->logDir();
-    settingsMap.insert(CLEPSYDRA_LOGDIR, value);
-
-    int gracePeriod = settings->gracePeriod();
-    settingsMap.insert(CLEPSYDRA_GRACEPERIOD, gracePeriod);
-
-    delete settings;
-    m_maps.insert(MAP_SETTINGS_INFO, settingsMap);
-
     LimitsMapper* limits = new LimitsMapper(this);
-    limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
-    limits->readGroups2Map("/etc/clepsydra/clepsydra.conf");
+
+
+    // limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
+
+    limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    qDebug() << m_settingsMap.keys();
+    qDebug() << m_settingsMap;
+
+    limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
+    qDebug() << m_defaultLimitsMap.keys();
 
     // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
     //     'user' ---> user name in string format, QString ('user'), QString('joe')
