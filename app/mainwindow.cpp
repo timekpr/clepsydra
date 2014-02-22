@@ -18,7 +18,6 @@
 #include "user.h"
 #include "config.h"
 #include "src/limitsmapper.h"
-#include "settings.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"
@@ -76,7 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
     //     'operation'
     //     'time'
-
+    currentIndexChanged (0);
     delete limits;
     }
 
