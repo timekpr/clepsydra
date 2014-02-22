@@ -34,11 +34,13 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         }
         QStringList limits = limitMap.value("limits").toStringList();
         if (limits.length())  {
-            QTime limitTime(limitTime.fromString("0300", "hhmm"));
-
-            qDebug() << limitTime;
+            QRegExp rx("[[']");
+            QRegExp rxe("[]']");
+            QString timerx(limits.at(0));
+            timerx.remove(rx);
+            qDebug() << timerx;
+            QTime limitTime(limitTime.fromString(timerx, "hhmm"));
             m_limitTab->sbLimit_7->setTime(limitTime);
-            qDebug() << limits.at(0);
         }
 //        locked=false
 //        bounded=false
