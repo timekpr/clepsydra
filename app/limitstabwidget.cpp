@@ -34,13 +34,15 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         }
         QStringList limits = limitMap.value("limits").toStringList();
         if (limits.length())  {
-            QRegExp rx("[[']");
-            QRegExp rxe("[]']");
-            QString timerx(limits.at(0));
-            timerx.remove(rx);
-            qDebug() << timerx;
-            QTime limitTime(limitTime.fromString(timerx, "hhmm"));
-            m_limitTab->sbLimit_7->setTime(limitTime);
+            foreach  (QString limitsd, limits)  {
+                QRegExp rxd("\\D");
+                QString limerx(limitsd);
+                limerx.remove(rxd);
+                qDebug() << limerx;
+            }
+
+//            QTime limitTime(limitTime.fromString(timerx, "hhmm"));
+//            m_limitTab->sbLimit_7->setTime(limitTime);
         }
 //        locked=false
 //        bounded=false
