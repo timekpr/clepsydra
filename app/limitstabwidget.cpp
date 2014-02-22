@@ -22,6 +22,36 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
     setLimitTbCbs();
 }
 
+void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
+{
+    if (!m_controlsDisabled) {
+        qDebug() << limitMap;
+        bool bounded = limitMap.value("bounded").toBool();
+        if (bounded)  {
+            m_limitTab->ckBound->setDisabled(bounded);
+        } else {
+
+        }
+        QStringList limits = limitMap.value("limits").toStringList();
+        if (limits.length())  {
+            QTime limitTime(limitTime.fromString("0300", "hhmm"));
+
+            qDebug() << limitTime;
+            m_limitTab->sbLimit_7->setTime(limitTime);
+            qDebug() << limits.at(0);
+        }
+//        locked=false
+//        bounded=false
+//        boundedByDay=false
+//        limited=false
+//        limitedByday=false
+//        limits=['0300','0300','0300','0300','0300','0300','0300','0300']
+//        time_from=['0700','0700','0700','0700','0700','0700','0700','0700']
+//        time_to=['2200','2200','2200','2200','2200','2200','2200','2200']
+
+    }
+}
+
 void LimitsTabWidget::disableControls(bool toDisable)
 {
     if (m_controlsDisabled != toDisable)  {

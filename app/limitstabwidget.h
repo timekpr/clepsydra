@@ -14,6 +14,7 @@
 #ifndef LIMITSTABWIDGET_H
 #define LIMITSTABWIDGET_H
 
+#include <QMap>
 #include <QWidget>
 #include "ui_limits.h"
 
@@ -24,6 +25,8 @@ public:
     explicit LimitsTabWidget(QWidget *parent = 0);
 
     void  setLimitTbCbs();
+
+    void setLimits (const QVariantMap&);
 
 public slots:
     // if true all controls are disable,

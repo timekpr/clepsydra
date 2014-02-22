@@ -62,16 +62,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->tab->setCurrentIndex(0);
 
     LimitsMapper* limits = new LimitsMapper(this);
-
-
-    // limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
-
     limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
     qDebug() << m_settingsMap.keys();
-    qDebug() << m_settingsMap;
 
     limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
     qDebug() << m_defaultLimitsMap.keys();
+    QVariantMap map = m_defaultLimitsMap.value("default").toMap();
+    m_limitWidget->setLimits(map);
 
     // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
     //     'user' ---> user name in string format, QString ('user'), QString('joe')
@@ -81,7 +78,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'time'
 
     delete limits;
-    // qDebug() << m_maps;
     }
 
 void MainWindow::currentIndexChanged (int index)
