@@ -18,7 +18,6 @@
 #include "user.h"
 #include "config.h"
 #include "src/limitsmapper.h"
-#include "settings.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"
@@ -62,10 +61,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->tab->setCurrentIndex(0);
 
     LimitsMapper* limits = new LimitsMapper(this);
-
-
-    // limits->getLimits ("/etc/clepsydra/clepsydradefault", "default");
-
     limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
     qDebug() << m_settingsMap.keys();
     qDebug() << m_settingsMap;
@@ -79,7 +74,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
     //     'operation'
     //     'time'
-
+    currentIndexChanged (0);
     delete limits;
     // qDebug() << m_maps;
     }
