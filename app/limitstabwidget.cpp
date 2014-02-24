@@ -15,6 +15,8 @@
 #include "mainwindow.h"
 #include "limitstabwidget.h"
 
+#define FORMAT_STRING_FMT "hhmm"
+
 LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
     QWidget(parent), m_limitTab(new Ui::limitForm)
 {
@@ -25,24 +27,26 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
     if (!m_controlsDisabled) {
-        qDebug() << limitMap;
         bool bounded = limitMap.value("bounded").toBool();
-        if (bounded)  {
-            m_limitTab->ckBound->setDisabled(bounded);
-        } else {
-
-        }
+        m_limitTab->ckBound->setDisabled(bounded);
         QStringList limits = limitMap.value("limits").toStringList();
         if (limits.length())  {
-            foreach  (QString limitsd, limits)  {
-                QRegExp rxd("\\D");
-                QString limerx(limitsd);
-                limerx.remove(rxd);
-                qDebug() << limerx;
-            }
-
-//            QTime limitTime(limitTime.fromString(timerx, "hhmm"));
-//            m_limitTab->sbLimit_7->setTime(limitTime);
+            QTime limitTime(limitTime.fromString(limits.at(0), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_7->setTime(limitTime);
+            limitTime.fromString(limits.at(1), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_0->setTime(limitTime);
+            limitTime.fromString(limits.at(2), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_1->setTime(limitTime);
+            limitTime.fromString(limits.at(3), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_2->setTime(limitTime);
+            limitTime.fromString(limits.at(4), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_3->setTime(limitTime);
+            limitTime.fromString(limits.at(5), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_4->setTime(limitTime);
+            limitTime.fromString(limits.at(6), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_5->setTime(limitTime);
+            limitTime.fromString(limits.at(7), FORMAT_STRING_FMT);
+            m_limitTab->sbLimit_6->setTime(limitTime);
         }
 //        locked=false
 //        bounded=false

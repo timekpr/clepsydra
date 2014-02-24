@@ -705,6 +705,28 @@
         <item>
          <widget class="QWidget" name="wgBoundWeek" native="true">
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="1" column="0">
+            <widget class="QLabel" name="lbLimit_11">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>23</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Tuesday:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <property name="margin">
+              <number>0</number>
+             </property>
+             <property name="indent">
+              <number>4</number>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="0">
             <widget class="QLabel" name="lbLimit_10">
              <property name="minimumSize">
@@ -750,28 +772,6 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lbLimit_11">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>23</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Tuesday:</string>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-             </property>
-             <property name="margin">
-              <number>0</number>
-             </property>
-             <property name="indent">
-              <number>4</number>
              </property>
             </widget>
            </item>
@@ -884,6 +884,19 @@
              </property>
             </widget>
            </item>
+           <item row="4" column="1">
+            <widget class="QTimeEdit" name="sbFrom_5">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="2">
             <widget class="QTimeEdit" name="sbTo_4">
              <property name="enabled">
@@ -919,19 +932,6 @@
              </property>
             </widget>
            </item>
-           <item row="4" column="1">
-            <widget class="QTimeEdit" name="sbFrom_5">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>16777215</height>
-              </size>
-             </property>
-            </widget>
-           </item>
            <item row="4" column="2">
             <widget class="QTimeEdit" name="sbTo_5">
              <property name="enabled">
@@ -945,7 +945,7 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="0">
+           <item row="7" column="0">
             <widget class="QLabel" name="lbLimit_15">
              <property name="minimumSize">
               <size>
@@ -967,7 +967,7 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
+           <item row="7" column="1">
             <widget class="QTimeEdit" name="sbFrom_6">
              <property name="enabled">
               <bool>true</bool>
@@ -980,7 +980,7 @@
              </property>
             </widget>
            </item>
-           <item row="5" column="2">
+           <item row="7" column="2">
             <widget class="QTimeEdit" name="sbTo_6">
              <property name="enabled">
               <bool>true</bool>
@@ -992,6 +992,12 @@
               </size>
              </property>
             </widget>
+           </item>
+           <item row="6" column="0">
+            <widget class="QTreeView" name="treeView"/>
+           </item>
+           <item row="5" column="0">
+            <widget class="QTreeView" name="treeView_2"/>
            </item>
           </layout>
          </widget>
