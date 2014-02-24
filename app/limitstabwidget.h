@@ -33,6 +33,7 @@ public slots:
     void disableControls(bool);
 
     void ckLimitDayStateChanged(int checked);
+    void ckBoundDayStateChanged (int checked);
 
 private:
     Ui_limitForm *m_limitTab;

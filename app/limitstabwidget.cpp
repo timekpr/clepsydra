@@ -65,6 +65,13 @@ void LimitsTabWidget::ckLimitDayStateChanged(int checked)
     m_limitTab->wgLimitWeek->setHidden(checked);
 }
 
+
+void LimitsTabWidget::ckBoundDayStateChanged (int checked)
+{
+    m_limitTab->wgBoundWeek->setHidden(checked);
+}
+
+
 void LimitsTabWidget::disableControls(bool toDisable)
 {
     if (m_controlsDisabled != toDisable)  {
@@ -115,7 +122,7 @@ void LimitsTabWidget::setLimitTbCbs ()
             SLOT(ckLimitDayStateChanged(int)));
     connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), parent(),
             SLOT(ckBoundStateChanged(int)));
-    connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), parent(),
+    connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundDayStateChanged(int)));
 
 }
