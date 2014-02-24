@@ -32,6 +32,8 @@ public slots:
     // if true all controls are disable,
     void disableControls(bool);
 
+    void ckLimitDayStateChanged(int checked);
+
 private:
     Ui_limitForm *m_limitTab;
     bool m_controlsDisabled;

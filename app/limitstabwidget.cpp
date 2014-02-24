@@ -60,6 +60,11 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     }
 }
 
+void LimitsTabWidget::ckLimitDayStateChanged(int checked)
+{
+    m_limitTab->wgLimitWeek->setHidden(checked);
+}
+
 void LimitsTabWidget::disableControls(bool toDisable)
 {
     if (m_controlsDisabled != toDisable)  {
@@ -106,7 +111,7 @@ void LimitsTabWidget::setLimitTbCbs ()
 
     connect(m_limitTab->ckLimit, SIGNAL(stateChanged (int)), parent(),
             SLOT(ckLimitStateChanged(int)));
-    connect(m_limitTab->ckLimitDay, SIGNAL(stateChanged (int)), parent(),
+    connect(m_limitTab->ckLimitDay, SIGNAL(stateChanged (int)), this ,
             SLOT(ckLimitDayStateChanged(int)));
     connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), parent(),
             SLOT(ckBoundStateChanged(int)));
