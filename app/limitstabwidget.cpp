@@ -48,6 +48,40 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
             limitTime.fromString(limits.at(7), FORMAT_STRING_FMT);
             m_limitTab->sbLimit_6->setTime(limitTime);
         }
+
+        QStringList time_from = limitMap.value("time_from").toStringList();
+        if (time_from.length())  {
+            m_limitTab->sbFrom_7->setTime(QTime::fromString(time_from.at(7), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_0->setTime(QTime::fromString(time_from.at(0), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_1->setTime(QTime::fromString(time_from.at(1), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_2->setTime(QTime::fromString(time_from.at(2), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_3->setTime(QTime::fromString(time_from.at(3), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_4->setTime(QTime::fromString(time_from.at(4), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_5->setTime(QTime::fromString(time_from.at(5), FORMAT_STRING_FMT));
+            m_limitTab->sbFrom_6->setTime(QTime::fromString(time_from.at(6), FORMAT_STRING_FMT));
+        }
+
+        QStringList lstTimeTo = limitMap.value("time_to").toStringList();
+        if (lstTimeTo.length())  {
+            QTime limitTimeTo;
+            limitTimeTo.fromString(lstTimeTo.at(0), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_7->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(1), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_0->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(2), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_1->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(3), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_2->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(4), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_3->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(5), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_4->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(6), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_5->setTime(limitTimeTo);
+            limitTimeTo.fromString(lstTimeTo.at(7), FORMAT_STRING_FMT);
+            m_limitTab->sbTo_6->setTime(limitTimeTo);
+        }
+
 //        locked=false
 //        bounded=false
 //        boundedByDay=false
@@ -62,13 +96,13 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 
 void LimitsTabWidget::ckLimitDayStateChanged(int checked)
 {
-    m_limitTab->wgLimitWeek->setHidden(checked);
+    m_limitTab->wgLimitWeek->setHidden(!checked);
 }
 
 
 void LimitsTabWidget::ckBoundDayStateChanged (int checked)
 {
-    m_limitTab->wgBoundWeek->setHidden(checked);
+    m_limitTab->wgBoundWeek->setHidden(!checked);
 }
 
 

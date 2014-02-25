@@ -603,6 +603,9 @@
              <height>16777215</height>
             </size>
            </property>
+           <property name="displayFormat">
+            <string>hh:mm</string>
+           </property>
           </widget>
          </item>
          <item>
@@ -615,6 +618,9 @@
              <width>16777215</width>
              <height>16777215</height>
             </size>
+           </property>
+           <property name="displayFormat">
+            <string>hh:mm</string>
            </property>
           </widget>
          </item>
@@ -684,6 +690,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item>
@@ -696,6 +705,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -738,6 +750,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="0" column="2">
@@ -750,6 +765,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -786,6 +804,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="1" column="2">
@@ -798,6 +819,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -834,6 +858,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="2" column="2">
@@ -846,6 +873,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -882,6 +912,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="3" column="2">
@@ -894,6 +927,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -930,6 +966,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="4" column="2">
@@ -942,6 +981,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
@@ -978,6 +1020,9 @@
                <height>16777215</height>
               </size>
              </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
+             </property>
             </widget>
            </item>
            <item row="5" column="2">
@@ -990,6 +1035,9 @@
                <width>16777215</width>
                <height>16777215</height>
               </size>
+             </property>
+             <property name="displayFormat">
+              <string>hh:mm</string>
              </property>
             </widget>
            </item>
