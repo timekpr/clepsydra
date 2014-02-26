@@ -55,13 +55,6 @@ public slots:
     void btnAddTimeClicked ();
     void btnResetTimeClicked ();
 
-// limit tab
-public slots:
-    void ckLimitStateChanged (int);
-    void ckLimitDayStateChanged (int);
-    void ckBoundStateChanged (int);
-    void ckBoundDayStateChanged (int);
-
 private:
     Ui::Form *m_ui;
     GrantTabWidget*  m_grantWidget;

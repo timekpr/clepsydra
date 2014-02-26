@@ -129,23 +129,15 @@ void MainWindow::btnResetTimeClicked ()
     qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
 }
 
-void MainWindow::ckLimitStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckLimitStateChanged, wait for implementation";
-}
 
-void MainWindow::ckLimitDayStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckLimitDayStateChanged, wait for implementation";
-}
+//void MainWindow::ckLimitDayStateChanged(int /*state*/)
+//{
+//    qDebug() << "TODO : ckLimitDayStateChanged, wait for implementation";
+//}
 
-void MainWindow::ckBoundStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckckBoundStateChanged, wait for implementation";
-}
 
-void MainWindow::ckBoundDayStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckckBoundDayStateChanged, wait for implementation";
-}
+//void MainWindow::ckBoundDayStateChanged(int /*state*/)
+//{
+//    qDebug() << "TODO : ckckBoundDayStateChanged, wait for implementation";
+//}
 

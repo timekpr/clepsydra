@@ -137,14 +137,29 @@ void LimitsTabWidget::disableControls(bool toDisable)
     }
 }
 
+void LimitsTabWidget::ckLimitStateChanged(int state)
+{
+    if (state == Qt::Checked && m_limitTab->ckBound->checkState()==Qt::Checked) {
+        m_limitTab->ckBound->setCheckState(Qt::Unchecked);
+    }
+}
+
+void LimitsTabWidget::ckBoundStateChanged(int state)
+{
+    if (state == Qt::Checked && m_limitTab->ckBound->checkState()==Qt::Checked) {
+        m_limitTab->ckLimit->setCheckState(Qt::Unchecked);
+    }
+}
+
+
 void LimitsTabWidget::setLimitTbCbs ()
 {
 
-    connect(m_limitTab->ckLimit, SIGNAL(stateChanged (int)), parent(),
+    connect(m_limitTab->ckLimit, SIGNAL(stateChanged (int)), this,
             SLOT(ckLimitStateChanged(int)));
     connect(m_limitTab->ckLimitDay, SIGNAL(stateChanged (int)), this ,
             SLOT(ckLimitDayStateChanged(int)));
-    connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), parent(),
+    connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundStateChanged(int)));
     connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundDayStateChanged(int)));
