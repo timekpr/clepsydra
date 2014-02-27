@@ -11,6 +11,7 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QDebug>
 #include "statustabwidget.h"
 
 StatusTabWidget::StatusTabWidget(QWidget *parent) :
@@ -19,7 +20,20 @@ StatusTabWidget::StatusTabWidget(QWidget *parent) :
     m_statusTab->setupUi(this);
 }
 
-void StatusTabWidget::disableControls(bool toDisable)
+void StatusTabWidget::setStatus (const QVariantMap& map)
+{
+    if (map.count())  {
+        bool locked = map.value("locked").toBool();
+        if (locked) {
+            m_statusTab->lbAccountlocked->setText(tr("Yes"));
+        } else {
+            m_statusTab->lbAccountlocked->setText(tr("No"));
+        }
+
+    }
+}
+
+void StatusTabWidget::disableControls(bool /*toDisable*/)
 {
 
 }

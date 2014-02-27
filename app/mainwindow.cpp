@@ -68,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << m_defaultLimitsMap.keys();
     QVariantMap map = m_defaultLimitsMap.value("default").toMap();
     m_limitWidget->setLimits(map);
+    m_statusWidget->setStatus(map);
 
     // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
     //     'user' ---> user name in string format, QString ('user'), QString('joe')

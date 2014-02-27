@@ -208,7 +208,7 @@
    <item row="6" column="1">
     <widget class="QLabel" name="lbLimitedByAccessDuration">
      <property name="text">
-      <string>Some times</string>
+      <string>No</string>
      </property>
      <property name="textFormat">
       <enum>Qt::LogText</enum>
@@ -251,7 +251,7 @@
       </size>
      </property>
      <property name="text">
-      <string>0 min</string>
+      <string>No limit</string>
      </property>
     </widget>
    </item>

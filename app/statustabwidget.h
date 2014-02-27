@@ -23,6 +23,7 @@ class StatusTabWidget : public QWidget
 public:
     explicit StatusTabWidget(QWidget *parent = 0);
 
+    void setStatus (const QVariantMap&);
 public slots:
     // if true all controls are disable,
     void disableControls(bool);
