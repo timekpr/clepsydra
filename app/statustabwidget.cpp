@@ -30,6 +30,19 @@ void StatusTabWidget::setStatus (const QVariantMap& map)
             m_statusTab->lbAccountlocked->setText(tr("No"));
         }
 
+        bool limited = map.value("limited").toBool();
+        if (limited)  {
+            m_statusTab->lbLimitedByAccessDuration->setText(tr("Yes"));
+        } else {
+            m_statusTab->lbLimitedByAccessDuration->setText(tr("No"));
+        }
+
+        bool limitedTf = map.value("limitedByday").toBool();
+        if (limitedTf)  {
+            m_statusTab->lbLimitedByTimeFrame->setText(tr("Yes"));
+        } else {
+            m_statusTab->lbLimitedByTimeFrame->setText(tr("No"));
+        }
     }
 }
 
