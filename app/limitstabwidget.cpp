@@ -12,10 +12,12 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
+#include "config.h"
 #include "mainwindow.h"
 #include "limitstabwidget.h"
 
 #define FORMAT_STRING_FMT "hhmm"
+
 
 LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
     QWidget(parent), m_limitTab(new Ui::limitForm)
@@ -28,11 +30,11 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
     if (!m_controlsDisabled) {
 
-        bool bounded = limitMap.value("bounded").toBool();
+        bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
         m_limitTab->ckBound->setDisabled(bounded);
         ckLimitDayStateChanged(bounded);
 
-        bool boundedByDay = limitMap.value("boundedByDay").toBool();
+        bool boundedByDay = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
         m_limitTab->ckBoundDay->setDisabled(boundedByDay);
         ckBoundDayStateChanged(boundedByDay);
 
@@ -82,6 +84,31 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 //        time_to=['2200','2200','2200','2200','2200','2200','2200','2200']
 
     }
+}
+
+void LimitsTabWidget::getLimits(QVariantMap &map)
+{
+    map.clear();
+    bool bound = false;
+    if (m_limitTab->ckBound->checkState()==Qt::Checked) {
+        bound = true;
+    }
+
+    bool boundByDay = false;
+    if (m_limitTab->ckBoundDay->checkState()==Qt::Checked) {
+        boundByDay = true;
+    }
+
+    bool limits = false;
+    if (m_limitTab->ckLimit->checkState()==Qt::Checked) {
+        limits = true;
+    }
+
+    map.insert(CLEPSYDRA_LIMIT_BOUNDED, bound);
+    map.insert(CLEPSYDRA_LIMIT_BOUNDEDBYDAY, boundByDay);
+    map.insert(CLEPSYDRA_LIMIT_LIMITS, limits);
+
+    qDebug() << map;
 }
 
 void LimitsTabWidget::ckLimitDayStateChanged(int checked)

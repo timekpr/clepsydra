@@ -77,6 +77,11 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'operation'
     //     'time'
     currentIndexChanged (0);
+
+    // temp
+    QVariantMap limitMap;
+    m_limitWidget->getLimits(limitMap);
+
     delete limits;
     }
 
@@ -129,16 +134,4 @@ void MainWindow::btnResetTimeClicked ()
 {
     qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
 }
-
-
-//void MainWindow::ckLimitDayStateChanged(int /*state*/)
-//{
-//    qDebug() << "TODO : ckLimitDayStateChanged, wait for implementation";
-//}
-
-
-//void MainWindow::ckBoundDayStateChanged(int /*state*/)
-//{
-//    qDebug() << "TODO : ckckBoundDayStateChanged, wait for implementation";
-//}
 

@@ -24,9 +24,11 @@ class LimitsTabWidget : public QWidget
 public:
     explicit LimitsTabWidget(QWidget *parent = 0);
 
-    void  setLimitTbCbs();
+    void setLimitTbCbs();
 
     void setLimits (const QVariantMap&);
+
+    void getLimits (QVariantMap&);
 
 public slots:
     // if true all controls are disable,
