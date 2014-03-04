@@ -104,9 +104,15 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
         limits = true;
     }
 
+    bool limitsbyday = false;
+    if (m_limitTab->ckLimitDay->checkState()==Qt::Checked) {
+        limitsbyday = true;
+    }
+
     map.insert(CLEPSYDRA_LIMIT_BOUNDED, bound);
     map.insert(CLEPSYDRA_LIMIT_BOUNDEDBYDAY, boundByDay);
     map.insert(CLEPSYDRA_LIMIT_LIMITS, limits);
+    map.insert(CLEPSYDRA_LIMIT_LIMITSBYDAY, limits);
 
     qDebug() << map;
 }

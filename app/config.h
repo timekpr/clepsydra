@@ -13,5 +13,6 @@
 #define CLEPSYDRA_LIMIT_BOUNDED         "bounded"
 #define CLEPSYDRA_LIMIT_BOUNDEDBYDAY    "boundedByDay"
 #define CLEPSYDRA_LIMIT_LIMITS          "limits"
+#define CLEPSYDRA_LIMIT_LIMITSBYDAY     "limitedByday"
 
 #endif // CONFIG_H
