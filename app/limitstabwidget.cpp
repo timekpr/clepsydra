@@ -109,6 +109,10 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
         limitsbyday = true;
     }
 
+    QStringList limitsList;
+    limitsList.append( m_limitTab->sbLimit_7->time().toString());
+    qDebug() << limitsList;
+
     map.insert(CLEPSYDRA_LIMIT_BOUNDED, bound);
     map.insert(CLEPSYDRA_LIMIT_BOUNDEDBYDAY, boundByDay);
     map.insert(CLEPSYDRA_LIMIT_LIMITS, limits);
