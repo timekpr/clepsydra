@@ -38,7 +38,7 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->ckBoundDay->setDisabled(boundedByDay);
         ckBoundDayStateChanged(boundedByDay);
 
-        QStringList limits = limitMap.value("limits").toStringList();
+        QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
         if (limits.length())  {
             m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
             m_limitTab->sbLimit_0->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
@@ -110,13 +110,20 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     }
 
     QStringList limitsList;
-    limitsList.append( m_limitTab->sbLimit_7->time().toString());
-    qDebug() << limitsList;
+    limitsList.append( m_limitTab->sbLimit_7->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_0->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_1->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_2->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_3->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_4->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_5->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_6->time().toString(FORMAT_STRING_FMT));
 
     map.insert(CLEPSYDRA_LIMIT_BOUNDED, bound);
     map.insert(CLEPSYDRA_LIMIT_BOUNDEDBYDAY, boundByDay);
     map.insert(CLEPSYDRA_LIMIT_LIMITS, limits);
     map.insert(CLEPSYDRA_LIMIT_LIMITSBYDAY, limits);
+    map.insert(CLEPSYDRA_LIMIT_LIMITS, limitsList);
 
     qDebug() << map;
 }
