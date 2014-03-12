@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include "statustabwidget.h"
+#include "config.h"
 
 StatusTabWidget::StatusTabWidget(QWidget *parent) :
     QWidget(parent), m_statusTab(new Ui::statusForm)
@@ -23,21 +24,21 @@ StatusTabWidget::StatusTabWidget(QWidget *parent) :
 void StatusTabWidget::setStatus (const QVariantMap& map)
 {
     if (map.count())  {
-        bool locked = map.value("locked").toBool();
+        bool locked = map.value(CLEPSYDRA_LOCKED).toBool();
         if (locked) {
             m_statusTab->lbAccountlocked->setText(tr("Yes"));
         } else {
             m_statusTab->lbAccountlocked->setText(tr("No"));
         }
 
-        bool limited = map.value("limited").toBool();
+        bool limited = map.value(CLEPSYDRA_LIMITED).toBool();
         if (limited)  {
             m_statusTab->lbLimitedByAccessDuration->setText(tr("Yes"));
         } else {
             m_statusTab->lbLimitedByAccessDuration->setText(tr("No"));
         }
 
-        bool limitedTf = map.value("limitedByday").toBool();
+        bool limitedTf = map.value(CLEPSYDRA_LIMIT_LIMITSBYDAY).toBool();
         if (limitedTf)  {
             m_statusTab->lbLimitedByTimeFrame->setText(tr("Yes"));
         } else {
