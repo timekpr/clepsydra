@@ -46,9 +46,6 @@ void LimitsMapper::readGroups2Map(QVariantMap& target, const QString &file)
             QStringList keylist = limits->allKeys();
             foreach (const QString& key, keylist) {
                 variantMap.insert(key, limits->value(key));
-                if (key.compare("limits")==0)  {
-                    qDebug() << "lmitst" << limits->childKeys();
-                }
             }
             target.insert(group, variantMap);
             limits->endGroup();
