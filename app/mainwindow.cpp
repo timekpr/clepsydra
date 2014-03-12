@@ -14,49 +14,44 @@
 #include <QDebug>
 #include <QList>
 #include <QProgressBar>
+
 #include "user.h"
-#include "settings.h"
+#include "config.h"
+#include "src/limitsmapper.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"
 #include "ui_main.h"
-#include "ui_status.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
+    m_grantWidget = new GrantTabWidget(this);
+    m_statusWidget = new StatusTabWidget(this);
+    m_limitWidget =  new LimitsTabWidget(this);
+    connect(this, SIGNAL(disableControls(bool) ),m_limitWidget, SLOT(disableControls(bool)));
+    connect(this, SIGNAL(disableControls(bool) ),m_grantWidget, SLOT(disableControls(bool)));
+    connect(this, SIGNAL(disableControls(bool) ),m_statusWidget, SLOT(disableControls(bool)));
 
     m_accounts = new Accounts(this);
 
-    QList<User*> users = m_accounts->getUsers();
-    int count = users.count();
+    int count = m_accounts->usersCount();
     if (count)  {
         for (int i=0; i < count; i++) {
-            User* auser =users.at(i);
-            m_ui->cbActiveUser->insertItem(0, auser->UserName());
+            User* auser = m_accounts->getUser(i);
+            if (auser)  {
+                m_ui->cbActiveUser->addItem(auser->UserName());
+            }
         }
         m_ui->cbActiveUser->setCurrentIndex(0);
     }
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
-
-    QWidget* grantWidget = new QWidget(this);
-    m_uiG = new Ui::grantForm();
-    m_uiG->setupUi(grantWidget);
-
-    QWidget* limitWidget = new QWidget(this);
-    m_uilimit = new Ui::limitForm();
-    m_uilimit->setupUi(limitWidget);
-
-    QWidget* statusWidget = new QWidget(this);
-    Ui::statusForm uiStatus;
-    uiStatus.setupUi(statusWidget);
-
-    m_ui->tab->insertTab(0, statusWidget, tr ("Status"));
-    m_ui->tab->insertTab(1, grantWidget, tr("Grant"));
+    m_ui->tab->insertTab(0, m_statusWidget, tr ("Status"));
+    m_ui->tab->insertTab(1, m_grantWidget, tr("Grant"));
     // Probably we need separate limits and bounds to different tabs ...
-    m_ui->tab->insertTab(2,limitWidget, tr("Limits and Bounds"));
+    m_ui->tab->insertTab(2, m_limitWidget, tr("Limits and Bounds"));
 
     // yes,  all rest stub tabs
     m_ui->tab->removeTab(3);
@@ -65,55 +60,45 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_ui->tab->setCurrentIndex(0);
 
-    setGrantTbCbs ();
-    setLimitTbCbs ();
+    LimitsMapper* limits = new LimitsMapper(this);
+    limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    qDebug() << m_settingsMap.keys();
 
-    Settings* settings = new Settings (this);
-    QString workdir(settings->workdir());
-    qDebug() << workdir;
-    delete settings;
+    limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
+    qDebug() << m_defaultLimitsMap.keys();
+    QVariantMap map = m_defaultLimitsMap.value("default").toMap();
+    m_limitWidget->setLimits(map);
+    m_statusWidget->setStatus(map);
+
+    // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
+    //     'user' ---> user name in string format, QString ('user'), QString('joe')
+    //     'bound' ---> Bound info?, format, QString, QString?
+    //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
+    //     'operation'
+    //     'time'
+    currentIndexChanged (0);
+
+    // temp
+    QVariantMap limitMap;
+    m_limitWidget->getLimits(limitMap);
+
+    delete limits;
     }
 
 void MainWindow::currentIndexChanged (int index)
 {
-    qDebug() << m_accounts->getUser(index)->isLocked();
+    if (m_accounts->getUser(index)->isAdmin() ) {
+        // Disable all buttons and other controls since we should not
+        // admin accounts.
+        emit disableControls(true);
+        qDebug() << "Admin" << m_accounts->getUser(index)->UserName();
+    } else {
+        emit disableControls(false);
+        qDebug() << "Not admin"  << m_accounts->getUser(index)->UserName();
+    }
 }
 
-void MainWindow::addGrantForm()
-{
-}
 
-void MainWindow::setGrantTbCbs ()
-{
-    connect(m_uiG->btnClearAllRestriction, SIGNAL(clicked ()), this,
-            SLOT(btnClearAllRestrictionClicked()));
-    connect(m_uiG->btnBypass, SIGNAL(clicked ()), this,
-            SLOT(btnBypassClicked()));
-    connect(m_uiG->btnClearBypass, SIGNAL(clicked ()), this,
-            SLOT(btnClearBypassClicked()));
-    connect(m_uiG->btnLockAccount, SIGNAL(clicked ()), this,
-            SLOT(btnLockAccountClicked()));
-    connect(m_uiG->btnUnlockAccount, SIGNAL(clicked ()), this,
-            SLOT(btnUnlockAccountClicked()));
-    connect(m_uiG->btnAddTime, SIGNAL(clicked ()), this,
-            SLOT(btnAddTimeClicked()));
-    connect(m_uiG->btnResetTime, SIGNAL(clicked ()), this,
-            SLOT(btnResetTimeClicked()));
-}
-
-void MainWindow::setLimitTbCbs ()
-{
-
-    connect(m_uilimit->ckLimit, SIGNAL(stateChanged (int)), this,
-            SLOT(ckLimitStateChanged(int)));
-    connect(m_uilimit->ckLimitDay, SIGNAL(stateChanged (int)), this,
-            SLOT(ckLimitDayStateChanged(int)));
-    connect(m_uilimit->ckBound, SIGNAL(stateChanged (int)), this,
-            SLOT(ckBoundStateChanged(int)));
-    connect(m_uilimit->ckBoundDay, SIGNAL(stateChanged (int)), this,
-            SLOT(ckBoundDayStateChanged(int)));
-
-}
 
 void MainWindow::btnClearAllRestrictionClicked ()
 {
@@ -148,25 +133,5 @@ void MainWindow::btnAddTimeClicked ()
 void MainWindow::btnResetTimeClicked ()
 {
     qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
-}
-
-void MainWindow::ckLimitStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckLimitStateChanged, wait for implementation";
-}
-
-void MainWindow::ckLimitDayStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckLimitDayStateChanged, wait for implementation";
-}
-
-void MainWindow::ckBoundStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckckBoundStateChanged, wait for implementation";
-}
-
-void MainWindow::ckBoundDayStateChanged(int /*state*/)
-{
-    qDebug() << "TODO : ckckBoundDayStateChanged, wait for implementation";
 }
 

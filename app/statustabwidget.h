@@ -11,21 +11,25 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QDebug>
-#include <QStringList>
-#include "settings.h"
+#ifndef STATUSTABWIDGET_H
+#define STATUSTABWIDGET_H
 
-Settings::Settings(QObject *parent) :
-    QObject(parent)
-{
-    m_settings = new QSettings (staticSettingsFile(), QSettings::IniFormat, this);
-    m_allkeys = m_settings->allKeys();
-}
+#include <QWidget>
+#include "ui_status.h"
 
-const QString& Settings::workdir()
+class StatusTabWidget : public QWidget
 {
-    qDebug() << m_allkeys;
-    QString key;
-    // return key;
-    return m_settings->value ("directories/CLEPSYDRAWORK").toString();
-}
+    Q_OBJECT
+public:
+    explicit StatusTabWidget(QWidget *parent = 0);
+
+    void setStatus (const QVariantMap&);
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
+
+private:
+    Ui_statusForm *m_statusTab;
+};
+
+#endif // STATUSTABWIDGET_H

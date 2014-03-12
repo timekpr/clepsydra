@@ -11,29 +11,26 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef SETTINGS_H
-#define SETTINGS_H
+#ifndef LIMITSMAPPER_H
+#define LIMITSMAPPER_H
 
+#include <QVariantMap>
 #include <QObject>
-#include <QSettings>
-#include <QStringList>
 
-class Settings : public QObject
+class LimitsMapper : public QObject
 {
     Q_OBJECT
 public:
-    explicit Settings(QObject *parent = 0);
+    explicit LimitsMapper(QObject *parent = 0);  
 
-    const QString&  workdir ();
-
-static inline const char *staticSettingsFile ()
-    { return "/etc/clepsydra/clepsydra.conf"; }
+public:
+    void getLimits (const QString&, const QString&);
+    void readGroups2Map (QVariantMap&, const QString&);
 
 private:
-
-    QStringList m_allkeys;
-    QSettings*  m_settings;
+    QVariantMap  m_LimitsMap;
+    QVariantMap m_groupMaps;
     
 };
 
-#endif // SETTINGS_H
+#endif // LIMITSMAPPER_H

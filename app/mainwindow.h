@@ -15,11 +15,13 @@
 #define MAINWINDOW_H
 
 #include <QObject>
+#include <QVariantMap>
 #include <QMainWindow>
 
+#include "granttabwidget.h"
+#include "limitstabwidget.h"
+#include "statustabwidget.h"
 #include "accounts.h"
-#include "ui_grant.h"
-#include "ui_limits.h"
 
 namespace Ui {
 class Form;
@@ -36,6 +38,8 @@ private:
     void setGrantTbCbs ();
     void setLimitTbCbs();
 
+signals:
+    void disableControls (bool);
 public slots:
     //
     void currentIndexChanged (int);
@@ -51,22 +55,14 @@ public slots:
     void btnAddTimeClicked ();
     void btnResetTimeClicked ();
 
-// limit tab
-public slots:
-    void ckLimitStateChanged (int);
-    void ckLimitDayStateChanged (int);
-    void ckBoundStateChanged (int);
-    void ckBoundDayStateChanged (int);
-
-private:
-    //
-    void addGrantForm();
-
 private:
     Ui::Form *m_ui;
-    Ui::grantForm *m_uiG;
-    Ui::limitForm *m_uilimit;
+    GrantTabWidget*  m_grantWidget;
+    StatusTabWidget* m_statusWidget;
+    LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
+    QVariantMap m_settingsMap;
+    QVariantMap m_defaultLimitsMap;
 
 };
 

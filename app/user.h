@@ -15,6 +15,7 @@
 #define USER_H
 
 #include <QObject>
+#include <QVariantMap>
 
 class User : public QObject
 {
@@ -39,11 +40,13 @@ private:
     void loadUserInfo ();
 
 private:
+    QVariantMap m_accountLimits;
     QString m_path;
     QString m_userName;
     bool    m_isLocked;
     QString m_uid;
     quint32 m_accountType;  // If true, user is member of 'Sudoers'.
+
 
 };
 

@@ -11,35 +11,30 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef ACCOUNTS_H
-#define ACCOUNTS_H
+#ifndef GRANTUIWIDGET_H
+#define GRANTUIWIDGET_H
 
-#include <QObject>
-#include <QList>
-#include "user.h"
+#include "ui_grant.h"
+#include <QWidget>
 
-class Accounts : public QObject
+class GrantTabWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Accounts(QObject *parent = 0);
-    
-    ~Accounts ();
+    explicit GrantTabWidget(QWidget *parent = 0);
 
-    User*   getUser (int) const;
-    int usersCount();
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
 
 public:
-    static inline const char *staticInterfaceName()
-    { return "org.freedesktop.Accounts"; }
+    //
+    void setGrantTbCbs ();
 
 private:
-
-    void init ();
-
-private:
-    QList<User*>    m_users;
+    Ui_grantForm *m_grantTab;
+    bool m_controlsDisabled;
 
 };
 
-#endif // ACCOUNTS_H
+#endif // GRANTUIWIDGET_H

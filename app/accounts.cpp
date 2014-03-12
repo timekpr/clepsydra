@@ -27,14 +27,18 @@ Accounts::~Accounts ()
     m_users.clear();
 }
 
-QList<User*>    Accounts::getUsers () const
+int Accounts::usersCount()
 {
-    return m_users;
+    return m_users.count();
 }
 
 User*   Accounts::getUser(int index) const
 {
-    return m_users.at(index);
+    User* rtuser = NULL;
+    if (index < m_users.count())  {
+        rtuser = m_users.at(index);
+    }
+    return rtuser;
 }
 
 void  Accounts::init ()
@@ -54,7 +58,7 @@ void  Accounts::init ()
     while (!dbvFirst.atEnd())  {
         User *user = new User();
         dbvFirst >> path;
-        user->setObjectPath(path.path());
+        user->setObjectPath(path.path());        
         m_users.append(user);
       }
     dbvFirst.endArray();

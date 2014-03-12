@@ -11,35 +11,39 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef ACCOUNTS_H
-#define ACCOUNTS_H
+#ifndef LIMITSTABWIDGET_H
+#define LIMITSTABWIDGET_H
 
-#include <QObject>
-#include <QList>
-#include "user.h"
+#include <QMap>
+#include <QWidget>
+#include "ui_limits.h"
 
-class Accounts : public QObject
+class LimitsTabWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit Accounts(QObject *parent = 0);
-    
-    ~Accounts ();
+    explicit LimitsTabWidget(QWidget *parent = 0);
 
-    User*   getUser (int) const;
-    int usersCount();
+    void setLimitTbCbs();
 
-public:
-    static inline const char *staticInterfaceName()
-    { return "org.freedesktop.Accounts"; }
+    void setLimits (const QVariantMap&);
+
+    void getLimits (QVariantMap&);
+
+public slots:
+    // if true all controls are disable,
+    void disableControls(bool);
+
+    void ckLimitStateChanged (int);
+    void ckBoundStateChanged (int);
+
+    void ckLimitDayStateChanged(int checked);
+    void ckBoundDayStateChanged (int checked);
 
 private:
-
-    void init ();
-
-private:
-    QList<User*>    m_users;
+    Ui_limitForm *m_limitTab;
+    bool m_controlsDisabled;
 
 };
 
-#endif // ACCOUNTS_H
+#endif // LIMITSTABWIDGET_H
