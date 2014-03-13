@@ -100,7 +100,6 @@ bool Helper::managepermissions(const QVariantMap &args)
 	    break;
 	default:
         code = false;
-//	    return ActionReply::HelperError;
     }
 
     return code;
@@ -201,7 +200,6 @@ bool Helper::addTime(QString root,int time)
 {
     QString fileName;
     fileName = root + ".time";
-    //int time = 0;
     QFile timeFile(fileName);
     
     if (!timeFile.open(QIODevice::WriteOnly|QIODevice::Truncate))
