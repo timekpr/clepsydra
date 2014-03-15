@@ -5,6 +5,15 @@
 #include <sys/stat.h>
 #include <string.h>
 
+// aux_source_directory(. SRC_LIST)
+
+// read conf file
+// read log rotate file
+
+void readConfFile (char *p);
+
+#include "c_socket.h"
+
 int make_daemon ()
 {
     FILE *fp= NULL;
@@ -39,6 +48,7 @@ int make_daemon ()
     close(STDIN_FILENO);
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
+
 
     // Open a log file in write mode.
     fp = fopen ("clepsydra.log", "w+");
