@@ -1,3 +1,16 @@
+// Copyright (c) 2014 Olli-Pekka Wallin <opwallin@gmail.com>
+
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -10,7 +23,7 @@
 // read conf file
 // read log rotate file
 
-void readConfFile (char *p);
+int readConfFile (char *p);
 
 #include "c_socket.h"
 
@@ -49,14 +62,14 @@ int make_daemon ()
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
-
+    int keyword = readConfFile("/etc");
     // Open a log file in write mode.
     fp = fopen ("clepsydra.log", "w+");
     while (1)
     {
        //Dont block context switches, let the process sleep for some time
        sleep(1);
-       fprintf(fp, "Logging info...\n");
+       fprintf(fp, "Logging info... %d \n", keyword );
        fflush(fp);
        // Implement and call some function that does core work for this daemon.
      }

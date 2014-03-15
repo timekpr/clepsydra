@@ -11,7 +11,17 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
-void readConfFile (char *p)
+#include <iniparser.h>
+
+int readConfFile (char *p)
 {
+    int logfile = 3;
+    dictionary* dict = iniparser_load("/etc/clepsydra/clepsydra.conf");
+    if (dict) {
+        logfile = iniparser_find_entry (dict, "variables");
+    }
+
+    iniparser_freedict (dict);
+    return logfile;
 }
 
