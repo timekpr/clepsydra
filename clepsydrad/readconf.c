@@ -19,6 +19,9 @@ int readConfFile (char *p)
     dictionary* dict = iniparser_load("/etc/clepsydra/clepsydra.conf");
     if (dict) {
         logfile = iniparser_find_entry (dict, "variables");
+        if (logfile)  {
+            logfile = iniparser_getsecnkeys (dict,"variables" );
+        }
     }
 
     iniparser_freedict (dict);
