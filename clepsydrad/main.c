@@ -23,7 +23,7 @@
 // read conf file
 // read log rotate file
 
-int readConfFile (char *p);
+int readConfFile (FILE *fp);
 
 #include "c_socket.h"
 
@@ -62,14 +62,17 @@ int make_daemon ()
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
-    int keyword = readConfFile("/etc");
-    // Open a log file in write mode.
     fp = fopen ("clepsydra.log", "w+");
+
+    char *p = NULL;
+    int keyword = readConfFile(fp);
+    // Open a log file in write mode.
+
     while (1)
     {
        //Dont block context switches, let the process sleep for some time
        sleep(1);
-       fprintf(fp, "Logging info... %d \n", keyword );
+       fprintf(fp, "Logging info... %d %s\n", keyword, p );
        fflush(fp);
        // Implement and call some function that does core work for this daemon.
      }

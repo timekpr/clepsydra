@@ -13,14 +13,30 @@
 
 #include <iniparser.h>
 
-int readConfFile (char *p)
+
+int readConfFile (FILE *fp)
 {
     int logfile = 3;
     dictionary* dict = iniparser_load("/etc/clepsydra/clepsydra.conf");
     if (dict) {
         logfile = iniparser_find_entry (dict, "variables");
         if (logfile)  {
-            logfile = iniparser_getsecnkeys (dict,"variables" );
+            int count  = iniparser_getsecnkeys (dict,"variables" );
+            char **sec = iniparser_getseckeys (dict, "variables");
+            if (sec)  {
+                int i= 0;
+                for ( i=0; i<count; ++i)
+                    // iniparser_unset((dictionary*)Dictionary, Keys[i]);
+                    fprintf(fp, "Logging info...found cc %s %s \n", sec[i], iniparser_getstring (dict, sec[i], ""));
+                }
+
+                fprintf(fp, "Logging info...found cc \n" );
+
+            char *p = dictionary_get (dict, "POLLTIME", "12");
+            if (p)  {
+                fprintf(fp, "Logging info...%d %s\n", count, p );
+                logfile = 10;
+            }
         }
     }
 
