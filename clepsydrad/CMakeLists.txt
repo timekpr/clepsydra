@@ -8,6 +8,15 @@ SET(SRC_LIST
     c_socket.h
 )
 
+find_package(OpenGL REQUIRED)
+find_library(JSON_LIBRARY NAMES json-c2)
+find_library(PAM0G_LIBRARY NAMES pam0g)
+
+
+include_directories(${OPENGL_INCLUDE_DIR} )
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-target_link_libraries(json-c2 ${LIBS})
+target_link_libraries(${PROJECT_NAME} ${OPENGL_LIBRARIES} ${JSON_LIBRARIES} ${PAM0G_LIBRARIES})
+
+
+
