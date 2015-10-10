@@ -68,14 +68,22 @@ int make_daemon ()
     int keyword = readConfFile(fp);
     // Open a log file in write mode.
 
+    int countToDie = 0;
     while (1)
     {
        //Dont block context switches, let the process sleep for some time
        sleep(1);
        fprintf(fp, "Logging info... %d %s\n", keyword, p );
        fflush(fp);
+       // Temp code to cleanly die this process
+       countToDie ++;
+       if (countToDie > 15 )  {
+           break;
+       }
        // Implement and call some function that does core work for this daemon.
-     }
+    }
+    fprintf(fp, "Quit clepsydrad, bye !...\n");
+    fflush(fp);
     fclose(fp);
     return (0);
 
