@@ -10,4 +10,4 @@ SET(SRC_LIST
 
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-target_link_libraries (${PROJECT_NAME} iniparser)
+target_link_libraries(json-c2 ${LIBS})

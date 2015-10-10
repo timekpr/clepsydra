@@ -5,3 +5,5 @@ ui_*
 *.ui.autosave
 *.o
 *.pro.user
+clepsydrad/CMakeLists.txt.user
+build-*/
