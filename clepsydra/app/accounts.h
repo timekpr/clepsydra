@@ -27,7 +27,8 @@ public:
     ~Accounts ();
 
     User*   getUser (int) const;
-    int usersCount();
+    int   getCurrentLoginUserIndex () const;
+    int usersCount() const;
 
 public:
     static inline const char *staticInterfaceName()

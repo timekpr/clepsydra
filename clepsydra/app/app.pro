@@ -17,6 +17,7 @@ TARGET = clepsydra
 FORMS  = ui/main.ui ui/grant.ui ui/limits.ui ui/status.ui
 
 QT += dbus
+QT += widgets
 
 RCC_DIR = tmp
 OBJECTS_DIR = tmp

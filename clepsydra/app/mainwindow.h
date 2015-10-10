@@ -38,6 +38,8 @@ private:
     void setGrantTbCbs ();
     void setLimitTbCbs();
 
+   void setCurrentUserIndex (int index);
+
 signals:
     void disableControls (bool);
 public slots:

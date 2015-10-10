@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
         }
         m_ui->cbActiveUser->setCurrentIndex(0);
     }
+
+
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
             SLOT(currentIndexChanged(int)));
     m_ui->tab->insertTab(0, m_statusWidget, tr ("Status"));
@@ -76,7 +78,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
     //     'operation'
     //     'time'
-    currentIndexChanged (0);
+    int userId = m_accounts->getCurrentLoginUserIndex();
+    setCurrentUserIndex (userId);
 
     // temp
     QVariantMap limitMap;
@@ -84,6 +87,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     delete limits;
     }
+
+void MainWindow::setCurrentUserIndex(int nwIndex)
+{
+    this->m_ui->cbActiveUser->setCurrentIndex(nwIndex);
+}
 
 void MainWindow::currentIndexChanged (int index)
 {

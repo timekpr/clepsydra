@@ -219,7 +219,6 @@ void LimitsTabWidget::ckBoundStateChanged(int state)
     }
 }
 
-
 void LimitsTabWidget::setLimitTbCbs ()
 {
 
@@ -231,5 +230,4 @@ void LimitsTabWidget::setLimitTbCbs ()
             SLOT(ckBoundStateChanged(int)));
     connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundDayStateChanged(int)));
-
 }

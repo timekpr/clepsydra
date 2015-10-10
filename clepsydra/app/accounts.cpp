@@ -14,6 +14,7 @@
 #include <QtDBus>
 #include "accounts.h"
 #include "user.h"
+#include <stdlib.h>
 
 Accounts::Accounts(QObject *parent) :
     QObject(parent)
@@ -27,9 +28,26 @@ Accounts::~Accounts ()
     m_users.clear();
 }
 
-int Accounts::usersCount()
+int Accounts::usersCount() const
 {
     return m_users.count();
+}
+
+// Return index to current user in list
+int  Accounts::getCurrentLoginUserIndex() const
+{
+    int curUserIndex = -1;
+    char *curUser  = getenv("USER");
+    if( curUser != NULL)  {
+        curUserIndex = 0;
+        foreach (User *user, m_users) {
+            if (user->UserName()==curUser)  {
+                curUserIndex ++;
+                break;
+            }
+        }
+    }
+    return curUserIndex;
 }
 
 User*   Accounts::getUser(int index) const
