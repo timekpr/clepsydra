@@ -1,6 +1,10 @@
 project(clepsydrad)
 cmake_minimum_required(VERSION 2.8)
 
+#-----------
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
+#-----------
+
 SET(SRC_LIST
     main.c
     config.h
@@ -9,15 +13,23 @@ SET(SRC_LIST
     c_socket.h
 )
 
-find_path(PAM0G_INCLUDE_DIR NAMES security/pam_appl.h security/pam_misc.h)
+if(NOT NO_PAM)
+    find_package(PAM REQUIRED)
+    if(PAM_FOUND)
+        add_definitions(-DUSE_PAM)
+    endif()
+endif()
 
 find_library(JSON_LIBRARY NAMES json-c2)
-find_library(PAM0G_LIBRARY NAMES pam0g)
 
-include_directories(${PAM0G_INCLUDE_DIR})
+#include_directories(${PAM0G_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
-target_link_libraries(${PROJECT_NAME} ${JSON_LIBRARIES} ${PAM0G_LIBRARIES})
+set(LIBS ${LIBS} ${PAM_LIBRARIES})
+message(STATUS "Found PAM2: ${PAM_LIBRARIES}")
+
+
+target_link_libraries(${PROJECT_NAME} ${JSON_LIBRARIES} ${PAM_LIBRARIES})
 
 
 
