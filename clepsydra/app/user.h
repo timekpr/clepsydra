@@ -29,8 +29,10 @@ public:
     // Set object path and init default values for it.
     void setObjectPath(const QString&);
 
-public:     // Getters
+public:
+    void setJsonData (const QJsonObject& jdsonData );
 
+public:     // Getters
     bool isAdmin ();
     bool isLocked();
     QString Uid();

@@ -39,9 +39,11 @@ private:
     void setLimitTbCbs();
 
    void setCurrentUserIndex (int index);
+   void LoadJsonData ();
 
 signals:
     void disableControls (bool);
+
 public slots:
     //
     void currentIndexChanged (int);

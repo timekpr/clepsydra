@@ -11,8 +11,12 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QJsonObject>
+#include <QDesktopWidget>
+#include <QJsonDocument>
 #include <QDebug>
 #include <QList>
+#include <QFile>
 #include <QProgressBar>
 
 #include "user.h"
@@ -33,6 +37,16 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(disableControls(bool) ),m_limitWidget, SLOT(disableControls(bool)));
     connect(this, SIGNAL(disableControls(bool) ),m_grantWidget, SLOT(disableControls(bool)));
     connect(this, SIGNAL(disableControls(bool) ),m_statusWidget, SLOT(disableControls(bool)));
+
+    QRect windowRect = qApp->desktop()->availableGeometry ();
+    setGeometry(
+        QStyle::alignedRect(
+            Qt::LeftToRight,
+            Qt::AlignCenter,
+            size(),
+            windowRect
+        )
+    );
 
     m_accounts = new Accounts(this);
 
@@ -81,6 +95,8 @@ MainWindow::MainWindow(QWidget *parent) :
     int userId = m_accounts->getCurrentLoginUserIndex();
     setCurrentUserIndex (userId);
 
+    LoadJsonData ();
+
     // temp
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
@@ -90,7 +106,49 @@ MainWindow::MainWindow(QWidget *parent) :
 
 void MainWindow::setCurrentUserIndex(int nwIndex)
 {
-    this->m_ui->cbActiveUser->setCurrentIndex(nwIndex);
+    m_ui->cbActiveUser->setCurrentIndex(nwIndex);
+}
+
+
+void MainWindow::LoadJsonData ()
+{
+    QString val;
+    QFile file;
+    file.setFileName("/tmp/clepsydra.json");
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        val = file.readAll();
+        file.close();
+    } else {
+        qDebug () << "json file not found";
+        return;
+    }
+
+    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+    if (d.isEmpty()) {
+        qDebug () << "Not valid document.";
+        return;
+    }
+
+    QJsonObject obj = d.object();
+    foreach (QJsonValue usersO , obj) {
+        qDebug () << usersO;
+    }
+
+//    QJsonObject sett2 = d.object();
+//    QJsonValue value = sett2.value(QString("appName"));
+//    qWarning() << value;
+//    QJsonObject item = value.toObject();
+//    qWarning() << tr("QJsonObject of description: ") << item;
+
+//    /* incase of string value get value and convert into string*/
+//    qWarning() << tr("QJsonObject[appName] of description: ") << item["description"];
+//    QJsonValue subobj = item["description"];
+//    qWarning() << subobj.toString();
+
+//    /* incase of array get array and convert into string*/
+//    qWarning() << tr("QJsonObject[appName] of value: ") << item["imp"];
+//    QJsonArray test = item["imp"].toArray();
+//    qWarning() << test[1].toString();
 }
 
 void MainWindow::currentIndexChanged (int index)
@@ -99,14 +157,10 @@ void MainWindow::currentIndexChanged (int index)
         // Disable all buttons and other controls since we should not
         // admin accounts.
         emit disableControls(true);
-        qDebug() << "Admin" << m_accounts->getUser(index)->UserName();
     } else {
         emit disableControls(false);
-        qDebug() << "Not admin"  << m_accounts->getUser(index)->UserName();
     }
 }
-
-
 
 void MainWindow::btnClearAllRestrictionClicked ()
 {
@@ -142,4 +196,3 @@ void MainWindow::btnResetTimeClicked ()
 {
     qDebug() << "TODO : btnResetTimeClicked, wait for implementation";
 }
-

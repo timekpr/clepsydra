@@ -11,8 +11,10 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QJsonDocument>
 #include <QtDBus>
 #include "user.h"
+
 #include "config.h"
 
 User::User(QObject *parent) :
@@ -21,6 +23,10 @@ User::User(QObject *parent) :
 }
 
 User::~User()
+{
+}
+
+void User::setJsonData (const QJsonObject& jsonData )
 {
 }
 

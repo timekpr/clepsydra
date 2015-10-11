@@ -16,7 +16,6 @@ See the COPYRIGHT file for full details. You should have received the COPYRIGHT 
 
 #include "config.h"
 
-
 bool secureCopy(const QString &from, const QString &to)
 {
     QFile srcFile(from);
@@ -234,10 +233,12 @@ bool Helper::lockUnlock(QString user, int op)
 	    QString newline = "-:" + user + ":ALL\n" + re.cap(0);
 	    conf.replace(re.cap(0),newline);
 	}
-	else
+    else {
 	    conf.replace(re.cap(1),"");
-    else
-	return false;
+    }
+    else {
+        return false;
+    }
     
     QFile filew("/etc/security/access.conf");
     if (!filew.open(QIODevice::WriteOnly|QIODevice::Truncate))
