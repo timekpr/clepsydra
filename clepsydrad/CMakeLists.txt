@@ -22,12 +22,9 @@ endif()
 
 find_library(JSON_LIBRARY NAMES json-c2)
 
-#include_directories(${PAM0G_INCLUDE_DIRS})
 add_executable(${PROJECT_NAME} ${SRC_LIST})
 
 set(LIBS ${LIBS} ${PAM_LIBRARIES})
-message(STATUS "Found PAM2: ${PAM_LIBRARIES}")
-
 
 target_link_libraries(${PROJECT_NAME} ${JSON_LIBRARIES} ${PAM_LIBRARIES})
 
