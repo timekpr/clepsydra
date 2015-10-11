@@ -79,6 +79,10 @@ int make_daemon ()
        countToDie ++;
        if (countToDie > 15 )  {
            break;
+       } else {
+           int pm = checkPamUser ();
+           fprintf(fp, " pam user check ... %d\n",  pm);
+           fflush(fp);
        }
        // Implement and call some function that does core work for this daemon.
     }
