@@ -5,8 +5,8 @@ endif (PAM_INCLUDE_DIR AND PAM_LIBRARY)
 
 find_path(PAM_INCLUDE_DIR NAMES security/pam_appl.h security/pam_misc.h)
 #find_library(PAM_LIBRARY NAMES pam pam_misc)
-find_library(PAM_LIBRARIES NAMES pam pam_misc)
-find_library(DL_LIBRARY dl)
+find_library(PAM_LIBRARY pam)
+find_library(PAM_MISC_LIBRARY pam_misc)
 
 #include(FindPackageHandleStandardArgs)
 #find_package_handle_standard_args(PAM0G DEFAULT_MSG
@@ -14,14 +14,15 @@ find_library(DL_LIBRARY dl)
 # PAM0G_INCLUDE_DIR
 #)
 
-if (PAM_INCLUDE_DIR AND PAM_LIBRARY)
-	set(PAM_FOUND TRUE)
-	if (DL_LIBRARY)
-		set(PAM_LIBRARIES ${PAM_LIBRARY} ${DL_LIBRARY})
-	else (DL_LIBRARY)
-		set(PAM_LIBRARIES ${PAM_LIBRARY})
-	endif (DL_LIBRARY)
-endif (PAM_INCLUDE_DIR AND PAM_LIBRARY)
+if (PAM_INCLUDE_DIR AND PAM_LIBRARIES)
+        set(PAM_FOUND TRUE)
+#	if (DL_LIBRARY)
+#                set(PAM_LIBRARIES ${PAM_LIBRARIES} ${DL_LIBRARY})
+#	else (DL_LIBRARY)
+        set(PAM_LIBRARIES ${PAM_LIBRARY} ${PAM_MISC_LIBRARY})
+endif (PAM_INCLUDE_DIR AND PAM_LIBRARIES)
+
+
 
 if (PAM_FOUND)
 	if (NOT PAM_FIND_QUIETLY)
