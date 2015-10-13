@@ -26,7 +26,7 @@ User::~User()
 {
 }
 
-void User::setJsonData (const QJsonObject& jsonData )
+void User::setJsonData (const QJsonObject& /*jsonData*/ )
 {
 }
 
@@ -39,9 +39,18 @@ void User::setObjectPath(const QString& path)
 bool User::isAdmin()
 {
     bool reply = false;
-    if (m_accountType!=0)
+    if (m_isAdmin!=0)
         reply = true;
     return reply;
+}
+void User::setValue (const QString& settings, bool newVal)
+{
+    if (settings == CLEPSYDRA_LOCKED && m_isAdmin)  {
+        // Make sure that admin accounts are not locked
+        return;
+    } else {
+        m_accountLimits.insert(settings, newVal);
+    }
 }
 
 bool User::isLocked()
@@ -62,6 +71,6 @@ void User::loadUserInfo()
 
     m_userName = adbus_iface.property("UserName").toString();
     m_uid = adbus_iface.property("Uid").toString();
-    m_accountLimits.insert(KEY_ACCOUNT_LOCKED, adbus_iface.property("Locked").toBool() );
-    m_accountType = adbus_iface.property("AccountType").toInt();
+    m_accountLimits.insert(CLEPSYDRA_LOCKED, adbus_iface.property("Locked").toBool() );
+    m_isAdmin = adbus_iface.property("AccountType").toInt();
 }

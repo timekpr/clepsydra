@@ -101,6 +101,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
 
+    map2Json (limitMap);
+
     delete limits;
     }
 
@@ -109,6 +111,16 @@ void MainWindow::setCurrentUserIndex(int nwIndex)
     m_ui->cbActiveUser->setCurrentIndex(nwIndex);
 }
 
+
+void MainWindow::map2Json(const QVariantMap& map )
+{
+    QJsonDocument d = QJsonDocument::fromVariant(map);
+    if (d.isEmpty())  {
+        qDebug () << "empty";
+    } else {
+        qDebug () << d.toJson();
+    }
+}
 
 void MainWindow::LoadJsonData ()
 {
@@ -160,6 +172,7 @@ void MainWindow::currentIndexChanged (int index)
     } else {
         emit disableControls(false);
     }
+    m_curUserIndex = index;
 }
 
 void MainWindow::btnClearAllRestrictionClicked ()
@@ -175,16 +188,19 @@ void MainWindow::btnBypassClicked()
 void MainWindow::btnClearBypassClicked()
 {
     qDebug() << "TODO : btnClearBypassClicked, wait for implementation";
+    // m_accounts->getUser(index)->isAdmin()
 }
 
 void MainWindow::btnLockAccountClicked ()
 {
-    qDebug() << "TODO : btnLockAccountClicked, wait for implementation";
+     m_accounts->getUser(m_curUserIndex)
+             ->setValue(QString(CLEPSYDRA_LOCKED), true );
 }
 
 void MainWindow::btnUnlockAccountClicked ()
 {
-    qDebug() << "TODO : btnUnlockAccountClicked, wait for implementation";
+    m_accounts->getUser(m_curUserIndex)
+            ->setValue(CLEPSYDRA_LOCKED, false);
 }
 
 void MainWindow::btnAddTimeClicked ()

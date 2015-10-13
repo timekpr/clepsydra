@@ -41,6 +41,8 @@ private:
    void setCurrentUserIndex (int index);
    void LoadJsonData ();
 
+   void map2Json (const QVariantMap&);
+
 signals:
     void disableControls (bool);
 
@@ -67,7 +69,7 @@ private:
     Accounts* m_accounts;
     QVariantMap m_settingsMap;
     QVariantMap m_defaultLimitsMap;
-
+    int m_curUserIndex;
 };
 
 #endif // MAINWINDOW_H

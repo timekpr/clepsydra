@@ -26,6 +26,7 @@ public:
 public slots:
     // if true all controls are disable,
     void disableControls(bool);
+    void setGranSettings (const QVariantMap& values);
 
 public:
     //

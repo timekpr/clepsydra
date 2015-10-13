@@ -33,4 +33,7 @@ settings_target.files = etc/clepsydra/clepsydra.conf etc/clepsydra/clepsydradefa
 logrotate_target.path = $$LOGRORATEDIR
 logrotate_target.files = etc/logrotate.d/clepsydra
 
+OTHER_FILES += ../etc/clepsydra/clepsydra.conf
+OTHER_FILES += ../etc/clepsydra/clepsydradefault
+
 INSTALLS = settings_target logrotate_target

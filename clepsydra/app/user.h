@@ -21,6 +21,12 @@ class User : public QObject
 {
     Q_OBJECT
 
+    enum Settings
+    {
+        Locked,
+        Bybass,
+    };
+
 public:
     explicit User(QObject *parent = 0);
 
@@ -35,6 +41,7 @@ public:
 public:     // Getters
     bool isAdmin ();
     bool isLocked();
+    void setValue (const QString&, bool newVal);
     QString Uid();
     QString UserName () const;
 
@@ -47,7 +54,7 @@ private:
     QString m_userName;
     bool    m_isLocked;
     QString m_uid;
-    quint32 m_accountType;  // If true, user is member of 'Sudoers'.
+    quint32 m_isAdmin;  // If true, user is member of 'Sudoers'.
 
 
 };
