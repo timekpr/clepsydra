@@ -55,7 +55,7 @@ void User::setValue (const QString& settings, bool newVal)
 
 bool User::isLocked()
 {
-    return m_accountLimits.key(KEY_ACCOUNT_LOCKED).toInt();
+    return m_accountLimits.value(CLEPSYDRA_LOCKED).toBool();
 }
 
 QString User::UserName() const

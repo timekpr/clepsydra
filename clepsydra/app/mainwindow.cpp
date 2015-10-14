@@ -168,10 +168,13 @@ void MainWindow::currentIndexChanged (int index)
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // admin accounts.
-        emit disableControls(true);
+        emit disableControls(true);        
     } else {
         emit disableControls(false);
+        bool locked = m_accounts->getUser(index)->isLocked();
+        m_grantWidget->disableLockBtns (locked);
     }
+
     m_curUserIndex = index;
 }
 
@@ -195,12 +198,15 @@ void MainWindow::btnLockAccountClicked ()
 {
      m_accounts->getUser(m_curUserIndex)
              ->setValue(QString(CLEPSYDRA_LOCKED), true );
+
+     m_grantWidget->disableLockBtns (true);
 }
 
 void MainWindow::btnUnlockAccountClicked ()
 {
     m_accounts->getUser(m_curUserIndex)
             ->setValue(CLEPSYDRA_LOCKED, false);
+    m_grantWidget->disableLockBtns (false);
 }
 
 void MainWindow::btnAddTimeClicked ()

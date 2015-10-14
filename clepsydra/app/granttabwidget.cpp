@@ -28,6 +28,17 @@ void GrantTabWidget::setGranSettings (const QVariantMap& values)
 
 }
 
+void GrantTabWidget::disableLockBtns (bool setLock)
+{
+    if (setLock)  {
+        m_grantTab->btnLockAccount->setDisabled(true);
+        m_grantTab->btnUnlockAccount->setDisabled(false);
+    } else {
+        m_grantTab->btnLockAccount->setDisabled(false);
+        m_grantTab->btnUnlockAccount->setDisabled(true);
+    }
+}
+
 void GrantTabWidget::disableControls(bool toDisable)
 {
     m_grantTab->btnClearAllRestriction->setDisabled(toDisable);
