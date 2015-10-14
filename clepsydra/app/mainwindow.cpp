@@ -77,20 +77,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     LimitsMapper* limits = new LimitsMapper(this);
     limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
-    qDebug() << m_settingsMap.keys();
 
     limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
-    // qDebug() << m_defaultLimitsMap.keys();
     QVariantMap map = m_defaultLimitsMap.value("default").toMap();
     m_limitWidget->setLimits(map);
     m_statusWidget->setStatus(map);
-
-    // map 'var'  ---> default settings for everyone, format ('var'), QMap ?
-    //     'user' ---> user name in string format, QString ('user'), QString('joe')
-    //     'bound' ---> Bound info?, format, QString, QString?
-    //     'subaction' ---> action to execute, enum { ClearAllRestriction, Lock, Bypass, ClearBypass, ResetTime, AddTime };
-    //     'operation'
-    //     'time'
 
     int userId = m_accounts->getFirstNonAdminUserIndex();
     setCurrentUserIndex (userId);
@@ -139,22 +130,6 @@ void MainWindow::LoadJsonData ()
     foreach (QJsonValue usersO , obj) {
         qDebug () << usersO;
     }
-
-//    QJsonObject sett2 = d.object();
-//    QJsonValue value = sett2.value(QString("appName"));
-//    qWarning() << value;
-//    QJsonObject item = value.toObject();
-//    qWarning() << tr("QJsonObject of description: ") << item;
-
-//    /* incase of string value get value and convert into string*/
-//    qWarning() << tr("QJsonObject[appName] of description: ") << item["description"];
-//    QJsonValue subobj = item["description"];
-//    qWarning() << subobj.toString();
-
-//    /* incase of array get array and convert into string*/
-//    qWarning() << tr("QJsonObject[appName] of value: ") << item["imp"];
-//    QJsonArray test = item["imp"].toArray();
-//    qWarning() << test[1].toString();
 }
 
 void MainWindow::setCurrentUserIndex(int nwIndex)
