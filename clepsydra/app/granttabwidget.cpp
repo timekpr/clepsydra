@@ -25,7 +25,6 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
 
 void GrantTabWidget::setGranSettings (const QVariantMap& values)
 {
-
 }
 
 void GrantTabWidget::disableLockBtns (bool setLock)

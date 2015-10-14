@@ -149,7 +149,7 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     limitsList.append( m_limitTab->sbTo_6->time().toString(FORMAT_STRING_FMT));
     map.insert(CLEPSYDRA_LIMIT_TIME_TO, limitsList);
 
-    qDebug() << map;
+    // qDebug() << map;
 }
 
 void LimitsTabWidget::ckLimitDayStateChanged(int checked)

@@ -86,13 +86,13 @@ MainWindow::MainWindow(QWidget *parent) :
     int userId = m_accounts->getFirstNonAdminUserIndex();
     setCurrentUserIndex (userId);
 
-    LoadJsonData ();
+    // LoadJsonData ();
 
     // temp
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
 
-    map2Json (limitMap);
+    // map2Json (limitMap);
 
     delete limits;
     }
