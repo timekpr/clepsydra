@@ -33,8 +33,24 @@ int Accounts::usersCount() const
     return m_users.count();
 }
 
+// Return index of first not admin account or 0 if not found.
+int Accounts::getFirstNonAdminUserIndex () const
+{
+    int index = 0;
+    int keeper = 0;
+    foreach (User* user, m_users) {
+        if (!user->isAdmin())  {
+            index = keeper;
+            break;
+        } else {
+            keeper++;
+        }
+    }
+    return index;
+}
+
 // Return index to current user in list
-int  Accounts::getCurrentLoginUserIndex() const
+int Accounts::getCurrentLoginUserIndex() const
 {
     int curUserIndex = -1;
     char *curUser  = getenv("USER");

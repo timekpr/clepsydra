@@ -28,6 +28,7 @@ public:
 
     User*   getUser (int) const;
     int   getCurrentLoginUserIndex () const;
+    int getFirstNonAdminUserIndex () const;
     int usersCount() const;
 
 public:
