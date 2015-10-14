@@ -80,7 +80,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qDebug() << m_settingsMap.keys();
 
     limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
-    qDebug() << m_defaultLimitsMap.keys();
+    // qDebug() << m_defaultLimitsMap.keys();
     QVariantMap map = m_defaultLimitsMap.value("default").toMap();
     m_limitWidget->setLimits(map);
     m_statusWidget->setStatus(map);
