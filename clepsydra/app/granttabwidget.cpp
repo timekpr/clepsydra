@@ -23,7 +23,7 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
     m_controlsDisabled = false;
 }
 
-void GrantTabWidget::setGranSettings (const QVariantMap& values)
+void GrantTabWidget::setGranSettings (const QVariantMap& /*values*/)
 {
 }
 

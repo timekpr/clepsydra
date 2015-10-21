@@ -72,7 +72,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_ui->tab->removeTab(3);
     m_ui->tab->removeTab(3);
     m_ui->tab->removeTab(3);
-
     m_ui->tab->setCurrentIndex(0);
 
     LimitsMapper* limits = new LimitsMapper(this);
@@ -92,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
 
-    // map2Json (limitMap);
+    map2Json (limitMap);
 
     delete limits;
     }
@@ -103,7 +102,12 @@ void MainWindow::map2Json(const QVariantMap& map )
     if (d.isEmpty())  {
         qDebug () << "empty";
     } else {
-        qDebug () << d.toJson();
+        QFile file("/tmp/tempcheck.json");
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+        QTextStream out(&file);
+        out << d.toJson();
+        file.close();
     }
 }
 
