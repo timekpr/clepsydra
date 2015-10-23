@@ -12,8 +12,11 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QSettings>
+#include <QJsonObject>
+#include <QFile>
 #include <QStringList>
 #include <QDebug>
+#include <QJsonDocument>
 #include "limitsmapper.h"
 
 LimitsMapper::LimitsMapper(QObject *parent) :
@@ -32,6 +35,54 @@ void LimitsMapper::getLimits(const QString& location, const QString& groupName)
         m_LimitsMap.insert(key, limits->value(key));
     }
     delete limits;
+}
+
+void LimitsMapper::map2Json(const QString& user, const QVariantMap& map )
+{
+    QJsonDocument d = QJsonDocument::fromVariant(map);
+    if (d.isEmpty())  {
+        qDebug () << "empty";
+    } else {
+        QString filename = "/tmp/";
+        filename.append(user + ".json");
+        QFile file(filename);
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+            return;
+        QTextStream out(&file);
+        out << d.toJson();
+        file.close();
+    }
+}
+
+void LimitsMapper::json2Map (const QString& user)
+{
+    QString val;
+    QFile file;
+    QString filename = "/tmp/";
+    filename.append(user + ".json");
+    file.setFileName(filename);
+    if ( !file.isReadable() ) {
+        // Make sure that users have a at least a defaults
+        filename = QString("/etc/clepsydra/clepsydradefault");
+    }
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        val = file.readAll();
+        file.close();
+    } else {
+        qDebug () << "json file not found";
+        return;
+    }
+
+    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
+    if (d.isEmpty()) {
+        qDebug () << "Not valid document.";
+        return;
+    }
+
+    QJsonObject obj = d.object();
+    foreach (QJsonValue usersO , obj) {
+        qDebug () << usersO;
+    }
 }
 
 void LimitsMapper::readGroups2Map(QVariantMap& target, const QString &file)

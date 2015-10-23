@@ -26,6 +26,8 @@ public:
 public:
     void getLimits (const QString&, const QString&);
     void readGroups2Map (QVariantMap&, const QString&);
+    void map2Json(const QString& user, const QVariantMap& map);
+    void json2Map (const QString& user);
 
 private:
     QVariantMap  m_LimitsMap;

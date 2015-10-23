@@ -11,12 +11,9 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QJsonObject>
 #include <QDesktopWidget>
-#include <QJsonDocument>
 #include <QDebug>
 #include <QList>
-#include <QFile>
 #include <QProgressBar>
 
 #include "user.h"
@@ -48,17 +45,18 @@ MainWindow::MainWindow(QWidget *parent) :
         )
     );
 
+    // get list of actual accounts in this computer
     m_accounts = new Accounts(this);
 
     int count = m_accounts->usersCount();
+    // Fill required widgets components to account names
     if (count)  {
         for (int i=0; i < count; i++) {
-            User* auser = m_accounts->getUser(i);
-            if (auser)  {
-                m_ui->cbActiveUser->addItem(auser->UserName());
+            User* anuser = m_accounts->getUser(i);
+            if (anuser)  {
+                m_ui->cbActiveUser->addItem(anuser->UserName());
             }
         }
-        m_ui->cbActiveUser->setCurrentIndex(0);
     }
 
     connect(m_ui->cbActiveUser, SIGNAL(currentIndexChanged (int)), this,
@@ -68,73 +66,33 @@ MainWindow::MainWindow(QWidget *parent) :
     // Probably we need separate limits and bounds to different tabs ...
     m_ui->tab->insertTab(2, m_limitWidget, tr("Limits and Bounds"));
 
-    // yes,  all rest stub tabs
+    // yes,  all rest of tabs are stub
     m_ui->tab->removeTab(3);
     m_ui->tab->removeTab(3);
     m_ui->tab->removeTab(3);
     m_ui->tab->setCurrentIndex(0);
 
-    LimitsMapper* limits = new LimitsMapper(this);
-    limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    int userIndex = m_accounts->getFirstNonAdminUserIndex();
+    setCurrentUserIndex (userIndex);
 
-    limits->readGroups2Map(m_defaultLimitsMap, "/etc/clepsydra/clepsydradefault");
+    // todo remove this
+    m_limits = new LimitsMapper(this);
+    m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    m_limits->readGroups2Map(m_defaultLimitsMap, "/tmp/clepsydradefault");
+    m_limits->map2Json ("foo", m_defaultLimitsMap);
     QVariantMap map = m_defaultLimitsMap.value("default").toMap();
+
+
     m_limitWidget->setLimits(map);
     m_statusWidget->setStatus(map);
-
-    int userId = m_accounts->getFirstNonAdminUserIndex();
-    setCurrentUserIndex (userId);
-
-    // LoadJsonData ();
 
     // temp
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
 
-    map2Json (limitMap);
+    // m_limits->map2Json ("foo", limitMap);
 
-    delete limits;
     }
-
-void MainWindow::map2Json(const QVariantMap& map )
-{
-    QJsonDocument d = QJsonDocument::fromVariant(map);
-    if (d.isEmpty())  {
-        qDebug () << "empty";
-    } else {
-        QFile file("/tmp/tempcheck.json");
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-            return;
-        QTextStream out(&file);
-        out << d.toJson();
-        file.close();
-    }
-}
-
-void MainWindow::LoadJsonData ()
-{
-    QString val;
-    QFile file;
-    file.setFileName("/tmp/clepsydra.json");
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
-        val = file.readAll();
-        file.close();
-    } else {
-        qDebug () << "json file not found";
-        return;
-    }
-
-    QJsonDocument d = QJsonDocument::fromJson(val.toUtf8());
-    if (d.isEmpty()) {
-        qDebug () << "Not valid document.";
-        return;
-    }
-
-    QJsonObject obj = d.object();
-    foreach (QJsonValue usersO , obj) {
-        qDebug () << usersO;
-    }
-}
 
 void MainWindow::setCurrentUserIndex(int nwIndex)
 {

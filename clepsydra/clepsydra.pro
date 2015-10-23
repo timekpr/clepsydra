@@ -35,5 +35,6 @@ logrotate_target.files = etc/logrotate.d/clepsydra
 
 OTHER_FILES += ../etc/clepsydra/clepsydra.conf
 OTHER_FILES += ../etc/clepsydra/clepsydradefault
+OTHER_FILES += ../etc/clepsydra/clepsydradefault.json
 
 INSTALLS = settings_target logrotate_target

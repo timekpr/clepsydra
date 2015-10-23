@@ -22,6 +22,7 @@
 #include "limitstabwidget.h"
 #include "statustabwidget.h"
 #include "accounts.h"
+#include "src/limitsmapper.h"
 
 namespace Ui {
 class Form;
@@ -39,9 +40,9 @@ private:
     void setLimitTbCbs();
 
    void setCurrentUserIndex (int index);
-   void LoadJsonData ();
 
-   void map2Json (const QVariantMap&);
+   void LoadJsonData (const QString&);
+   void map2Json (const QString&, const QVariantMap&);
 
 signals:
     void disableControls (bool);
@@ -68,6 +69,7 @@ private:
     LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
     QVariantMap m_settingsMap;
+    LimitsMapper* m_limits;
     QVariantMap m_defaultLimitsMap;
     int m_curUserIndex;
 };
