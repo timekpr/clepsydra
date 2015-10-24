@@ -77,17 +77,18 @@ MainWindow::MainWindow(QWidget *parent) :
     setCurrentUserIndex (userIndex);
 
     m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
-    m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(),m_defaultLimitsMap );
-    QVariantMap map = m_defaultLimitsMap.value("default").toMap();
+    QVariantMap map4user;
+    m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(), map4user );
+    m_accounts->getUser(m_curUserIndex)->setUserData(map4user);
+    // QVariantMap map = m_defaultLimitsMap.value("default").toMap();
 
-    m_limitWidget->setLimits(map);
-    m_statusWidget->setStatus(map);
+    m_limitWidget->setLimits(map4user);
+    m_statusWidget->setStatus(map4user);
 
     // temp
     QVariantMap limitMap;
     m_limitWidget->getLimits(limitMap);
 
-    // m_limits->map2Json ("foo", limitMap);
 
     }
 
@@ -135,7 +136,8 @@ void MainWindow::btnLockAccountClicked ()
      m_accounts->getUser(m_curUserIndex)
              ->setValue(QString(CLEPSYDRA_LOCKED), true );
 
-     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(), m_accounts->getUser(m_curUserIndex)->);
+     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
+        m_accounts->getUser(m_curUserIndex)->getUserData());
      m_grantWidget->disableLockBtns (true);
 }
 
