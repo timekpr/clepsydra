@@ -28,13 +28,12 @@ FILESETTINGDIR = $$ETC_PREFIX/clepsydra
 LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
 
 settings_target.path = $$FILESETTINGDIR
-settings_target.files = etc/clepsydra/clepsydra.conf etc/clepsydra/clepsydradefault
+settings_target.files = config/clepsydra/clepsydra.conf etc/clepsydra/clepsydradefault
 
 logrotate_target.path = $$LOGRORATEDIR
-logrotate_target.files = etc/logrotate.d/clepsydra
+logrotate_target.files = config/logrotate.d/clepsydra
 
 OTHER_FILES += ../etc/clepsydra/clepsydra.conf
-OTHER_FILES += ../etc/clepsydra/clepsydradefault
 OTHER_FILES += ../etc/clepsydra/clepsydradefault.json
 
-INSTALLS = settings_target logrotate_target
+INSTALLS += settings_target logrotate_target

@@ -28,7 +28,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
-    m_grantWidget = new GrantTabWidget(this);
+    m_limits = new LimitsMapper(this);
+    m_grantWidget = new GrantTabWidget(this);    
     m_statusWidget = new StatusTabWidget(this);
     m_limitWidget =  new LimitsTabWidget(this);
     connect(this, SIGNAL(disableControls(bool) ),m_limitWidget, SLOT(disableControls(bool)));
@@ -75,13 +76,9 @@ MainWindow::MainWindow(QWidget *parent) :
     int userIndex = m_accounts->getFirstNonAdminUserIndex();
     setCurrentUserIndex (userIndex);
 
-    // todo remove this
-    m_limits = new LimitsMapper(this);
     m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
-    m_limits->readGroups2Map(m_defaultLimitsMap, "/tmp/clepsydradefault");
-    m_limits->map2Json ("foo", m_defaultLimitsMap);
+    m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(),m_defaultLimitsMap );
     QVariantMap map = m_defaultLimitsMap.value("default").toMap();
-
 
     m_limitWidget->setLimits(map);
     m_statusWidget->setStatus(map);

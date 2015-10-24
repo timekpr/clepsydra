@@ -211,7 +211,7 @@
       <string>No</string>
      </property>
      <property name="textFormat">
-      <enum>Qt::LogText</enum>
+      <enum>Qt::PlainText</enum>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -223,6 +223,9 @@
      <property name="text">
       <string>No</string>
      </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
      </property>
@@ -233,12 +236,18 @@
      <property name="text">
       <string>Yes</string>
      </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
+     </property>
     </widget>
    </item>
    <item row="8" column="1">
     <widget class="QLabel" name="lbLimitedByTimeFrame">
      <property name="text">
       <string>No</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
      </property>
     </widget>
    </item>
@@ -252,6 +261,9 @@
      </property>
      <property name="text">
       <string>No limit</string>
+     </property>
+     <property name="textFormat">
+      <enum>Qt::PlainText</enum>
      </property>
     </widget>
    </item>

@@ -54,7 +54,7 @@ void LimitsMapper::map2Json(const QString& user, const QVariantMap& map )
     }
 }
 
-void LimitsMapper::json2Map (const QString& user)
+void LimitsMapper::json2Map (const QString& user, QVariantMap& map)
 {
     QString val;
     QFile file;
@@ -63,13 +63,13 @@ void LimitsMapper::json2Map (const QString& user)
     file.setFileName(filename);
     if ( !file.isReadable() ) {
         // Make sure that users have a at least a defaults
-        filename = QString("/etc/clepsydra/clepsydradefault");
+        filename = QString("/etc/clepsydra/clepsydradefault.json");
     }
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         val = file.readAll();
         file.close();
     } else {
-        qDebug () << "json file not found";
+        qDebug () << filename << "json file not found";
         return;
     }
 
@@ -80,6 +80,7 @@ void LimitsMapper::json2Map (const QString& user)
     }
 
     QJsonObject obj = d.object();
+    map = obj.toVariantMap();
     foreach (QJsonValue usersO , obj) {
         qDebug () << usersO;
     }

@@ -1,0 +1,9 @@
+[default]
+locked=false
+bounded=false
+boundedByDay=false
+limited=false
+limitedByday=false
+limits=0300,0300,0300,0300,0300,0300,0300,0300
+time_from=0700,0700,0700,0700,0700,0700,0700,0700
+time_to=2200,2200,2200,2200,2200,2200,2200,2200

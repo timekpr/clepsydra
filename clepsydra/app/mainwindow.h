@@ -51,7 +51,7 @@ public slots:
     //
     void currentIndexChanged (int);
 
-// grant tab
+    // grant tab
 public slots:
     //
     void btnClearAllRestrictionClicked();

@@ -73,16 +73,6 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
             m_limitTab->sbTo_5->setTime(QTime::fromString(lstTimeTo.at(5),FORMAT_STRING_FMT));
             m_limitTab->sbTo_6->setTime(QTime::fromString(lstTimeTo.at(6),FORMAT_STRING_FMT));
         }
-
-    //        locked=false
-    //        bounded=false
-    //        boundedByDay=false
-    //        limited=false
-    //        limitedByday=false
-    //        limits=0300,0300,0300,0300,0300,0300,0300,0300
-    //        time_from=0700,0700,0700,0700,0700,0700,0700,0700
-    //        time_to=2200,2200,2200,2200,2200,2200,2200,2200
-
     }
 }
 
