@@ -135,6 +135,7 @@ void MainWindow::btnLockAccountClicked ()
      m_accounts->getUser(m_curUserIndex)
              ->setValue(QString(CLEPSYDRA_LOCKED), true );
 
+     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(), m_accounts->getUser(m_curUserIndex)->);
      m_grantWidget->disableLockBtns (true);
 }
 
