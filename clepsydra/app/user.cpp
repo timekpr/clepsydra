@@ -11,8 +11,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#include <QJsonDocument>
 #include <QtDBus>
+#include <QVariantMap>
 #include "user.h"
 
 #include "config.h"
@@ -26,8 +26,9 @@ User::~User()
 {
 }
 
-void User::setJsonData (const QJsonObject& /*jsonData*/ )
+void User::setUserData (const QVariantMap& data )
 {
+    m_accountLimits = data;
 }
 
 void User::setObjectPath(const QString& path)
@@ -47,15 +48,17 @@ void User::setValue (const QString& settings, bool newVal)
 {
     if (settings == CLEPSYDRA_LOCKED && m_isAdmin)  {
         // Make sure that admin accounts are not locked
+        m_isLocked = false;
         return;
     } else {
-        m_accountLimits.insert(settings, newVal);
+        m_isLocked = newVal;
     }
+    m_accountLimits.insert(settings, m_isLocked);
 }
 
 bool User::isLocked()
 {
-    return m_accountLimits.value(CLEPSYDRA_LOCKED).toBool();
+    return m_isLocked;
 }
 
 QString User::UserName() const
@@ -71,6 +74,6 @@ void User::loadUserInfo()
 
     m_userName = adbus_iface.property("UserName").toString();
     m_uid = adbus_iface.property("Uid").toString();
-    m_accountLimits.insert(CLEPSYDRA_LOCKED, adbus_iface.property("Locked").toBool() );
+    m_isLocked = adbus_iface.property("Locked").toBool();
     m_isAdmin = adbus_iface.property("AccountType").toInt();
 }

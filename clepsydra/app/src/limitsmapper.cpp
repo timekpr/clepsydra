@@ -58,14 +58,17 @@ void LimitsMapper::json2Map (const QString& user, QVariantMap& map)
 {
     QString val;
     QFile file;
+    bool hasnotfile = false;
     QString filename = "/tmp/";
     filename.append(user + ".json");
     file.setFileName(filename);
     if ( !file.isReadable() ) {
         // Make sure that users have a at least a defaults
         filename = QString("/etc/clepsydra/clepsydradefault.json");
+        file.setFileName(filename);
+        hasnotfile = true;
     }
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)==true) {
         val = file.readAll();
         file.close();
     } else {
@@ -78,11 +81,12 @@ void LimitsMapper::json2Map (const QString& user, QVariantMap& map)
         qDebug () << "Not valid document.";
         return;
     }
-
     QJsonObject obj = d.object();
     map = obj.toVariantMap();
-    foreach (QJsonValue usersO , obj) {
-        qDebug () << usersO;
+
+    if (hasnotfile)  {
+        // save file to filesystem
+        map2Json(user, map);
     }
 }
 

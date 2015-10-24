@@ -49,10 +49,3 @@ isEmpty(PREFIX) {
     PREFIX = /etc/
 }
 
-CONFIG_ETC_DIR =$$PREFIX/clepsydra
-DEFINES += CONFIG_ETC_DIR=\\\"$$CONFIG_ETC_DIR\\\"
-
-commonfiles.path = /etc/clepsydra
-commonfiles.files += ../etc/clepsydra/clepsydradefault.json
-
-INSTALLS += commonfiles
