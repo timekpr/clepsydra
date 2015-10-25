@@ -42,17 +42,17 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Limit time frame</string>
+      <string>Limit access on time frame</string>
      </property>
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="ckLimitAccessDuration">
+    <widget class="QCheckBox" name="ckBoundAccessDuration">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Limit access duration</string>
+      <string>Limit access on duration</string>
      </property>
     </widget>
    </item>
@@ -477,7 +477,7 @@
    <item row="4" column="0">
     <widget class="QCheckBox" name="ckLimitByDayAccess">
      <property name="text">
-      <string>Daily based access:</string>
+      <string>Per each day:</string>
      </property>
     </widget>
    </item>

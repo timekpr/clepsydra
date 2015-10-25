@@ -32,10 +32,10 @@ public:
 
 public slots:
     // if true all controls are disable,
-    void disableControls(bool);
+    void enableControls(bool);
 
-    void ckLimitStateChanged (int);
-    void ckBoundStateChanged (int);
+    void ckBoundAccessDurationStateChanged (int);
+    void ckBoundTimeFrameStateChanged (int);
 
     void ckLimitDayStateChanged(int checked);
     void ckBoundDayStateChanged (int checked);

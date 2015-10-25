@@ -31,7 +31,7 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     if (!m_controlsDisabled) {
 
         bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
-        m_limitTab->ckLimitAccessDuration->setDisabled(bounded);
+        m_limitTab->ckBoundAccessDuration->setDisabled(bounded);
         ckLimitDayStateChanged(bounded);
 
         bool boundedByDay = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
@@ -161,13 +161,13 @@ void LimitsTabWidget::ckBoundDayStateChanged (int checked)
 }
 
 
-void LimitsTabWidget::disableControls(bool toDisable)
+void LimitsTabWidget::enableControls(bool toEnable)
 {
-    if (m_controlsDisabled != toDisable)  {
+    if (m_controlsDisabled != toEnable)  {
 //        m_limitTab->ckLimit->setDisabled(toDisable);
 //        m_limitTab->ckLimitByDay->setDisabled(toDisable);
 //        m_limitTab->ckBound->setDisabled(toDisable);
-        m_limitTab->ckBoundDay->setDisabled(toDisable);
+        m_limitTab->ckBoundDay->setDisabled(toEnable);
 
         // limit  ..
 //        m_limitTab->sbLimit_0->setDisabled(toDisable);
@@ -180,51 +180,51 @@ void LimitsTabWidget::disableControls(bool toDisable)
         //m_limitTab->sbLimit_7->setDisabled(toDisable);
 
         // from  ... to
-        m_limitTab->sbFrom_mon->setEnabled(toDisable);
-        m_limitTab->sbFrom_tue->setEnabled(toDisable);
-        m_limitTab->sbFrom_wed->setEnabled(toDisable);
-        m_limitTab->sbFrom_thu->setEnabled(toDisable);
-        m_limitTab->sbFrom_fri->setEnabled(toDisable);
-        m_limitTab->sbFrom_sat->setEnabled(toDisable);
-        m_limitTab->sbFrom_sun->setEnabled(toDisable);
+        m_limitTab->sbFrom_mon->setEnabled(toEnable);
+        m_limitTab->sbFrom_tue->setEnabled(toEnable);
+        m_limitTab->sbFrom_wed->setEnabled(toEnable);
+        m_limitTab->sbFrom_thu->setEnabled(toEnable);
+        m_limitTab->sbFrom_fri->setEnabled(toEnable);
+        m_limitTab->sbFrom_sat->setEnabled(toEnable);
+        m_limitTab->sbFrom_sun->setEnabled(toEnable);
 
         //m_limitTab->sbFrom_7->setDisabled(toDisable);
 
-        m_limitTab->sbTo_mon->setEnabled(toDisable);
-        m_limitTab->sbTo_tue->setEnabled(toDisable);
-        m_limitTab->sbTo_wed->setEnabled(toDisable);
-        m_limitTab->sbTo_thu->setEnabled(toDisable);
-        m_limitTab->sbTo_fri->setEnabled(toDisable);
-        m_limitTab->sbTo_sat->setEnabled(toDisable);
-        m_limitTab->sbTo_sun->setEnabled(toDisable);
+        m_limitTab->sbTo_mon->setEnabled(toEnable);
+        m_limitTab->sbTo_tue->setEnabled(toEnable);
+        m_limitTab->sbTo_wed->setEnabled(toEnable);
+        m_limitTab->sbTo_thu->setEnabled(toEnable);
+        m_limitTab->sbTo_fri->setEnabled(toEnable);
+        m_limitTab->sbTo_sat->setEnabled(toEnable);
+        m_limitTab->sbTo_sun->setEnabled(toEnable);
         //
         //m_limitTab->sbTo_7->setDisabled(toDisable);
 
-        m_controlsDisabled = toDisable;
+        m_controlsDisabled = toEnable;
     }
 }
 
-void LimitsTabWidget::ckLimitStateChanged(int state)
+void LimitsTabWidget::ckBoundAccessDurationStateChanged (int state)
 {
-//    if (state == Qt::Checked && m_limitTab->ckBound->checkState()==Qt::Checked) {
-//        m_limitTab->ckBound->setCheckState(Qt::Unchecked);
-//    }
+    if (state == Qt::Checked && m_limitTab->ckBoundTimeFrame->checkState()==Qt::Checked) {
+        m_limitTab->ckBoundTimeFrame->setCheckState(Qt::Unchecked);
+    }
 }
 
-void LimitsTabWidget::ckBoundStateChanged(int state)
+void LimitsTabWidget::ckBoundTimeFrameStateChanged(int state)
 {
-//    if (state == Qt::Checked && m_limitTab->ckBound->checkState()==Qt::Checked) {
-//        m_limitTab->ckLimit->setCheckState(Qt::Unchecked);
-//    }
+    if (state == Qt::Checked && m_limitTab->ckBoundAccessDuration->checkState()==Qt::Checked) {
+        m_limitTab->ckBoundAccessDuration->setCheckState(Qt::Unchecked);
+    }
 }
 
 void LimitsTabWidget::setLimitTbCbs ()
 {
 
-//    connect(m_limitTab->ckLimit, SIGNAL(stateChanged (int)), this,
-//            SLOT(ckLimitStateChanged(int)));
-//    connect(m_limitTab->ckLimitByDay, SIGNAL(stateChanged (int)), this ,
-//            SLOT(ckLimitDayStateChanged(int)));
+    connect(m_limitTab->ckBoundAccessDuration, SIGNAL(stateChanged (int)), this,
+            SLOT(ckBoundAccessDurationStateChanged(int)));
+    connect(m_limitTab->ckBoundTimeFrame, SIGNAL(stateChanged (int)), this ,
+            SLOT(ckBoundTimeFrameStateChanged(int)));
 //    connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), this,
 //            SLOT(ckBoundStateChanged(int)));
 //    connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
