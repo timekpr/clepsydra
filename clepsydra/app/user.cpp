@@ -58,7 +58,11 @@ void User::setValue (const QString& settings, bool newVal)
     } else {
         m_isLocked = newVal;
     }
-    m_accountLimits.insert(settings, m_isLocked);
+    if (m_accountLimits.contains("default") ) {
+        QVariantMap data = m_accountLimits.value("default").toMap();
+        data.insert(settings, m_isLocked);
+        m_accountLimits.insert("default", data);
+    }
 }
 
 bool User::isLocked()

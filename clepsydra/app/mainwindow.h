@@ -25,7 +25,7 @@
 #include "src/limitsmapper.h"
 
 namespace Ui {
-class Form;
+    class Form;
 }
 
 class MainWindow : public QWidget
