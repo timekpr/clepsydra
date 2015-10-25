@@ -44,6 +44,8 @@ private:
    void LoadJsonData (const QString&);
    void map2Json (const QString&, const QVariantMap&);
 
+   void updateChangesToWidgets (const QVariantMap&);
+
 signals:
     void disableControls (bool);
 

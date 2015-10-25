@@ -54,6 +54,28 @@ void LimitsMapper::map2Json(const QString& user, const QVariantMap& map )
     }
 }
 
+void LimitsMapper::getDefaultLimits(QVariantMap& map)
+{
+    QString filename = QString("/etc/clepsydra/clepsydradefault.json");
+    QFile file;
+    QString data=NULL;
+    file.setFileName(filename);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)==true) {
+        data = file.readAll();
+        file.close();
+    } else {
+        qDebug () << filename << "json file not found";
+        return;
+    }
+    QJsonDocument d = QJsonDocument::fromJson(data.toUtf8());
+    if (d.isEmpty()) {
+        qDebug () << "Not valid document.";
+        return;
+    }
+    QJsonObject obj = d.object();
+    map = obj.toVariantMap();
+}
+
 void LimitsMapper::json2Map (const QString& user, QVariantMap& map)
 {
     QString val;

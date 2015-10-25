@@ -23,11 +23,7 @@ GrantTabWidget::GrantTabWidget(QWidget *parent) :
     m_controlsDisabled = false;
 }
 
-void GrantTabWidget::setGranSettings (const QVariantMap& /*values*/)
-{
-}
-
-void GrantTabWidget::disableLockBtns (bool setLock)
+void GrantTabWidget::enableLockButton (bool setLock)
 {
     if (setLock)  {
         m_grantTab->btnLockAccount->setDisabled(true);

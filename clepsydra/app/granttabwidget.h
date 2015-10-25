@@ -26,8 +26,7 @@ public:
 public slots:
     // if true all controls are disable,
     void disableControls(bool);
-    void disableLockBtns (bool);
-    void setGranSettings (const QVariantMap& values);
+    void enableLockButton (bool);
 
 public:
     //

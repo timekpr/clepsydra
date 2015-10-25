@@ -80,15 +80,8 @@ MainWindow::MainWindow(QWidget *parent) :
     QVariantMap map4user;
     m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(), map4user );
     m_accounts->getUser(m_curUserIndex)->setUserData(map4user);
-    // QVariantMap map = m_defaultLimitsMap.value("default").toMap();
 
-    m_limitWidget->setLimits(map4user);
-    m_statusWidget->setStatus(map4user);
-
-    // temp
-    QVariantMap limitMap;
-    m_limitWidget->getLimits(limitMap);
-
+    updateChangesToWidgets (map4user);
 
     }
 
@@ -109,7 +102,7 @@ void MainWindow::currentIndexChanged (int index)
     } else {
         emit disableControls(false);
         bool locked = m_accounts->getUser(index)->isLocked();
-        m_grantWidget->disableLockBtns (locked);
+        m_grantWidget->enableLockButton (locked);
     }
 
     m_curUserIndex = index;
@@ -117,7 +110,18 @@ void MainWindow::currentIndexChanged (int index)
 
 void MainWindow::btnClearAllRestrictionClicked ()
 {
-    qDebug() << "TODO : btnClearAllRestrictionClicked, wait for implementation";
+    QVariantMap defaults;
+    m_limits->getDefaultLimits(defaults);
+    m_accounts->getUser(m_curUserIndex)->setUserData(defaults);
+    m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
+       m_accounts->getUser(m_curUserIndex)->getUserData());
+    m_grantWidget->enableLockButton (false);
+}
+
+void MainWindow::updateChangesToWidgets (const QVariantMap& map)
+{
+    m_limitWidget->setLimits(map);
+    m_statusWidget->setStatus(map);
 }
 
 void MainWindow::btnBypassClicked()
@@ -137,7 +141,7 @@ void MainWindow::btnLockAccountClicked ()
              ->setValue(QString(CLEPSYDRA_LOCKED), true );
      m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
         m_accounts->getUser(m_curUserIndex)->getUserData());
-     m_grantWidget->disableLockBtns (true);
+     m_grantWidget->enableLockButton (true);
 }
 
 void MainWindow::btnUnlockAccountClicked ()
@@ -146,7 +150,7 @@ void MainWindow::btnUnlockAccountClicked ()
             ->setValue(CLEPSYDRA_LOCKED, false);
     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
        m_accounts->getUser(m_curUserIndex)->getUserData());
-    m_grantWidget->disableLockBtns (false);
+    m_grantWidget->enableLockButton (false);
 }
 
 void MainWindow::btnAddTimeClicked ()
