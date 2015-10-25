@@ -27,14 +27,14 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="1" column="0">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="chkBoundAccessAllSame">
      <property name="text">
       <string>Configure every day</string>
      </property>
     </widget>
    </item>
    <item row="0" column="3">
-    <widget class="QCheckBox" name="ckBound">
+    <widget class="QCheckBox" name="ckBoundTimeFrame">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -47,7 +47,7 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="ckLimit">
+    <widget class="QCheckBox" name="ckLimitAccessDuration">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
@@ -119,7 +119,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="teEveryDayLimit">
+      <widget class="QTimeEdit" name="sbEveryDayLimit">
        <property name="displayFormat">
         <string>hh.mm</string>
        </property>
@@ -178,7 +178,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="sbFrom_7">
+      <widget class="QTimeEdit" name="sbLTFEveryFrom">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -194,7 +194,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="sbTo_7">
+      <widget class="QTimeEdit" name="sbLTFEveryTo">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -475,14 +475,14 @@
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QCheckBox" name="ckLimitByDay">
+    <widget class="QCheckBox" name="ckLimitByDayAccess">
      <property name="text">
       <string>Daily based access:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="3">
-    <widget class="QCheckBox" name="checkBox_2">
+    <widget class="QCheckBox" name="ckBoundPerDay">
      <property name="text">
       <string>Per each day :</string>
      </property>
@@ -528,7 +528,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbFrom_1">
+        <widget class="QTimeEdit" name="sbFrom_mon">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -544,7 +544,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbTo_1">
+        <widget class="QTimeEdit" name="sbTo_mon">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -599,7 +599,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbFrom_2">
+        <widget class="QTimeEdit" name="sbFrom_tue">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -615,7 +615,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbTo_2">
+        <widget class="QTimeEdit" name="sbTo_tue">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -670,7 +670,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbTo_3">
+        <widget class="QTimeEdit" name="sbFrom_wed">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -686,7 +686,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbFrom_3">
+        <widget class="QTimeEdit" name="sbTo_wed">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -741,7 +741,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbFrom_4">
+        <widget class="QTimeEdit" name="sbFrom_thu">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -757,7 +757,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbTo_4">
+        <widget class="QTimeEdit" name="sbTo_thu">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -812,7 +812,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbFrom_5">
+        <widget class="QTimeEdit" name="sbFrom_fri">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -828,7 +828,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="sbTo_5">
+        <widget class="QTimeEdit" name="sbTo_fri">
          <property name="enabled">
           <bool>true</bool>
          </property>
@@ -868,10 +868,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit_2"/>
+        <widget class="QTimeEdit" name="sbFrom_sat">
+         <property name="displayFormat">
+          <string>hh:mm</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit"/>
+        <widget class="QTimeEdit" name="sbTo_sat">
+         <property name="displayFormat">
+          <string>hh:mm</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -898,10 +906,18 @@
         </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit_4"/>
+        <widget class="QTimeEdit" name="sbFrom_sun">
+         <property name="displayFormat">
+          <string>hh:mm</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QTimeEdit" name="timeEdit_3"/>
+        <widget class="QTimeEdit" name="sbTo_sun">
+         <property name="displayFormat">
+          <string>hh:mm</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
