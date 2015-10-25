@@ -40,14 +40,14 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 
         QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
         if (limits.length())  {
-            m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_0->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_1->setTime(QTime::fromString(limits.at(1), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_2->setTime(QTime::fromString(limits.at(2), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_3->setTime(QTime::fromString(limits.at(3), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_4->setTime(QTime::fromString(limits.at(4), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_5->setTime(QTime::fromString(limits.at(5), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_6->setTime(QTime::fromString(limits.at(6), FORMAT_STRING_FMT));
+            // m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_mon->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_tue->setTime(QTime::fromString(limits.at(1), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_wed->setTime(QTime::fromString(limits.at(2), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_thu->setTime(QTime::fromString(limits.at(3), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_fri->setTime(QTime::fromString(limits.at(4), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_sat->setTime(QTime::fromString(limits.at(5), FORMAT_STRING_FMT));
+            m_limitTab->sbLimit_sun->setTime(QTime::fromString(limits.at(6), FORMAT_STRING_FMT));
         }
 
         QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_TIME_FROM).toStringList();
@@ -95,7 +95,7 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     }
 
     bool limitsbyday = false;
-    if (m_limitTab->ckLimitDay->checkState()==Qt::Checked) {
+    if (m_limitTab->ckLimitByDay->checkState()==Qt::Checked) {
         limitsbyday = true;
     }
 
@@ -105,14 +105,14 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     map.insert(CLEPSYDRA_LIMIT_LIMITSBYDAY, limitsbyday);
 
     QStringList limitsList;
-    limitsList.append( m_limitTab->sbLimit_7->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_0->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_1->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_2->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_3->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_4->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_5->time().toString(FORMAT_STRING_FMT));
-    limitsList.append( m_limitTab->sbLimit_6->time().toString(FORMAT_STRING_FMT));
+    //limitsList.append( m_limitTab->sbLimit_7->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_mon->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_tue->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_wed->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_thu->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_fri->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_sat->time().toString(FORMAT_STRING_FMT));
+    limitsList.append( m_limitTab->sbLimit_sun->time().toString(FORMAT_STRING_FMT));
     map.insert(CLEPSYDRA_LIMIT_LIMITS, limitsList);
     limitsList.clear();
 
@@ -144,7 +144,7 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
 
 void LimitsTabWidget::ckLimitDayStateChanged(int checked)
 {
-    m_limitTab->wgLimitWeek->setHidden(!checked);
+    //m_limitTab->wgLimitWeek->setHidden(!checked);
 }
 
 
@@ -158,19 +158,19 @@ void LimitsTabWidget::disableControls(bool toDisable)
 {
     if (m_controlsDisabled != toDisable)  {
         m_limitTab->ckLimit->setDisabled(toDisable);
-        m_limitTab->ckLimitDay->setDisabled(toDisable);
+        m_limitTab->ckLimitByDay->setDisabled(toDisable);
         m_limitTab->ckBound->setDisabled(toDisable);
         m_limitTab->ckBoundDay->setDisabled(toDisable);
 
         // limit  ..
-        m_limitTab->sbLimit_0->setDisabled(toDisable);
-        m_limitTab->sbLimit_1->setDisabled(toDisable);
-        m_limitTab->sbLimit_2->setDisabled(toDisable);
-        m_limitTab->sbLimit_3->setDisabled(toDisable);
-        m_limitTab->sbLimit_4->setDisabled(toDisable);
-        m_limitTab->sbLimit_5->setDisabled(toDisable);
-        m_limitTab->sbLimit_6->setDisabled(toDisable);
-        m_limitTab->sbLimit_7->setDisabled(toDisable);
+//        m_limitTab->sbLimit_0->setDisabled(toDisable);
+//        m_limitTab->sbLimit_1->setDisabled(toDisable);
+//        m_limitTab->sbLimit_2->setDisabled(toDisable);
+//        m_limitTab->sbLimit_3->setDisabled(toDisable);
+//        m_limitTab->sbLimit_4->setDisabled(toDisable);
+//        m_limitTab->sbLimit_5->setEnabled(toDisable);
+//        m_limitTab->sbLimit_6->setDisabled(toDisable);
+        //m_limitTab->sbLimit_7->setDisabled(toDisable);
 
         // from  ... to
         m_limitTab->sbFrom_0->setDisabled(toDisable);
@@ -214,7 +214,7 @@ void LimitsTabWidget::setLimitTbCbs ()
 
     connect(m_limitTab->ckLimit, SIGNAL(stateChanged (int)), this,
             SLOT(ckLimitStateChanged(int)));
-    connect(m_limitTab->ckLimitDay, SIGNAL(stateChanged (int)), this ,
+    connect(m_limitTab->ckLimitByDay, SIGNAL(stateChanged (int)), this ,
             SLOT(ckLimitDayStateChanged(int)));
     connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundStateChanged(int)));
