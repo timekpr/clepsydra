@@ -31,8 +31,9 @@ public:
     void getLimits (QVariantMap&);
 
 public slots:
-    // if true all controls are disable,
-    void enableControls(bool);
+    // If true all controls are going to disable,
+    // most when admin (sudoer) user has been selected.
+    void disableControls(bool);
 
     void ckBoundAccessDurationStateChanged (int);
     void ckBoundTimeFrameStateChanged (int);
