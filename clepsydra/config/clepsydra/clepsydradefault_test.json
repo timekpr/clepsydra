@@ -26,52 +26,52 @@
         "LimitAccessOnTimeFrameEachDay" : "true",
         "LimitAccessOnTimeFrameEachDayTime" : {
             "time_from_to": [
-                "0700",
-                "2200"
+                "0125",
+                "0230"
             ]
         },
         "LimitAccessOnTimeFramePerDay" : "false",
         "LimitAccessOnTimeFramePerDayTime": {
             "monday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0244",
+                    "2233"
                 ]
             },
             "tuesday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0455",
+                    "1954"
                 ]
             },
             "wednesday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0323",
+                    "1734"
                 ]
             },
             "thursday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0722",
+                    "2243"
                 ]
             },
             "friday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0612",
+                    "1212"
                 ]
             },
             "saturday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "0455",
+                    "2211"
                 ]
             },
             "sunday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "1111",
+                    "2222"
                 ]
             }
         }
