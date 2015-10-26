@@ -120,7 +120,7 @@ void MainWindow::btnClearAllRestrictionClicked ()
 
 void MainWindow::updateChangesToWidgets (const QVariantMap& map)
 {
-    m_limitWidget->setLimits(map);
+    m_limitWidget->setLimits(map.value("default").toMap());
     m_statusWidget->setStatus(map);
 }
 

@@ -28,57 +28,54 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
-    if (!m_controlsDisabled) {
+    bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
+    m_limitTab->ckBoundAccessDuration->setDisabled(bounded);
+    ckLimitDayStateChanged(bounded);
 
-        bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
-        m_limitTab->ckBoundAccessDuration->setDisabled(bounded);
-        ckLimitDayStateChanged(bounded);
+    bool boundedByDay = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
+    m_limitTab->ckBoundDay->setDisabled(boundedByDay);
+    ckBoundDayStateChanged(boundedByDay);
 
-        bool boundedByDay = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
-        m_limitTab->ckBoundDay->setDisabled(boundedByDay);
-        ckBoundDayStateChanged(boundedByDay);
+    QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
+    if (limits.length())  {
+        // Limit time based on time:
+        // How much user can use his/her account per day
+        // m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_mon->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_tue->setTime(QTime::fromString(limits.at(1), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_wed->setTime(QTime::fromString(limits.at(2), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_thu->setTime(QTime::fromString(limits.at(3), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_fri->setTime(QTime::fromString(limits.at(4), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_sat->setTime(QTime::fromString(limits.at(5), FORMAT_STRING_FMT));
+        m_limitTab->sbLimit_sun->setTime(QTime::fromString(limits.at(6), FORMAT_STRING_FMT));
+    }
 
-        QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
-        if (limits.length())  {
-            // Limit time based on time:
-            // How much user can use his/her account per day
-            // m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_mon->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_tue->setTime(QTime::fromString(limits.at(1), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_wed->setTime(QTime::fromString(limits.at(2), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_thu->setTime(QTime::fromString(limits.at(3), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_fri->setTime(QTime::fromString(limits.at(4), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_sat->setTime(QTime::fromString(limits.at(5), FORMAT_STRING_FMT));
-            m_limitTab->sbLimit_sun->setTime(QTime::fromString(limits.at(6), FORMAT_STRING_FMT));
-        }
-
-        QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_TIME_FROM).toStringList();
-        if (time_from.length())  {
+    QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_TIME_FROM).toStringList();
+    if (time_from.length())  {
 //            // Limit time frame, every day 'From' value
 //            m_limitTab->sbLTFEveryFrom->setTime(QTime::fromString(time_from.at(7), FORMAT_STRING_FMT));
 //            // Limit time frame, per day 'From' values
-            m_limitTab->sbFrom_mon->setTime(QTime::fromString(time_from.at(0), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_tue->setTime(QTime::fromString(time_from.at(1), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_wed->setTime(QTime::fromString(time_from.at(2), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_thu->setTime(QTime::fromString(time_from.at(3), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_fri->setTime(QTime::fromString(time_from.at(4), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_sat->setTime(QTime::fromString(time_from.at(5), FORMAT_STRING_FMT));
-            m_limitTab->sbFrom_sun->setTime(QTime::fromString(time_from.at(6), FORMAT_STRING_FMT));
-        }
+        m_limitTab->sbFrom_mon->setTime(QTime::fromString(time_from.at(0), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_tue->setTime(QTime::fromString(time_from.at(1), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_wed->setTime(QTime::fromString(time_from.at(2), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_thu->setTime(QTime::fromString(time_from.at(3), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_fri->setTime(QTime::fromString(time_from.at(4), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_sat->setTime(QTime::fromString(time_from.at(5), FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_sun->setTime(QTime::fromString(time_from.at(6), FORMAT_STRING_FMT));
+    }
 
-        QStringList lstTimeTo = limitMap.value(CLEPSYDRA_LIMIT_TIME_TO).toStringList();
-        if (lstTimeTo.length())  {
+    QStringList lstTimeTo = limitMap.value(CLEPSYDRA_LIMIT_TIME_TO).toStringList();
+    if (lstTimeTo.length())  {
 //            // Limit time frame, every day 'To' value
 //            m_limitTab->sbLTFEveryTo->setTime(QTime::fromString(lstTimeTo.at(7),FORMAT_STRING_FMT));
 //            // Limit time frame, per day 'To' values
-            m_limitTab->sbTo_mon->setTime(QTime::fromString(lstTimeTo.at(0),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_tue->setTime(QTime::fromString(lstTimeTo.at(1),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_wed->setTime(QTime::fromString(lstTimeTo.at(2),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_thu->setTime(QTime::fromString(lstTimeTo.at(3),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_fri->setTime(QTime::fromString(lstTimeTo.at(4),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_sat->setTime(QTime::fromString(lstTimeTo.at(5),FORMAT_STRING_FMT));
-            m_limitTab->sbTo_sun->setTime(QTime::fromString(lstTimeTo.at(6),FORMAT_STRING_FMT));
-        }
+        m_limitTab->sbTo_mon->setTime(QTime::fromString(lstTimeTo.at(0),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_tue->setTime(QTime::fromString(lstTimeTo.at(1),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_wed->setTime(QTime::fromString(lstTimeTo.at(2),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_thu->setTime(QTime::fromString(lstTimeTo.at(3),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_fri->setTime(QTime::fromString(lstTimeTo.at(4),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sat->setTime(QTime::fromString(lstTimeTo.at(5),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sun->setTime(QTime::fromString(lstTimeTo.at(6),FORMAT_STRING_FMT));
     }
 }
 
@@ -169,15 +166,15 @@ void LimitsTabWidget::disableControls(bool toEnable)
 //        m_limitTab->ckBound->setDisabled(toDisable);
         m_limitTab->ckBoundDay->setDisabled(toEnable);
 
-        // limit  ..
-//        m_limitTab->sbLimit_0->setDisabled(toDisable);
-//        m_limitTab->sbLimit_1->setDisabled(toDisable);
-//        m_limitTab->sbLimit_2->setDisabled(toDisable);
-//        m_limitTab->sbLimit_3->setDisabled(toDisable);
-//        m_limitTab->sbLimit_4->setDisabled(toDisable);
-//        m_limitTab->sbLimit_5->setEnabled(toDisable);
-//        m_limitTab->sbLimit_6->setDisabled(toDisable);
-        //m_limitTab->sbLimit_7->setDisabled(toDisable);
+        // limit time frame..
+        m_limitTab->sbLimit_mon->setEnabled(toEnable);
+        m_limitTab->sbLimit_tue->setEnabled(toEnable);
+        m_limitTab->sbLimit_wed->setEnabled(toEnable);
+        m_limitTab->sbLimit_thu->setEnabled(toEnable);
+        m_limitTab->sbLimit_fri->setEnabled(toEnable);
+        m_limitTab->sbLimit_sat->setEnabled(toEnable);
+        m_limitTab->sbLimit_sun->setEnabled(toEnable);
+       //m_limitTab->sbLimit_7->setDisabled(toDisable);
 
         // from  ... to
         m_limitTab->sbFrom_mon->setEnabled(toEnable);
