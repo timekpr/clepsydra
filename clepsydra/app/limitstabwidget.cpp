@@ -29,11 +29,14 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
     bool vcurValue = false;
+
+    // access on duration controls
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool();
     m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool();
     m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
-
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
+    m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(vcurValue);
 
     // time frame section
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
