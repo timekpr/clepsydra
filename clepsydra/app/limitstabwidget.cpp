@@ -162,38 +162,70 @@ void LimitsTabWidget::ckBoundDayStateChanged (int checked)
 void LimitsTabWidget::disableControls(bool toEnable)
 {
     if (m_controlsEnabled != toEnable)  {
-        m_limitTab->ckLimitAccessTimeDuration->setEnabled(toEnable);
-        m_limitTab->chkLimitAccessTimeDurationEachDay->setEnabled(toEnable);
+        //
+        // Enable/disable access duration side
+        //
+        m_limitTab->ckLimitAccessTimeDuration->setDisabled(toEnable);
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(toEnable);
+
+        m_limitTab->sbLimitAccessDurarationEveryDay->setDisabled(toEnable);
+        m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(toEnable);
+
+        m_limitTab->lblEveryDay->setDisabled(toEnable);
+        m_limitTab->lblAccessMon->setDisabled(toEnable);
+        m_limitTab->lblAccessTue->setDisabled(toEnable);
+        m_limitTab->lblAccessWed->setDisabled(toEnable);
+        m_limitTab->lblAccessThu->setDisabled(toEnable);
+        m_limitTab->lblAccessFri->setDisabled(toEnable);
+        m_limitTab->lblAccessSat->setDisabled(toEnable);
+        m_limitTab->lblAccessSun->setDisabled(toEnable);
 
         // Set limit time frame per each day..
-        m_limitTab->sbLimit_mon->setEnabled(toEnable);
-        m_limitTab->sbLimit_tue->setEnabled(toEnable);
-        m_limitTab->sbLimit_wed->setEnabled(toEnable);
-        m_limitTab->sbLimit_thu->setEnabled(toEnable);
-        m_limitTab->sbLimit_fri->setEnabled(toEnable);
-        m_limitTab->sbLimit_sat->setEnabled(toEnable);
-        m_limitTab->sbLimit_sun->setEnabled(toEnable);
+        m_limitTab->sbLimit_mon->setDisabled(toEnable);
+        m_limitTab->sbLimit_tue->setDisabled(toEnable);
+        m_limitTab->sbLimit_wed->setDisabled(toEnable);
+        m_limitTab->sbLimit_thu->setDisabled(toEnable);
+        m_limitTab->sbLimit_fri->setDisabled(toEnable);
+        m_limitTab->sbLimit_sat->setDisabled(toEnable);
+        m_limitTab->sbLimit_sun->setDisabled(toEnable);
+
+        //
+        // Limit Access On Time Frame
+        //
+
+        m_limitTab->ckLimitAccessTimeFrame->setDisabled(toEnable);
+        m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(toEnable);
+        m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(toEnable);
+
+        m_limitTab->sbEveryFrom->setDisabled(toEnable);
+        m_limitTab->sbEveryTo->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_everyday->setDisabled(toEnable);
+
+        m_limitTab->lblEveryDay->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_mon->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_tue->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_wed->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_thu->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_fri->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_sat->setDisabled(toEnable);
+        m_limitTab->lblAccessTF_sun->setDisabled(toEnable);
 
         // from  ... to
-        m_limitTab->sbFrom_mon->setEnabled(toEnable);
-        m_limitTab->sbFrom_tue->setEnabled(toEnable);
-        m_limitTab->sbFrom_wed->setEnabled(toEnable);
-        m_limitTab->sbFrom_thu->setEnabled(toEnable);
-        m_limitTab->sbFrom_fri->setEnabled(toEnable);
-        m_limitTab->sbFrom_sat->setEnabled(toEnable);
-        m_limitTab->sbFrom_sun->setEnabled(toEnable);
+        m_limitTab->sbFrom_mon->setDisabled(toEnable);
+        m_limitTab->sbFrom_tue->setDisabled(toEnable);
+        m_limitTab->sbFrom_wed->setDisabled(toEnable);
+        m_limitTab->sbFrom_thu->setDisabled(toEnable);
+        m_limitTab->sbFrom_fri->setDisabled(toEnable);
+        m_limitTab->sbFrom_sat->setDisabled(toEnable);
+        m_limitTab->sbFrom_sun->setDisabled(toEnable);
 
-        //m_limitTab->sbFrom_7->setDisabled(toDisable);
-
-        m_limitTab->sbTo_mon->setEnabled(toEnable);
-        m_limitTab->sbTo_tue->setEnabled(toEnable);
-        m_limitTab->sbTo_wed->setEnabled(toEnable);
-        m_limitTab->sbTo_thu->setEnabled(toEnable);
-        m_limitTab->sbTo_fri->setEnabled(toEnable);
-        m_limitTab->sbTo_sat->setEnabled(toEnable);
-        m_limitTab->sbTo_sun->setEnabled(toEnable);
-        //
-        //m_limitTab->sbTo_7->setDisabled(toDisable);
+        m_limitTab->sbTo_mon->setDisabled(toEnable);
+        m_limitTab->sbTo_tue->setDisabled(toEnable);
+        m_limitTab->sbTo_wed->setDisabled(toEnable);
+        m_limitTab->sbTo_thu->setDisabled(toEnable);
+        m_limitTab->sbTo_fri->setDisabled(toEnable);
+        m_limitTab->sbTo_sat->setDisabled(toEnable);
+        m_limitTab->sbTo_sun->setDisabled(toEnable);
 
         m_controlsEnabled = toEnable;
     }

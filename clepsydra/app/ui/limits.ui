@@ -84,7 +84,7 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="QCheckBox" name="ckLimitAccessOnTimeFrameEachDay">
+    <widget class="QCheckBox" name="ckLimitAccessTimeFrameEachDay">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -119,7 +119,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="sbEveryDayLimit">
+      <widget class="QTimeEdit" name="sbLimitAccessDurarationEveryDay">
        <property name="displayFormat">
         <string>hh.mm</string>
        </property>
@@ -156,7 +156,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QLabel" name="lbLimit_8">
+      <widget class="QLabel" name="lblAccessTF_everyday">
        <property name="minimumSize">
         <size>
          <width>0</width>
@@ -178,7 +178,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="sbLTFEveryFrom">
+      <widget class="QTimeEdit" name="sbEveryFrom">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -194,7 +194,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QTimeEdit" name="sbLTFEveryTo">
+      <widget class="QTimeEdit" name="sbEveryTo">
        <property name="enabled">
         <bool>true</bool>
        </property>
@@ -482,7 +482,7 @@
     </widget>
    </item>
    <item row="4" column="3">
-    <widget class="QCheckBox" name="chLimitAccessOnTimeFramePerDay">
+    <widget class="QCheckBox" name="chLimitAccessTimeFramePerDay">
      <property name="text">
       <string>Per each day :</string>
      </property>
@@ -506,7 +506,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="lbLimit_10">
+        <widget class="QLabel" name="lblAccessTF_mon">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -577,7 +577,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="lbLimit_11">
+        <widget class="QLabel" name="lblAccessTF_tue">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -648,7 +648,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="lbLimit_12">
+        <widget class="QLabel" name="lblAccessTF_wed">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -719,7 +719,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="lbLimit_13">
+        <widget class="QLabel" name="lblAccessTF_thu">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -790,7 +790,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="lbLimit_14">
+        <widget class="QLabel" name="lblAccessTF_fri">
          <property name="minimumSize">
           <size>
            <width>0</width>
@@ -861,7 +861,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="lblAccessTF_sat">
          <property name="text">
           <string>Saturday</string>
          </property>
@@ -899,7 +899,7 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="lblAccessTF_sun">
          <property name="text">
           <string>Sunday</string>
          </property>
