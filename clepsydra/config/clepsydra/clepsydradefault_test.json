@@ -2,15 +2,15 @@
     "default": {
         "bounded": "false",
         "boundedByDay": "false",
-        "limitedAccessOnDuration": "false",
-        "limitedAccessOnDurationEachDay": "true",
-        "limitedAccessOnDurationEachDayTime": {
+        "limitAccessOnDuration": "false",
+        "limitAccessOnDurationEachDay": "true",
+        "limitAccessOnDurationEachDayTime": {
             "duration": [
                 "0100"
             ]
         },
-        "limitedAccessOnDurationPerDay": "false",
-        "limitedAccessOnDurationPerDayTime": {
+        "limitAccessOnDurationPerDay": "false",
+        "limitAccessOnDurationPerDayTime": {
             "week": [
                 "0200",
                 "0300",

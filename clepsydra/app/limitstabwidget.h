@@ -43,7 +43,7 @@ public slots:
 
 private:
     Ui_limitForm *m_limitTab;
-    bool m_controlsDisabled;
+    bool m_controlsEnabled;
 
 };
 

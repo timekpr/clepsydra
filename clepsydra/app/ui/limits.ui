@@ -27,14 +27,14 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_4">
    <item row="1" column="0">
-    <widget class="QCheckBox" name="chkBoundAccessAllSame">
+    <widget class="QCheckBox" name="chkLimitAccessTimeDurationEachDay">
      <property name="text">
       <string>Configure every day</string>
      </property>
     </widget>
    </item>
    <item row="0" column="3">
-    <widget class="QCheckBox" name="ckBoundTimeFrame">
+    <widget class="QCheckBox" name="ckLimitAccessTimeFrame">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -47,7 +47,7 @@
     </widget>
    </item>
    <item row="0" column="0">
-    <widget class="QCheckBox" name="ckBoundAccessDuration">
+    <widget class="QCheckBox" name="ckLimitAccessTimeDuration">
      <property name="layoutDirection">
       <enum>Qt::LeftToRight</enum>
      </property>
@@ -84,7 +84,7 @@
     </widget>
    </item>
    <item row="1" column="3">
-    <widget class="QCheckBox" name="ckBoundDay">
+    <widget class="QCheckBox" name="ckLimitAccessOnTimeFrameEachDay">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -475,14 +475,14 @@
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QCheckBox" name="ckLimitByDayAccess">
+    <widget class="QCheckBox" name="ckLimitAccessDurationPerEachDay">
      <property name="text">
       <string>Per each day:</string>
      </property>
     </widget>
    </item>
    <item row="4" column="3">
-    <widget class="QCheckBox" name="ckBoundPerDay">
+    <widget class="QCheckBox" name="chLimitAccessOnTimeFramePerDay">
      <property name="text">
       <string>Per each day :</string>
      </property>

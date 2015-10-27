@@ -29,12 +29,12 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
     bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
-    m_limitTab->ckBoundAccessDuration->setDisabled(bounded);
+    m_limitTab->ckLimitAccessTimeDuration->setDisabled(bounded);
     ckLimitDayStateChanged(bounded);
 
-    bool boundedByDay = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
-    m_limitTab->ckBoundDay->setDisabled(boundedByDay);
-    ckBoundDayStateChanged(boundedByDay);
+    bool accessTimeFrame = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
+    m_limitTab->ckLimitAccessTimeFrame->setDisabled(accessTimeFrame);
+    ckBoundDayStateChanged(accessTimeFrame);
 
     QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
     if (limits.length())  {
@@ -157,16 +157,15 @@ void LimitsTabWidget::ckBoundDayStateChanged (int checked)
     // m_limitTab->wgBoundWeek->setHidden(!checked);
 }
 
-// Set all controls to disabled but not hide them
+// Set all controls to disabled but not hide them.
+// Useful selected user is admin.
 void LimitsTabWidget::disableControls(bool toEnable)
 {
-    if (m_controlsDisabled != toEnable)  {
-//        m_limitTab->ckLimit->setDisabled(toDisable);
-//        m_limitTab->ckLimitByDay->setDisabled(toDisable);
-//        m_limitTab->ckBound->setDisabled(toDisable);
-        m_limitTab->ckBoundDay->setDisabled(toEnable);
+    if (m_controlsEnabled != toEnable)  {
+        m_limitTab->ckLimitAccessTimeDuration->setEnabled(toEnable);
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setEnabled(toEnable);
 
-        // limit time frame..
+        // Set limit time frame per each day..
         m_limitTab->sbLimit_mon->setEnabled(toEnable);
         m_limitTab->sbLimit_tue->setEnabled(toEnable);
         m_limitTab->sbLimit_wed->setEnabled(toEnable);
@@ -174,7 +173,6 @@ void LimitsTabWidget::disableControls(bool toEnable)
         m_limitTab->sbLimit_fri->setEnabled(toEnable);
         m_limitTab->sbLimit_sat->setEnabled(toEnable);
         m_limitTab->sbLimit_sun->setEnabled(toEnable);
-       //m_limitTab->sbLimit_7->setDisabled(toDisable);
 
         // from  ... to
         m_limitTab->sbFrom_mon->setEnabled(toEnable);
@@ -197,30 +195,30 @@ void LimitsTabWidget::disableControls(bool toEnable)
         //
         //m_limitTab->sbTo_7->setDisabled(toDisable);
 
-        m_controlsDisabled = toEnable;
+        m_controlsEnabled = toEnable;
     }
 }
 
 void LimitsTabWidget::ckBoundAccessDurationStateChanged (int state)
 {
-    if (state == Qt::Checked && m_limitTab->ckBoundTimeFrame->checkState()==Qt::Checked) {
-        m_limitTab->ckBoundTimeFrame->setCheckState(Qt::Unchecked);
+    if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrame->checkState()==Qt::Checked) {
+        m_limitTab->ckLimitAccessTimeFrame->setCheckState(Qt::Unchecked);
     }
 }
 
 void LimitsTabWidget::ckBoundTimeFrameStateChanged(int state)
 {
-    if (state == Qt::Checked && m_limitTab->ckBoundAccessDuration->checkState()==Qt::Checked) {
-        m_limitTab->ckBoundAccessDuration->setCheckState(Qt::Unchecked);
+    if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked) {
+        m_limitTab->ckLimitAccessTimeDuration->setCheckState(Qt::Unchecked);
     }
 }
 
 void LimitsTabWidget::setLimitTbCbs ()
 {
 
-    connect(m_limitTab->ckBoundAccessDuration, SIGNAL(stateChanged (int)), this,
+    connect(m_limitTab->ckLimitAccessTimeDuration, SIGNAL(stateChanged (int)), this,
             SLOT(ckBoundAccessDurationStateChanged(int)));
-    connect(m_limitTab->ckBoundTimeFrame, SIGNAL(stateChanged (int)), this ,
+    connect(m_limitTab->ckLimitAccessTimeFrame, SIGNAL(stateChanged (int)), this ,
             SLOT(ckBoundTimeFrameStateChanged(int)));
 //    connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), this,
 //            SLOT(ckBoundStateChanged(int)));

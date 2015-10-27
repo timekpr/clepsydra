@@ -98,9 +98,9 @@ void MainWindow::currentIndexChanged (int index)
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // admin accounts.
-        emit disableControls(true);        
-    } else {
         emit disableControls(false);
+    } else {
+        emit disableControls(true);
         bool locked = m_accounts->getUser(index)->isLocked();
         m_grantWidget->enableLockButton (locked);
     }
