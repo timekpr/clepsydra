@@ -24,4 +24,18 @@
 
 #define CLEPSYDRA_LIMIT_LIMITSBYDAY     "limitedByday"
 
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION             "limitAccessOnDuration"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY    "limitAccessOnDurationEachDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME "limitAccessOnDurationEachDayTime"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY     "limitAccessOnDurationPerDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME "limitAccessOnDurationPerDayTime"
+
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME             "LimitAccessOnTimeFrame"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY    "LimitAccessOnTimeFrameEachDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY     "LimitAccessOnTimeFramePerDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME "LimitAccessOnTimeFrameEachDayTime"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME "LimitAccessOnTimeFramePerDayTime"
+
+
 #endif // CONFIG_H
+

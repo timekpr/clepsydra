@@ -28,13 +28,20 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
-    bool bounded = limitMap.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
-    m_limitTab->ckLimitAccessTimeDuration->setDisabled(bounded);
-    ckLimitDayStateChanged(bounded);
+    bool vcurValue = false;
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool();
+    m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool();
+    m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
 
-    bool accessTimeFrame = limitMap.value(CLEPSYDRA_LIMIT_BOUNDEDBYDAY).toBool();
-    m_limitTab->ckLimitAccessTimeFrame->setDisabled(accessTimeFrame);
-    ckBoundDayStateChanged(accessTimeFrame);
+
+    // time frame section
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
+    m_limitTab->ckLimitAccessTimeFrame->setChecked(vcurValue);
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY).toBool();
+    m_limitTab->ckLimitAccessTimeFrameEachDay->setChecked(vcurValue);
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY).toBool();
+    m_limitTab->chLimitAccessTimeFramePerDay->setChecked(vcurValue);
 
     QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
     if (limits.length())  {
@@ -141,6 +148,7 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     limitsList.append( m_limitTab->sbTo_fri->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbTo_sat->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbTo_sun->time().toString(FORMAT_STRING_FMT));
+
     map.insert(CLEPSYDRA_LIMIT_TIME_TO, limitsList);
 
     // qDebug() << map;

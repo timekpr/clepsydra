@@ -23,14 +23,14 @@
         },
         "locked": "false",
         "LimitAccessOnTimeFrame" : "false",
-        "LimitAccessOnTimeFrameEachDay" : "true",
+        "LimitAccessOnTimeFrameEachDay" : "false",
         "LimitAccessOnTimeFrameEachDayTime" : {
             "time_from_to": [
                 "0700",
                 "2200"
             ]
         },
-        "LimitAccessOnTimeFramePerDay" : "false",
+        "LimitAccessOnTimeFramePerDay" : "true",
         "LimitAccessOnTimeFramePerDayTime": {
             "monday" : {
                 "time_from_to": [

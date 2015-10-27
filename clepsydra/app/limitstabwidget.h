@@ -27,7 +27,6 @@ public:
     void setLimitTbCbs();
 
     void setLimits (const QVariantMap&);
-
     void getLimits (QVariantMap&);
 
 public slots:
@@ -40,6 +39,10 @@ public slots:
 
     void ckLimitDayStateChanged(int checked);
     void ckBoundDayStateChanged (int checked);
+private:
+
+    void hideTimeDurationControls ();
+    void hideTimeFrameControls ();
 
 private:
     Ui_limitForm *m_limitTab;
