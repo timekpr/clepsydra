@@ -16,8 +16,7 @@
 #include "mainwindow.h"
 #include "limitstabwidget.h"
 
-#define FORMAT_STRING_FMT "hhmm"
-
+#define FORMAT_STRING_FMT "HH:mm"
 
 LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
     QWidget(parent), m_limitTab(new Ui::limitForm)
@@ -41,7 +40,7 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
 
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
-    m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, "HH:mm" ));
+    m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, FORMAT_STRING_FMT ));
 
     QString weekData = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString();
     if (time.length())  {
@@ -70,18 +69,12 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY).toBool();
     m_limitTab->chLimitAccessTimeFramePerDay->setChecked(vcurValue);
 
-    QStringList limits = limitMap.value(CLEPSYDRA_LIMIT_LIMITS).toStringList();
-    if (limits.length())  {
-        // Limit time based on time:
-        // How much user can use his/her account per day
-        // m_limitTab->sbLimit_7->setTime(QTime::fromString(limits.at(7), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_mon->setTime(QTime::fromString(limits.at(0), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_tue->setTime(QTime::fromString(limits.at(1), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_wed->setTime(QTime::fromString(limits.at(2), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_thu->setTime(QTime::fromString(limits.at(3), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_fri->setTime(QTime::fromString(limits.at(4), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_sat->setTime(QTime::fromString(limits.at(5), FORMAT_STRING_FMT));
-        m_limitTab->sbLimit_sun->setTime(QTime::fromString(limits.at(6), FORMAT_STRING_FMT));
+    QString eachDayLimits = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME).toString();
+
+    if (eachDayLimits.length())  {
+        QStringList list = eachDayLimits.split(",");
+        m_limitTab->sbEveryFrom->setTime(QTime::fromString(list[0], FORMAT_STRING_FMT));
+        m_limitTab->sbEveryTo->setTime(QTime::fromString(list[1], FORMAT_STRING_FMT));
     }
 
     QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_TIME_FROM).toStringList();

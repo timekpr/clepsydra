@@ -9,12 +9,7 @@
         "limitAccessOnDurationPerDayTime": "02:00,03:00,04:00,05:00,06:00,07:00,08:00",
         "LimitAccessOnTimeFrame" : "false",
         "LimitAccessOnTimeFrameEachDay" : "false",
-        "LimitAccessOnTimeFrameEachDayTime" : {
-            "time_from_to": [
-                "07:00",
-                "22:00"
-            ]
-        },
+        "LimitAccessOnTimeFrameEachDayTime" : "07:00,22:00",
         "LimitAccessOnTimeFramePerDay" : "true",
         "LimitAccessOnTimeFramePerDayTime": {
             "monday" : {
