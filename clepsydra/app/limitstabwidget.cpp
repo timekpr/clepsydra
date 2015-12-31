@@ -35,13 +35,32 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool();
     m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
-    m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(vcurValue);
+    bool isLimitOnDurationPerDay = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
+    m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(isLimitOnDurationPerDay);
 
     m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
 
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
     m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, "HH:mm" ));
+
+    QString weekData = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString();
+    if (time.length())  {
+        QStringList times = weekData.split (",");
+        m_limitTab->sbLimit_mon->setTime(QTime().fromString(times[0]));
+        m_limitTab->sbLimit_mon->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_tue->setTime(QTime().fromString(times[1]));
+        m_limitTab->sbLimit_tue->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_wed->setTime(QTime().fromString(times[2]));
+        m_limitTab->sbLimit_wed->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_thu->setTime(QTime().fromString(times[3]));
+        m_limitTab->sbLimit_thu->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_fri->setTime(QTime().fromString(times[4]));
+        m_limitTab->sbLimit_fri->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_sat->setTime(QTime().fromString(times[5]));
+        m_limitTab->sbLimit_sat->setEnabled(isLimitOnDurationPerDay);
+        m_limitTab->sbLimit_sun->setTime(QTime().fromString(times[6]));
+        m_limitTab->sbLimit_sun->setEnabled(isLimitOnDurationPerDay);
+    }
 
     // time frame section
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
