@@ -38,6 +38,11 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
     m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(vcurValue);
 
+    m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
+
+    QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
+    m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, "HH:mm" ));
+
     // time frame section
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
     m_limitTab->ckLimitAccessTimeFrame->setChecked(vcurValue);

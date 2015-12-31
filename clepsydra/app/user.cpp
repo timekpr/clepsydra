@@ -49,6 +49,7 @@ bool User::isAdmin()
         reply = true;
     return reply;
 }
+
 void User::setValue (const QString& settings, bool newVal)
 {
     if (settings == CLEPSYDRA_LOCKED && m_isAdmin)  {

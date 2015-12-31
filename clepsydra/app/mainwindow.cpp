@@ -97,7 +97,7 @@ void MainWindow::currentIndexChanged (int index)
 {
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
-        // admin accounts.
+        // close admin accounts.
         emit disableControls(true);
     } else {
         emit disableControls(false);

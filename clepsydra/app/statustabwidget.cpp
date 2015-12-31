@@ -49,5 +49,4 @@ void StatusTabWidget::setStatus (const QVariantMap& map)
 
 void StatusTabWidget::disableControls(bool /*toDisable*/)
 {
-
 }

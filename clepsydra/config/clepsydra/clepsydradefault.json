@@ -4,21 +4,17 @@
         "boundedByDay": "false",
         "limitAccessOnDuration": "false",
         "limitAccessOnDurationEachDay": "true",
-        "limitAccessOnDurationEachDayTime": {
-            "duration": [
-                "0100"
-            ]
-        },
+        "limitAccessOnDurationEachDayTime": "01:00",
         "limitAccessOnDurationPerDay": "false",
         "limitAccessOnDurationPerDayTime": {
             "week": [
-                "0200",
-                "0300",
-                "0400",
-                "0500",
-                "0600",
-                "0700",
-                "0800"
+                "02:00",
+                "03:00",
+                "04:00",
+                "05:00",
+                "06:00",
+                "07:00",
+                "08:00"
             ]
         },
         "locked": "false",
@@ -26,52 +22,52 @@
         "LimitAccessOnTimeFrameEachDay" : "false",
         "LimitAccessOnTimeFrameEachDayTime" : {
             "time_from_to": [
-                "0700",
-                "2200"
+                "07:00",
+                "22:00"
             ]
         },
         "LimitAccessOnTimeFramePerDay" : "true",
         "LimitAccessOnTimeFramePerDayTime": {
             "monday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "tuesday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "wednesday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "thursday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "friday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "saturday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             },
             "sunday" : {
                 "time_from_to": [
-                    "0700",
-                    "2200"
+                    "07:00",
+                    "22:00"
                 ]
             }
         }

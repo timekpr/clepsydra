@@ -152,14 +152,8 @@ bool Helper::clearAllRestriction(QString root,QString user)
 	QFile file(filename);
 	if(file.exists())
 	    file.remove();
-    }
-    
-//     filename = var["TIMEKPRDIR"].toString() + "/" + user;
-//     QFile file(filename);
-//     if(file.exists())
-// 	file.remove();
-    //Should implement this paradigm in a function?
-	
+    }    
+
     addAndRemoveUserLimits(user,REMOVE);
     lockUnlock(user, 0);
     

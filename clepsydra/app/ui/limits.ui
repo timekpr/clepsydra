@@ -121,7 +121,7 @@
      <item>
       <widget class="QTimeEdit" name="sbLimitAccessDurarationEveryDay">
        <property name="displayFormat">
-        <string>hh.mm</string>
+        <string>HH:mm</string>
        </property>
       </widget>
      </item>
