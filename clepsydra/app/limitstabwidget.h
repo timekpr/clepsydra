@@ -44,7 +44,8 @@ public slots:
     void ckLimitAccessDurationPerEachDayChanged (int);
 
     //Timeframe checkbox's
-    void ckBoundDayStateChanged (int checked);
+    void ckLimitAccessTimeFrameEachDayChanged (int);
+    void chLimitAccessTimeFramePerDayChanged (int);
 
 private:
 

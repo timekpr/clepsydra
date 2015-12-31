@@ -161,7 +161,6 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     limitsList.clear();
 
     // time_to
-    // limitsList.append( m_limitTab->sbTo_7->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbTo_mon->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbTo_tue->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbTo_wed->time().toString(FORMAT_STRING_FMT));
@@ -172,33 +171,8 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
 
     map.insert(CLEPSYDRA_LIMIT_TIME_TO, limitsList);
 
-    // qDebug() << map;
+
 }
-
-void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
-{
-    if (state == Qt::Checked && m_limitTab->ckLimitAccessDurationPerEachDay->checkState()==Qt::Checked)  {
-        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Unchecked);
-    } else {
-        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Checked);
-    }
-}
-
-void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
-{
-    if (state == Qt::Checked && m_limitTab->chkLimitAccessTimeDurationEachDay->checkState()==Qt::Checked)  {
-        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Unchecked);
-    } else {
-        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Checked);
-    }
-}
-
-
-void LimitsTabWidget::ckBoundDayStateChanged (int checked)
-{
-    // m_limitTab->wgBoundWeek->setHidden(!checked);
-}
-
 // Set all controls to disabled but not hide them.
 // Useful selected user is admin.
 void LimitsTabWidget::disableControls(bool toEnable)
@@ -288,7 +262,37 @@ void LimitsTabWidget::ckLimitAccessTimeFrameChanged(int state)
     }
 }
 
+void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
+{
+    if (state == Qt::Checked && m_limitTab->ckLimitAccessDurationPerEachDay->checkState()==Qt::Checked)  {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Unchecked);
+    } else {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Checked);
+    }
+}
 
+void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
+{
+    if (state == Qt::Checked && m_limitTab->chkLimitAccessTimeDurationEachDay->checkState()==Qt::Checked)  {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Unchecked);
+    } else {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Checked);
+    }
+}
+
+void LimitsTabWidget::ckLimitAccessTimeFrameEachDayChanged (int state)
+{
+    if (state == Qt::Checked && m_limitTab->chLimitAccessTimeFramePerDay->checkState()==Qt::Checked)  {
+        m_limitTab->chLimitAccessTimeFramePerDay->setCheckState(Qt::Unchecked);
+    }
+}
+
+void LimitsTabWidget::chLimitAccessTimeFramePerDayChanged (int state)
+{
+    if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrameEachDay->checkState()==Qt::Checked)  {
+        m_limitTab->ckLimitAccessTimeFrameEachDay->setCheckState(Qt::Unchecked);
+    }
+}
 
 void LimitsTabWidget::setLimitTbCbs ()
 {
@@ -296,10 +300,14 @@ void LimitsTabWidget::setLimitTbCbs ()
             SLOT(ckLimitAccessTimeDurationChanged(int)));
     connect(m_limitTab->ckLimitAccessTimeFrame, SIGNAL(stateChanged (int)), this ,
             SLOT(ckLimitAccessTimeFrameChanged(int)));
+
     connect(m_limitTab->chkLimitAccessTimeDurationEachDay, SIGNAL(stateChanged (int)), this,
             SLOT(chkLimitAccessTimeDurationEachDayChanged(int)));
     connect(m_limitTab->ckLimitAccessDurationPerEachDay, SIGNAL(stateChanged (int)), this,
             SLOT(ckLimitAccessDurationPerEachDayChanged(int)));
-//    connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
-//            SLOT(ckBoundDayStateChanged(int)));
+
+    connect(m_limitTab->ckLimitAccessTimeFrameEachDay, SIGNAL(stateChanged (int)), this,
+            SLOT(ckLimitAccessTimeFrameEachDayChanged(int)));
+    connect(m_limitTab->chLimitAccessTimeFramePerDay,  SIGNAL(stateChanged (int)), this,
+            SLOT(chLimitAccessTimeFramePerDayChanged(int)));
 }
