@@ -77,32 +77,36 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->sbEveryTo->setTime(QTime::fromString(list[1], FORMAT_STRING_FMT));
     }
 
-    QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_TIME_FROM).toStringList();
+    QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME).toStringList();
     if (time_from.length())  {
-//            // Limit time frame, every day 'From' value
-//            m_limitTab->sbLTFEveryFrom->setTime(QTime::fromString(time_from.at(7), FORMAT_STRING_FMT));
-//            // Limit time frame, per day 'From' values
-        m_limitTab->sbFrom_mon->setTime(QTime::fromString(time_from.at(0), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_tue->setTime(QTime::fromString(time_from.at(1), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_wed->setTime(QTime::fromString(time_from.at(2), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_thu->setTime(QTime::fromString(time_from.at(3), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_fri->setTime(QTime::fromString(time_from.at(4), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_sat->setTime(QTime::fromString(time_from.at(5), FORMAT_STRING_FMT));
-        m_limitTab->sbFrom_sun->setTime(QTime::fromString(time_from.at(6), FORMAT_STRING_FMT));
-    }
-
-    QStringList lstTimeTo = limitMap.value(CLEPSYDRA_LIMIT_TIME_TO).toStringList();
-    if (lstTimeTo.length())  {
-//            // Limit time frame, every day 'To' value
-//            m_limitTab->sbLTFEveryTo->setTime(QTime::fromString(lstTimeTo.at(7),FORMAT_STRING_FMT));
-//            // Limit time frame, per day 'To' values
-        m_limitTab->sbTo_mon->setTime(QTime::fromString(lstTimeTo.at(0),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_tue->setTime(QTime::fromString(lstTimeTo.at(1),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_wed->setTime(QTime::fromString(lstTimeTo.at(2),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_thu->setTime(QTime::fromString(lstTimeTo.at(3),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_fri->setTime(QTime::fromString(lstTimeTo.at(4),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_sat->setTime(QTime::fromString(lstTimeTo.at(5),FORMAT_STRING_FMT));
-        m_limitTab->sbTo_sun->setTime(QTime::fromString(lstTimeTo.at(6),FORMAT_STRING_FMT));
+        // Monday
+        QString timeMon = time_from[0];
+        m_limitTab->sbFrom_mon->setTime(QTime::fromString(timeMon.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_mon->setTime(QTime::fromString(timeMon.split(",")[1],FORMAT_STRING_FMT));
+        // Tuesday
+        QString timeTue = time_from[1];
+        m_limitTab->sbFrom_tue->setTime(QTime::fromString(timeTue.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_tue->setTime(QTime::fromString(timeTue.split(",")[1],FORMAT_STRING_FMT));
+        // Wednesday
+        QString timeWed = time_from[2];
+        m_limitTab->sbFrom_wed->setTime(QTime::fromString(timeWed.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_wed->setTime(QTime::fromString(timeWed.split(",")[1],FORMAT_STRING_FMT));
+        // Thursday
+        QString timeThu = time_from[3];
+        m_limitTab->sbFrom_thu->setTime(QTime::fromString(timeThu.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeThu.split(",")[1],FORMAT_STRING_FMT));
+        // Friday
+        QString timeFri = time_from[4];
+        m_limitTab->sbFrom_fri->setTime(QTime::fromString(timeFri.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeFri.split(",")[1],FORMAT_STRING_FMT));
+        // Saturday
+        QString timeSat = time_from[5];
+        m_limitTab->sbFrom_sat->setTime(QTime::fromString(timeSat.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sat->setTime(QTime::fromString(timeSat.split(",")[1],FORMAT_STRING_FMT));
+        // Sunday
+        QString timeSun = time_from[6];
+        m_limitTab->sbFrom_sun->setTime(QTime::fromString(timeSun.split(",")[0], FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sun->setTime(QTime::fromString(timeSun.split(",")[1],FORMAT_STRING_FMT));
     }
 }
 
