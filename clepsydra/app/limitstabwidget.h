@@ -34,11 +34,18 @@ public slots:
     // most when admin (sudoer) user has been selected.
     void disableControls(bool);
 
-    void ckBoundAccessDurationStateChanged (int);
-    void ckBoundTimeFrameStateChanged (int);
+    // ckLimitAccessTimeDuration
+    void ckLimitAccessTimeDurationChanged (int);
+    // ckLimitAccessTimeFrame
+    void ckLimitAccessTimeFrameChanged (int);
 
-    void ckLimitDayStateChanged(int checked);
+    // duration based checkbox's
+    void chkLimitAccessTimeDurationEachDayChanged (int);
+    void ckLimitAccessDurationPerEachDayChanged (int);
+
+    //Timeframe checkbox's
     void ckBoundDayStateChanged (int checked);
+
 private:
 
     void hideTimeDurationControls ();

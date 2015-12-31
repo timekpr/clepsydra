@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Olli-Pekka Wallin <opwallin@gmail.com>
+// Copyright (c) 2016 Olli-Pekka Wallin <opwallin@gmail.com>
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -150,9 +150,6 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     map.insert(CLEPSYDRA_LIMIT_LIMITS, limitsList);
     limitsList.clear();
 
-    // time_from
-    //limitsList.append( m_limitTab->sbFrom_7->time().toString(FORMAT_STRING_FMT));
-
     limitsList.append( m_limitTab->sbFrom_mon->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbFrom_tue->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbFrom_wed->time().toString(FORMAT_STRING_FMT));
@@ -178,9 +175,22 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     // qDebug() << map;
 }
 
-void LimitsTabWidget::ckLimitDayStateChanged(int checked)
+void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
 {
-    //m_limitTab->wgLimitWeek->setHidden(!checked);
+    if (state == Qt::Checked && m_limitTab->ckLimitAccessDurationPerEachDay->checkState()==Qt::Checked)  {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Unchecked);
+    } else {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Checked);
+    }
+}
+
+void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
+{
+    if (state == Qt::Checked && m_limitTab->chkLimitAccessTimeDurationEachDay->checkState()==Qt::Checked)  {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Unchecked);
+    } else {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Checked);
+    }
 }
 
 
@@ -263,29 +273,33 @@ void LimitsTabWidget::disableControls(bool toEnable)
     }
 }
 
-void LimitsTabWidget::ckBoundAccessDurationStateChanged (int state)
+void LimitsTabWidget::ckLimitAccessTimeDurationChanged (int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrame->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeFrame->setCheckState(Qt::Unchecked);
     }
 }
 
-void LimitsTabWidget::ckBoundTimeFrameStateChanged(int state)
+// Nofied when checkbox of ckLimitAccessTimeFrame-state are changed.
+void LimitsTabWidget::ckLimitAccessTimeFrameChanged(int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeDuration->setCheckState(Qt::Unchecked);
     }
 }
 
+
+
 void LimitsTabWidget::setLimitTbCbs ()
 {
-
     connect(m_limitTab->ckLimitAccessTimeDuration, SIGNAL(stateChanged (int)), this,
-            SLOT(ckBoundAccessDurationStateChanged(int)));
+            SLOT(ckLimitAccessTimeDurationChanged(int)));
     connect(m_limitTab->ckLimitAccessTimeFrame, SIGNAL(stateChanged (int)), this ,
-            SLOT(ckBoundTimeFrameStateChanged(int)));
-//    connect(m_limitTab->ckBound, SIGNAL(stateChanged (int)), this,
-//            SLOT(ckBoundStateChanged(int)));
+            SLOT(ckLimitAccessTimeFrameChanged(int)));
+    connect(m_limitTab->chkLimitAccessTimeDurationEachDay, SIGNAL(stateChanged (int)), this,
+            SLOT(chkLimitAccessTimeDurationEachDayChanged(int)));
+    connect(m_limitTab->ckLimitAccessDurationPerEachDay, SIGNAL(stateChanged (int)), this,
+            SLOT(ckLimitAccessDurationPerEachDayChanged(int)));
 //    connect(m_limitTab->ckBoundDay, SIGNAL(stateChanged (int)), this,
 //            SLOT(ckBoundDayStateChanged(int)));
 }
