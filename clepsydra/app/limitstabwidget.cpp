@@ -202,11 +202,23 @@ void LimitsTabWidget::disableAccessDurationControls (bool toEnable, EnableMode m
     }
 }
 
-//
-//-
-//-
-//-        m_limitTab->lblEveryDay->setDisabled(toEnable);
-
+void LimitsTabWidget::disableTimeControlCheckbox (ControlTimeCheckboxs chebox, bool newstate)
+{
+    switch ( chebox ) {
+        case MainCheckboxes:
+            m_limitTab->ckLimitAccessTimeDuration->setDisabled(newstate);
+            m_limitTab->ckLimitAccessTimeFrame->setDisabled(newstate);
+            break;
+        case AccessDurationCheckbox:
+            m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(newstate);
+            m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(newstate);
+            break;
+        case AccessTimeFrameCheckbox:
+            m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(newstate);
+            m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(newstate);
+            break;
+    }
+}
 
 void LimitsTabWidget::disableAccessTimeFrameControls (bool toEnable, EnableMode mode)
 {
@@ -256,52 +268,16 @@ void LimitsTabWidget::disableControls(bool toEnable)
         //
         // Enable/disable access duration side
         //
-        m_limitTab->ckLimitAccessTimeDuration->setDisabled(toEnable);
-        m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(toEnable);
-
-        m_limitTab->sbLimitAccessDurarationEveryDay->setDisabled(toEnable);
-        m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(toEnable);
 
         disableAccessDurationControls (toEnable, SelectEveryDayConfig);
         disableAccessDurationControls (toEnable, SelectPerEachDayConfig);
 
-        //
-        // Limit Access On Time Frame
-        //
+        disableAccessTimeFrameControls(toEnable, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (toEnable, SelectPerEachDayConfig);
 
-        m_limitTab->ckLimitAccessTimeFrame->setDisabled(toEnable);
-        m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(toEnable);
-        m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(toEnable);
-
-        m_limitTab->sbEveryFrom->setDisabled(toEnable);
-        m_limitTab->sbEveryTo->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_everyday->setDisabled(toEnable);
-
-        m_limitTab->lblEveryDay->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_mon->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_tue->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_wed->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_thu->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_fri->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_sat->setDisabled(toEnable);
-        m_limitTab->lblAccessTF_sun->setDisabled(toEnable);
-
-        // from  ... to
-        m_limitTab->sbFrom_mon->setDisabled(toEnable);
-        m_limitTab->sbFrom_tue->setDisabled(toEnable);
-        m_limitTab->sbFrom_wed->setDisabled(toEnable);
-        m_limitTab->sbFrom_thu->setDisabled(toEnable);
-        m_limitTab->sbFrom_fri->setDisabled(toEnable);
-        m_limitTab->sbFrom_sat->setDisabled(toEnable);
-        m_limitTab->sbFrom_sun->setDisabled(toEnable);
-
-        m_limitTab->sbTo_mon->setDisabled(toEnable);
-        m_limitTab->sbTo_tue->setDisabled(toEnable);
-        m_limitTab->sbTo_wed->setDisabled(toEnable);
-        m_limitTab->sbTo_thu->setDisabled(toEnable);
-        m_limitTab->sbTo_fri->setDisabled(toEnable);
-        m_limitTab->sbTo_sat->setDisabled(toEnable);
-        m_limitTab->sbTo_sun->setDisabled(toEnable);
+        disableTimeControlCheckbox(MainCheckboxes, toEnable);
+        disableTimeControlCheckbox (AccessDurationCheckbox, toEnable);
+        disableTimeControlCheckbox (AccessTimeFrameCheckbox, toEnable);
 
         m_controlsEnabled = toEnable;
     }

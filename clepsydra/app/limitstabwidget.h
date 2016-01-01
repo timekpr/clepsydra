@@ -36,7 +36,8 @@ public:
      };
 
     enum ControlTimeCheckboxs {
-        AccessDurationCheckboxs,
+        MainCheckboxes,
+        AccessDurationCheckbox,
         AccessTimeFrameCheckbox
     };
 
