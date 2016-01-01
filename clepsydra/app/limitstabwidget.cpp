@@ -173,9 +173,8 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
 
 void LimitsTabWidget::disableAccessDurationControls (bool toEnable, EnableMode mode)
 {
-    switch ( mode ) {
-        case SelectedAnotherTimeMode:
-            break;
+    switch ( mode )
+    {
         case SelectEveryDayConfig:
             m_limitTab->lblEveryDay->setDisabled(toEnable);
             m_limitTab->sbLimitAccessDurarationEveryDay->setDisabled(toEnable);
@@ -203,11 +202,15 @@ void LimitsTabWidget::disableAccessDurationControls (bool toEnable, EnableMode m
     }
 }
 
+//
+//-
+//-
+//-        m_limitTab->lblEveryDay->setDisabled(toEnable);
+
+
 void LimitsTabWidget::disableAccessTimeFrameControls (bool toEnable, EnableMode mode)
 {
     switch ( mode ) {
-        case SelectedAnotherTimeMode:
-            break;
         case SelectEveryDayConfig:
             m_limitTab->sbEveryFrom->setDisabled(toEnable);
             m_limitTab->sbEveryTo->setDisabled(toEnable);
@@ -259,23 +262,8 @@ void LimitsTabWidget::disableControls(bool toEnable)
         m_limitTab->sbLimitAccessDurarationEveryDay->setDisabled(toEnable);
         m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(toEnable);
 
-        m_limitTab->lblEveryDay->setDisabled(toEnable);
-        m_limitTab->lblAccessMon->setDisabled(toEnable);
-        m_limitTab->lblAccessTue->setDisabled(toEnable);
-        m_limitTab->lblAccessWed->setDisabled(toEnable);
-        m_limitTab->lblAccessThu->setDisabled(toEnable);
-        m_limitTab->lblAccessFri->setDisabled(toEnable);
-        m_limitTab->lblAccessSat->setDisabled(toEnable);
-        m_limitTab->lblAccessSun->setDisabled(toEnable);
-
-        // Set limit time frame per each day..
-        m_limitTab->sbLimit_mon->setDisabled(toEnable);
-        m_limitTab->sbLimit_tue->setDisabled(toEnable);
-        m_limitTab->sbLimit_wed->setDisabled(toEnable);
-        m_limitTab->sbLimit_thu->setDisabled(toEnable);
-        m_limitTab->sbLimit_fri->setDisabled(toEnable);
-        m_limitTab->sbLimit_sat->setDisabled(toEnable);
-        m_limitTab->sbLimit_sun->setDisabled(toEnable);
+        disableAccessDurationControls (toEnable, SelectEveryDayConfig);
+        disableAccessDurationControls (toEnable, SelectPerEachDayConfig);
 
         //
         // Limit Access On Time Frame
@@ -323,6 +311,14 @@ void LimitsTabWidget::ckLimitAccessTimeDurationChanged (int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrame->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeFrame->setCheckState(Qt::Unchecked);
+        disableAccessTimeFrameControls (true, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (true, SelectPerEachDayConfig);
+
+        disableAccessDurationControls (false, SelectEveryDayConfig);
+        disableAccessDurationControls (false, SelectPerEachDayConfig);
+
+    } else {
+        m_limitTab->ckLimitAccessTimeFrame->setCheckState(Qt::Checked);
     }
 }
 
@@ -331,6 +327,14 @@ void LimitsTabWidget::ckLimitAccessTimeFrameChanged(int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeDuration->setCheckState(Qt::Unchecked);
+        disableAccessTimeFrameControls (false, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (false, SelectPerEachDayConfig);
+
+        disableAccessDurationControls (true, SelectEveryDayConfig);
+        disableAccessDurationControls (true, SelectPerEachDayConfig);
+
+    } else {
+        m_limitTab->ckLimitAccessTimeDuration->setCheckState(Qt::Checked);
     }
 }
 

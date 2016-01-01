@@ -31,15 +31,22 @@ public:
     void getLimits (QVariantMap&);
 public:
     enum EnableMode {
-        Total,  //
-        SelectedAnotherTimeMode,    // Disables all checkboxs and time controls but not main checkbox.
         SelectEveryDayConfig,  // Enable every day time and disable per each day time controls
         SelectPerEachDayConfig // Enable per each day time controls and disable every day time control
      };
 
+    enum ControlTimeCheckboxs {
+        AccessDurationCheckboxs,
+        AccessTimeFrameCheckbox
+    };
+
 private :
-    void disableAccessDurationControls (bool, EnableMode mode);
+    //
+    void disableAccessDurationControls (bool, EnableMode);
+    //
     void disableAccessTimeFrameControls(bool, EnableMode);
+    // Disable or enable based on control checkboxs
+    void disableTimeControlCheckbox (ControlTimeCheckboxs, bool);
 
 public slots:
     // If true all controls are going to disable,
