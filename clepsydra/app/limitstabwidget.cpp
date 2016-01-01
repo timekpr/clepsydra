@@ -36,7 +36,6 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
     bool isLimitOnDurationPerDay = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
     m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(isLimitOnDurationPerDay);
-
     m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
 
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
@@ -170,9 +169,82 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     limitsList.append( m_limitTab->sbTo_sun->time().toString(FORMAT_STRING_FMT));
 
     map.insert(CLEPSYDRA_LIMIT_TIME_TO, limitsList);
-
-
 }
+
+void LimitsTabWidget::disableAccessDurationControls (bool toEnable, EnableMode mode)
+{
+    switch ( mode ) {
+        case SelectedAnotherTimeMode:
+            break;
+        case SelectEveryDayConfig:
+            m_limitTab->lblEveryDay->setDisabled(toEnable);
+            m_limitTab->sbLimitAccessDurarationEveryDay->setDisabled(toEnable);
+            break;
+        case SelectPerEachDayConfig:
+            m_limitTab->lblAccessMon->setDisabled(toEnable);
+            m_limitTab->lblAccessTue->setDisabled(toEnable);
+            m_limitTab->lblAccessWed->setDisabled(toEnable);
+            m_limitTab->lblAccessThu->setDisabled(toEnable);
+            m_limitTab->lblAccessFri->setDisabled(toEnable);
+            m_limitTab->lblAccessSat->setDisabled(toEnable);
+            m_limitTab->lblAccessSun->setDisabled(toEnable);
+
+            // Set limit time frame per each day..
+            m_limitTab->sbLimit_mon->setDisabled(toEnable);
+            m_limitTab->sbLimit_tue->setDisabled(toEnable);
+            m_limitTab->sbLimit_wed->setDisabled(toEnable);
+            m_limitTab->sbLimit_thu->setDisabled(toEnable);
+            m_limitTab->sbLimit_fri->setDisabled(toEnable);
+            m_limitTab->sbLimit_sat->setDisabled(toEnable);
+            m_limitTab->sbLimit_sun->setDisabled(toEnable);
+            break;
+        default:
+            break;
+    }
+}
+
+void LimitsTabWidget::disableAccessTimeFrameControls (bool toEnable, EnableMode mode)
+{
+    switch ( mode ) {
+        case SelectedAnotherTimeMode:
+            break;
+        case SelectEveryDayConfig:
+            m_limitTab->sbEveryFrom->setDisabled(toEnable);
+            m_limitTab->sbEveryTo->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_everyday->setDisabled(toEnable);
+            break;
+        case SelectPerEachDayConfig:
+            m_limitTab->lblAccessTF_mon->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_tue->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_wed->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_thu->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_fri->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_sat->setDisabled(toEnable);
+            m_limitTab->lblAccessTF_sun->setDisabled(toEnable);
+
+            // from  ... to
+            m_limitTab->sbFrom_mon->setDisabled(toEnable);
+            m_limitTab->sbFrom_tue->setDisabled(toEnable);
+            m_limitTab->sbFrom_wed->setDisabled(toEnable);
+            m_limitTab->sbFrom_thu->setDisabled(toEnable);
+            m_limitTab->sbFrom_fri->setDisabled(toEnable);
+            m_limitTab->sbFrom_sat->setDisabled(toEnable);
+            m_limitTab->sbFrom_sun->setDisabled(toEnable);
+
+            m_limitTab->sbTo_mon->setDisabled(toEnable);
+            m_limitTab->sbTo_tue->setDisabled(toEnable);
+            m_limitTab->sbTo_wed->setDisabled(toEnable);
+            m_limitTab->sbTo_thu->setDisabled(toEnable);
+            m_limitTab->sbTo_fri->setDisabled(toEnable);
+            m_limitTab->sbTo_sat->setDisabled(toEnable);
+            m_limitTab->sbTo_sun->setDisabled(toEnable);
+            break;
+        default:
+            break;
+    }
+}
+
+
 // Set all controls to disabled but not hide them.
 // Useful selected user is admin.
 void LimitsTabWidget::disableControls(bool toEnable)
@@ -266,6 +338,8 @@ void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessDurationPerEachDay->checkState()==Qt::Checked)  {
         m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Unchecked);
+        disableAccessDurationControls (false, SelectEveryDayConfig);
+        disableAccessDurationControls (true, SelectPerEachDayConfig);
     } else {
         m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Checked);
     }
@@ -275,6 +349,8 @@ void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
 {
     if (state == Qt::Checked && m_limitTab->chkLimitAccessTimeDurationEachDay->checkState()==Qt::Checked)  {
         m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Unchecked);
+        disableAccessDurationControls (true, SelectEveryDayConfig);
+        disableAccessDurationControls (false, SelectPerEachDayConfig);
     } else {
         m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Checked);
     }
@@ -284,6 +360,10 @@ void LimitsTabWidget::ckLimitAccessTimeFrameEachDayChanged (int state)
 {
     if (state == Qt::Checked && m_limitTab->chLimitAccessTimeFramePerDay->checkState()==Qt::Checked)  {
         m_limitTab->chLimitAccessTimeFramePerDay->setCheckState(Qt::Unchecked);
+        disableAccessTimeFrameControls(false, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (true, SelectPerEachDayConfig);
+    } else {
+        m_limitTab->chLimitAccessTimeFramePerDay->setCheckState(Qt::Checked);
     }
 }
 
@@ -291,6 +371,10 @@ void LimitsTabWidget::chLimitAccessTimeFramePerDayChanged (int state)
 {
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrameEachDay->checkState()==Qt::Checked)  {
         m_limitTab->ckLimitAccessTimeFrameEachDay->setCheckState(Qt::Unchecked);
+        disableAccessTimeFrameControls(true, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (false, SelectPerEachDayConfig);
+    } else {
+           m_limitTab->ckLimitAccessTimeFrameEachDay->setCheckState(Qt::Checked);
     }
 }
 

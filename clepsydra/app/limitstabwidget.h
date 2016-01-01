@@ -18,6 +18,7 @@
 #include <QWidget>
 #include "ui_limits.h"
 
+
 class LimitsTabWidget : public QWidget
 {
     Q_OBJECT
@@ -28,11 +29,22 @@ public:
 
     void setLimits (const QVariantMap&);
     void getLimits (QVariantMap&);
+public:
+    enum EnableMode {
+        Total,  //
+        SelectedAnotherTimeMode,    // Disables all checkboxs and time controls but not main checkbox.
+        SelectEveryDayConfig,  // Enable every day time and disable per each day time controls
+        SelectPerEachDayConfig // Enable per each day time controls and disable every day time control
+     };
+
+private :
+    void disableAccessDurationControls (bool, EnableMode mode);
+    void disableAccessTimeFrameControls(bool, EnableMode);
 
 public slots:
     // If true all controls are going to disable,
     // most when admin (sudoer) user has been selected.
-    void disableControls(bool);
+    void disableControls(bool); // Disables all controls.
 
     // ckLimitAccessTimeDuration
     void ckLimitAccessTimeDurationChanged (int);
@@ -43,7 +55,7 @@ public slots:
     void chkLimitAccessTimeDurationEachDayChanged (int);
     void ckLimitAccessDurationPerEachDayChanged (int);
 
-    //Timeframe checkbox's
+    // Timeframe checkbox's
     void ckLimitAccessTimeFrameEachDayChanged (int);
     void chLimitAccessTimeFramePerDayChanged (int);
 
