@@ -92,7 +92,7 @@
       <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
-      <string>Configure per day</string>
+      <string>Configure every day</string>
      </property>
     </widget>
    </item>
