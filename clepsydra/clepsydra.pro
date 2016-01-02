@@ -45,11 +45,6 @@ OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
 CONFIG(debug) {
     message (debug build 2)
-    OTHER_FILES += config/clepsydra/clepsydradefault_test.json
-    clep_test.path = /tmp
-    clep_test.files += config/clepsydra/clepsydradefault_test.json
-    INSTALLS += clep_test
-    message (clep_test)
 }
 
 INSTALLS += settings_target working_lib_target logrotate_target
