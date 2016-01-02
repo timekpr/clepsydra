@@ -36,6 +36,10 @@
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME "LimitAccessOnTimeFrameEachDayTime"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME "LimitAccessOnTimeFramePerDayTime"
 
+#define CLEPSYDRA_CONFIG_FOLDER             "/etc/clepsydra/"
+#define CLEPSYDRA_CONFIG_FILENAME           "clepsydra.conf"
+#define CLEPSYDRA_JSON_DEFAULTS_FILENAME    "clepsydradefault.json"
+#define CLEPSYDRA_JSON_USERDATA_FILENAME    "clepsydralimits.json"
 
 #endif // CONFIG_H
 

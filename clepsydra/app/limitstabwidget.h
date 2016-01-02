@@ -74,8 +74,6 @@ private:
 
 private:
     Ui_limitForm *m_limitTab;
-    bool m_controlsEnabled;
-
 };
 
 #endif // LIMITSTABWIDGET_H

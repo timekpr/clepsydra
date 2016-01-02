@@ -26,12 +26,12 @@ User::~User()
 {
 }
 
-QVariantMap& User::getUserData ()
+QVariantMap& User::getUserLimits ()
 {
     return m_accountLimits;
 }
 
-void User::setUserData (const QVariantMap& data )
+void User::setUserLimits (const QVariantMap& data )
 {
     m_accountLimits = data;
 }

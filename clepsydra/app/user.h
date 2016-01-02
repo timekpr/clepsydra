@@ -42,8 +42,8 @@ public:     // Getters
     bool isAdmin ();
     bool isLocked();
     void setValue (const QString&, bool newVal);
-    void setUserData (const QVariantMap&);
-    QVariantMap& getUserData ();
+    void setUserLimits (const QVariantMap&);
+    QVariantMap& getUserLimits ();
     QString Uid();
     QString UserName () const;
 

@@ -29,15 +29,8 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
     bool vcurValue = false;
 
-    // access on duration controls
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool();
-    m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool();
-    m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
-    bool isLimitOnDurationPerDay = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool();
-    m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(isLimitOnDurationPerDay);
-    m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
-
+    qDebug () << "SetLimits";
+    // Set first values to Time edit controls (Access Duration side)
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
     m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, FORMAT_STRING_FMT ));
 
@@ -45,28 +38,30 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     if (time.length())  {
         QStringList times = weekData.split (",");
         m_limitTab->sbLimit_mon->setTime(QTime().fromString(times[0]));
-        m_limitTab->sbLimit_mon->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_tue->setTime(QTime().fromString(times[1]));
-        m_limitTab->sbLimit_tue->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_wed->setTime(QTime().fromString(times[2]));
-        m_limitTab->sbLimit_wed->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_thu->setTime(QTime().fromString(times[3]));
-        m_limitTab->sbLimit_thu->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_fri->setTime(QTime().fromString(times[4]));
-        m_limitTab->sbLimit_fri->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_sat->setTime(QTime().fromString(times[5]));
-        m_limitTab->sbLimit_sat->setEnabled(isLimitOnDurationPerDay);
         m_limitTab->sbLimit_sun->setTime(QTime().fromString(times[6]));
-        m_limitTab->sbLimit_sun->setEnabled(isLimitOnDurationPerDay);
     }
 
-    // time frame section
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
-    m_limitTab->ckLimitAccessTimeFrame->setChecked(vcurValue);
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY).toBool();
-    m_limitTab->ckLimitAccessTimeFrameEachDay->setChecked(vcurValue);
-    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY).toBool();
-    m_limitTab->chLimitAccessTimeFramePerDay->setChecked(vcurValue);
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool();
+    if (vcurValue)  {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(vcurValue);
+        m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(false);
+        disableAccessDurationControls (false, SelectEveryDayConfig);
+        disableAccessDurationControls (true, SelectPerEachDayConfig);
+    } else {
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setChecked(false);
+        m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(true);
+        disableAccessDurationControls (true, SelectEveryDayConfig);
+        disableAccessDurationControls (false, SelectPerEachDayConfig);
+    }
+
+    //
+    // Access control on Time Frame side
+    //
 
     QString eachDayLimits = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME).toString();
 
@@ -107,6 +102,29 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->sbFrom_sun->setTime(QTime::fromString(timeSun.split(",")[0], FORMAT_STRING_FMT));
         m_limitTab->sbTo_sun->setTime(QTime::fromString(timeSun.split(",")[1],FORMAT_STRING_FMT));
     }
+
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY).toBool();
+    if (vcurValue)  {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(true);
+        m_limitTab->ckLimitAccessTimeDuration->setChecked(false);
+
+        disableAccessTimeFrameControls (false, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (true, SelectPerEachDayConfig);
+    } else {
+        m_limitTab->ckLimitAccessDurationPerEachDay->setChecked(false);
+        m_limitTab->ckLimitAccessTimeDuration->setChecked(true);
+
+        disableAccessTimeFrameControls (true, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (false, SelectPerEachDayConfig);
+    }
+
+    // Set main checkbox first, some on have to be selected, not both
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool();
+    m_limitTab->ckLimitAccessTimeDuration->setChecked(vcurValue);
+
+    vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool();
+    m_limitTab->ckLimitAccessTimeFrame->setChecked(vcurValue);
+
 }
 
 void LimitsTabWidget::getLimits(QVariantMap &map)
@@ -261,22 +279,25 @@ void LimitsTabWidget::disableAccessTimeFrameControls (bool toEnable, EnableMode 
 
 // Set all controls to disabled but not hide them.
 // Useful selected user is admin.
-void LimitsTabWidget::disableControls(bool toEnable)
+void LimitsTabWidget::disableControls(bool toDisable)
 {
-    if (m_controlsEnabled != toEnable)  {
+    qDebug () << "disableControls" << toDisable;
+    if (toDisable)  {
         //
         // Enable/disable access duration side
         //
 
-        disableAccessDurationControls (toEnable, SelectEveryDayConfig);
-        disableAccessDurationControls (toEnable, SelectPerEachDayConfig);
+        disableAccessDurationControls (toDisable, SelectEveryDayConfig);
+        disableAccessDurationControls (toDisable, SelectPerEachDayConfig);
 
-        disableAccessTimeFrameControls(toEnable, SelectEveryDayConfig);
-        disableAccessTimeFrameControls (toEnable, SelectPerEachDayConfig);
+        disableAccessTimeFrameControls(toDisable, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (toDisable, SelectPerEachDayConfig);
 
-        disableTimeControlCheckbox(MainCheckboxes, toEnable);
-        disableTimeControlCheckbox (AccessDurationCheckbox, toEnable);
-        disableTimeControlCheckbox (AccessTimeFrameCheckbox, toEnable);
+        disableTimeControlCheckbox(MainCheckboxes, toDisable);
+        disableTimeControlCheckbox (AccessDurationCheckbox, toDisable);
+        disableTimeControlCheckbox (AccessTimeFrameCheckbox, toDisable);
+
+    } else {
 
     }
 }
