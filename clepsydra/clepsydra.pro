@@ -20,18 +20,28 @@ isEmpty(ETC_PREFIX) {
     ETC_PREFIX = /etc
 }
 
+isEmpty(VAR_PREFIX) {
+    VAR_PREFIX = /var/lib
+}
+
 FILESETTINGDIR = $$ETC_PREFIX/clepsydra
+WORKING_FOLDER = $$VAR_PREFIX/clepsydra
+
 LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
 
 settings_target.path = $$FILESETTINGDIR
 settings_target.files += config/clepsydra/clepsydra.conf
 settings_target.files += config/clepsydra/clepsydradefault.json
 
+working_lib_target.path = $$WORKING_FOLDER
+working_lib_target.files += config/clepsydra/clepsydralimits.json
+
 logrotate_target.path = $$LOGRORATEDIR
 logrotate_target.files = config/logrotate.d/clepsydra
 
 OTHER_FILES +=  config/clepsydra/clepsydra.conf
-OTHER_FILES += config/clepsydra/clepsydradefault.json
+OTHER_FILES +=  config/clepsydra/clepsydradefault.json
+OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
 CONFIG(debug) {
     message (debug build 2)
@@ -42,4 +52,4 @@ CONFIG(debug) {
     message (clep_test)
 }
 
-INSTALLS += settings_target logrotate_target
+INSTALLS += settings_target working_lib_target logrotate_target
