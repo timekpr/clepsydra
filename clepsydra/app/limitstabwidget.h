@@ -43,6 +43,10 @@ public:
 
 private :
     //
+    // This will be enable or disable controls based on state of checkbox.
+    // designed to use when user changed.
+    void disableCorrectControlsBasedOnCheckbox ();
+    //
     void disableAccessDurationControls (bool, EnableMode);
     //
     void disableAccessTimeFrameControls(bool, EnableMode);
@@ -74,6 +78,7 @@ private:
 
 private:
     Ui_limitForm *m_limitTab;
+    bool m_allowSignalChange;
 };
 
 #endif // LIMITSTABWIDGET_H

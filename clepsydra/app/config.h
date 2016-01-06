@@ -24,7 +24,7 @@
 
 #define CLEPSYDRA_LIMIT_LIMITSBYDAY     "limitedByday"
 
-#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION             "ckLimitAccessTimeDuration"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION             "limitAccessOnDuration"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY    "limitAccessOnDurationEachDay"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME "limitAccessOnDurationEachDayTime"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY     "limitAccessOnDurationPerDay"

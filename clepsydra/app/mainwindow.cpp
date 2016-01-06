@@ -87,10 +87,6 @@ MainWindow::MainWindow(QWidget *parent) :
     // Read application settings
     m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
 
-    // Read json limist for current user
-    QVariantMap limits = m_accounts->getUser(m_curUserIndex)->getUserLimits();
-    updateChangesToWidgets (limits);
-
     }
 
 void MainWindow::setCurrentUserIndex(int nwIndex)
@@ -103,6 +99,8 @@ void MainWindow::setCurrentUserIndex(int nwIndex)
 
 void MainWindow::currentIndexChanged (int index)
 {
+    QVariantMap limits = m_accounts->getUser(m_curUserIndex)->getUserLimits();
+    updateChangesToWidgets (limits);
     if (m_accounts->getUser(index)->isAdmin() ) {
         // Disable all buttons and other controls since we should not
         // close admin accounts.

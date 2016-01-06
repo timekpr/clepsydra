@@ -27,8 +27,11 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
+    qDebug () << "setLimits" << limitMap;
+
+    m_allowSignalChange = false;
+
     bool vcurValue = false;
-    qDebug () << "SetLimits" << limitMap;
     // Set first values to Time edit controls (Access Duration side)
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
     m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, FORMAT_STRING_FMT ));
@@ -117,44 +120,24 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         disableAccessTimeFrameControls (false, SelectPerEachDayConfig);
     }
 
-    // Set main checkbox first, some on have to be selected, not both
+    // Set main checkbox first,  on have to be selected, not both
     if (limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool()) {
         m_limitTab->ckLimitAccessTimeDuration->setChecked(true);
         m_limitTab->ckLimitAccessTimeFrame->setChecked(false);
+
     } else {
         m_limitTab->ckLimitAccessTimeDuration->setChecked(false);
         m_limitTab->ckLimitAccessTimeFrame->setChecked(true);
     }
+    m_allowSignalChange = true;
 }
 
 void LimitsTabWidget::getLimits(QVariantMap &map)
 {
     map.clear();
     bool bound = false;
-//    if (m_limitTab->ckBound->checkState()==Qt::Checked) {
-//        bound = true;
-//    }
-
-//    bool boundByDay = false;
-//    if (m_limitTab->ckBoundDay->checkState()==Qt::Checked) {
-//        boundByDay = true;
-//    }
-
-//    bool limits = false;
-//    if (m_limitTab->ckLimit->checkState()==Qt::Checked) {
-//        limits = true;
-//    }
-
-//    bool limitsbyday = false;
-//    if (m_limitTab->ckLimitByDay->checkState()==Qt::Checked) {
-//        limitsbyday = true;
-//    }
 
     map.insert(CLEPSYDRA_LIMIT_BOUNDED, bound);
-//    map.insert(CLEPSYDRA_LIMIT_BOUNDEDBYDAY, boundByDay);
-//    map.insert(CLEPSYDRA_LIMIT_LIMITS, limits);
-//    map.insert(CLEPSYDRA_LIMIT_LIMITSBYDAY, limitsbyday);
-
     QStringList limitsList;
     //limitsList.append( m_limitTab->sbLimit_7->time().toString(FORMAT_STRING_FMT));
     limitsList.append( m_limitTab->sbLimit_mon->time().toString(FORMAT_STRING_FMT));
@@ -277,16 +260,35 @@ void LimitsTabWidget::disableAccessTimeFrameControls (bool toEnable, EnableMode 
     }
 }
 
+void LimitsTabWidget::disableCorrectControlsBasedOnCheckbox ()
+{
+    m_allowSignalChange = false;
+
+    if (m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked){
+        // Verify that a) time frame side has been disabled and
+        // correct controls in duration side has been enabled or disabled.
+        disableAccessTimeFrameControls (true, SelectEveryDayConfig);
+        disableAccessTimeFrameControls (true, SelectPerEachDayConfig);
+
+        m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(true);
+        m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(true);
+    } else {
+        disableAccessDurationControls (true, SelectEveryDayConfig);
+        disableAccessDurationControls (true, SelectPerEachDayConfig);
+
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(true);
+        m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(true);
+
+    }
+    m_allowSignalChange = true;
+}
+
 // Set all controls to disabled but not hide them.
 // Useful selected user is admin.
 void LimitsTabWidget::disableControls(bool toDisable)
-{
-    qDebug () << "disableControls" << toDisable;
+{    
     if (toDisable)  {
-        //
-        // Enable/disable access duration side
-        //
-
+        // Easy, disable all controls.
         disableAccessDurationControls (toDisable, SelectEveryDayConfig);
         disableAccessDurationControls (toDisable, SelectPerEachDayConfig);
 
@@ -298,13 +300,15 @@ void LimitsTabWidget::disableControls(bool toDisable)
         disableTimeControlCheckbox (AccessTimeFrameCheckbox, toDisable);
 
     } else {
-        m_limitTab->ckLimitAccessTimeDuration->setDisabled(false);
-        m_limitTab->ckLimitAccessTimeFrame->setDisabled(false);
+        disableCorrectControlsBasedOnCheckbox ();
     }
 }
 
 void LimitsTabWidget::ckLimitAccessTimeDurationChanged (int state)
 {
+    if (!m_allowSignalChange)
+        return;
+
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrame->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeFrame->setCheckState(Qt::Unchecked);
         disableAccessTimeFrameControls (true, SelectEveryDayConfig);
@@ -329,6 +333,8 @@ void LimitsTabWidget::ckLimitAccessTimeDurationChanged (int state)
 // Nofied when state of ckLimitAccessTimeFrame-state has changed
 void LimitsTabWidget::ckLimitAccessTimeFrameChanged(int state)
 {
+    if (!m_allowSignalChange)
+        return;
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked) {
         m_limitTab->ckLimitAccessTimeDuration->setCheckState(Qt::Unchecked);
         if (m_limitTab->ckLimitAccessTimeFrameEachDay->isChecked()) {
@@ -351,6 +357,8 @@ void LimitsTabWidget::ckLimitAccessTimeFrameChanged(int state)
 
 void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
 {
+    if (!m_allowSignalChange)
+        return;
     if (state == Qt::Checked && m_limitTab->ckLimitAccessDurationPerEachDay->checkState()==Qt::Checked)  {
         m_limitTab->ckLimitAccessDurationPerEachDay->setCheckState(Qt::Unchecked);
         disableAccessDurationControls (false, SelectEveryDayConfig);
@@ -362,6 +370,8 @@ void LimitsTabWidget::chkLimitAccessTimeDurationEachDayChanged(int state)
 
 void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
 {
+    if (!m_allowSignalChange)
+        return;
     if (state == Qt::Checked && m_limitTab->chkLimitAccessTimeDurationEachDay->checkState()==Qt::Checked)  {
         m_limitTab->chkLimitAccessTimeDurationEachDay->setCheckState(Qt::Unchecked);
         disableAccessDurationControls (true, SelectEveryDayConfig);
@@ -373,6 +383,8 @@ void LimitsTabWidget::ckLimitAccessDurationPerEachDayChanged (int state)
 
 void LimitsTabWidget::ckLimitAccessTimeFrameEachDayChanged (int state)
 {
+    if (!m_allowSignalChange)
+        return;
     if (state == Qt::Checked && m_limitTab->chLimitAccessTimeFramePerDay->checkState()==Qt::Checked)  {
         m_limitTab->chLimitAccessTimeFramePerDay->setCheckState(Qt::Unchecked);
         disableAccessTimeFrameControls(false, SelectEveryDayConfig);
@@ -384,6 +396,8 @@ void LimitsTabWidget::ckLimitAccessTimeFrameEachDayChanged (int state)
 
 void LimitsTabWidget::chLimitAccessTimeFramePerDayChanged (int state)
 {
+    if (!m_allowSignalChange)
+        return;
     if (state == Qt::Checked && m_limitTab->ckLimitAccessTimeFrameEachDay->checkState()==Qt::Checked)  {
         m_limitTab->ckLimitAccessTimeFrameEachDay->setCheckState(Qt::Unchecked);
         disableAccessTimeFrameControls(true, SelectEveryDayConfig);
