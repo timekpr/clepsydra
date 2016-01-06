@@ -54,6 +54,10 @@ MainWindow::MainWindow(QWidget *parent) :
     if (count)  {
         for (int i=0; i < count; i++) {
             User* anuser = m_accounts->getUser(i);
+
+            // Get users limits !
+            
+
             if (anuser)  {
                 m_ui->cbActiveUser->addItem(anuser->UserName());
             }
@@ -76,9 +80,16 @@ MainWindow::MainWindow(QWidget *parent) :
     int userIndex = m_accounts->getFirstNonAdminUserIndex();
     setCurrentUserIndex (userIndex);
 
+    // Read application settings
     m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+
+    // Read json limist for current user
     QVariantMap map4user;
-    m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(), map4user );
+    bool found = m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(), map4user );
+    if (!found)  {
+        map4user = m_limits->getDefaultLimits();
+    }
+
     m_accounts->getUser(m_curUserIndex)->setUserLimits(map4user);
 
     updateChangesToWidgets (map4user);
@@ -104,14 +115,13 @@ void MainWindow::currentIndexChanged (int index)
         bool locked = m_accounts->getUser(index)->isLocked();
         m_grantWidget->enableLockButton (locked);
     }
-
     m_curUserIndex = index;
 }
 
 void MainWindow::btnClearAllRestrictionClicked ()
 {
     QVariantMap defaults;
-    m_limits->getDefaultLimits(defaults);
+    defaults = m_limits->getDefaultLimits();
     m_accounts->getUser(m_curUserIndex)->setUserLimits(defaults);
     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
        m_accounts->getUser(m_curUserIndex)->getUserLimits());

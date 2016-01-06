@@ -44,7 +44,7 @@ OTHER_FILES +=  config/clepsydra/clepsydradefault.json
 OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
 CONFIG(debug) {
-    message (debug build 2)
+    message (debug build)
 }
 
 INSTALLS += settings_target working_lib_target logrotate_target

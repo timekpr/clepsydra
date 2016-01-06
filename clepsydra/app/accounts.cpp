@@ -83,7 +83,6 @@ void  Accounts::init ()
        "org.freedesktop.Accounts", bus);
     QList<QVariant> argumentList;
     QDBusMessage msg = adbus_iface.callWithArgumentList(QDBus::AutoDetect, "ListCachedUsers", argumentList);
-
     QList<QVariant> outArgs = msg.arguments();
     QVariant first = outArgs.at(0);
     const QDBusArgument& dbvFirst = first.value<QDBusArgument>();

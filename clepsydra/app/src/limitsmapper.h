@@ -25,15 +25,25 @@ public:
 
 public:
     void getLimits (const QString&, const QString&);
-    void readGroups2Map (QVariantMap&, const QString&);
-    void map2Json(const QString& user, const QVariantMap& map);
-    void json2Map (const QString& user, QVariantMap&);
 
-    void getDefaultLimits (QVariantMap&);
+    void readGroups2Map (QVariantMap&, const QString&);
+    //
+    void map2Json(const QString& user, const QVariantMap& map);
+
+    // Return false if user not found or error occurs otherwise true
+    // if limists found for user.
+    bool json2Map (const QString& user, QVariantMap&);
+
+    //
+    QVariantMap&    getDefaultLimits ();
+
+private :
+
+    void  readDefaultLimits ();
 
 private:
-    QVariantMap  m_LimitsMap;
     QVariantMap m_groupMaps;
+    QVariantMap m_defaultLimits;
     
 };
 
