@@ -71,7 +71,7 @@ void LimitsMapper::map2Json(const QString& /*user*/, const QVariantMap& map )
 }
 
 QVariantMap& LimitsMapper::getDefaultLimits()
-{
+{    
     return m_defaultLimits;
 }
 

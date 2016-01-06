@@ -14,6 +14,7 @@
 #include <QDesktopWidget>
 #include <QDebug>
 #include <QList>
+#include <QMap>
 #include <QProgressBar>
 
 #include "user.h"
@@ -88,10 +89,11 @@ MainWindow::MainWindow(QWidget *parent) :
     bool found = m_limits->json2Map(m_accounts->getUser(userIndex)->UserName(), map4user );
     if (!found)  {
         map4user = m_limits->getDefaultLimits();
+        QVariantMap data = map4user.take("default").toMap();
+        map4user.insert(m_accounts->getUser(userIndex)->UserName(), data);
+        m_limits->map2Json("user", map4user);
     }
-
     m_accounts->getUser(m_curUserIndex)->setUserLimits(map4user);
-
     updateChangesToWidgets (map4user);
 
     }
