@@ -49,11 +49,12 @@ void LimitsMapper::readDefaultLimits()
         return;
     }
     QJsonObject obj = d.object();
-    m_defaultLimits = obj.toVariantMap();
+    QVariantMap tempData = obj.toVariantMap();
+    m_defaultLimits = tempData.take("default").toMap();
 }
 
 // This method save all users limists to working dir and file
-void LimitsMapper::map2Json(const QString& /*user*/, const QVariantMap& map )
+void LimitsMapper::map2Json(const QVariantMap& map )
 {
     QJsonDocument d = QJsonDocument::fromVariant(map);
     if (d.isEmpty())  {
@@ -62,10 +63,10 @@ void LimitsMapper::map2Json(const QString& /*user*/, const QVariantMap& map )
         QString filename = CLEPSYDRA_WORKING_FOLDER;
         filename.append(CLEPSYDRA_JSON_USERDATA_FILENAME);
         QFile file(filename);
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        if (!file.open(QIODevice::Append | QIODevice::Text))
             return;
         QTextStream out(&file);
-        out << d.toJson();
+        // out << d.toJson();
         file.close();
     }
 }
@@ -76,7 +77,7 @@ QVariantMap& LimitsMapper::getDefaultLimits()
 }
 
 
-bool LimitsMapper::json2Map (const QString& user, QVariantMap& map)
+bool LimitsMapper::json2Map (const QString& user, QVariantMap& target)
 {
     QString val;
     QFile file;
@@ -106,7 +107,9 @@ bool LimitsMapper::json2Map (const QString& user, QVariantMap& map)
         qDebug () << "User not found from limits.";
         return false;
     }
-    map = mapArray.toObject().toVariantMap();
+
+    QVariantMap dataC = mapArray.toObject().toVariantMap();
+    target = dataC.take(user).toMap();
     return true;
 }
 

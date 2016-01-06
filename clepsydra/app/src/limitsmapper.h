@@ -28,7 +28,7 @@ public:
 
     void readGroups2Map (QVariantMap&, const QString&);
     //
-    void map2Json(const QString& user, const QVariantMap& map);
+    void map2Json(const QVariantMap& map);
 
     // Return false if user not found or error occurs otherwise true
     // if limists found for user.
