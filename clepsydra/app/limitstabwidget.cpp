@@ -27,10 +27,8 @@ LimitsTabWidget::LimitsTabWidget(QWidget *parent) :
 
 void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
 {
-    qDebug () << "setLimits" << limitMap;
-
     m_allowSignalChange = false;
-
+    m_usedMap = limitMap;
     bool vcurValue = false;
     // Set first values to Time edit controls (Access Duration side)
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
@@ -264,11 +262,17 @@ void LimitsTabWidget::disableCorrectControlsBasedOnCheckbox ()
 {
     m_allowSignalChange = false;
 
+    m_limitTab->ckLimitAccessTimeFrame->setDisabled(false);
+    m_limitTab->ckLimitAccessTimeDuration->setDisabled(false);
+
     if (m_limitTab->ckLimitAccessTimeDuration->checkState()==Qt::Checked){
         // Verify that a) time frame side has been disabled and
         // correct controls in duration side has been enabled or disabled.
         disableAccessTimeFrameControls (true, SelectEveryDayConfig);
         disableAccessTimeFrameControls (true, SelectPerEachDayConfig);
+
+        m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(false);
+        m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(false);
 
         m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(true);
         m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(true);
@@ -278,6 +282,10 @@ void LimitsTabWidget::disableCorrectControlsBasedOnCheckbox ()
 
         m_limitTab->chkLimitAccessTimeDurationEachDay->setDisabled(true);
         m_limitTab->ckLimitAccessDurationPerEachDay->setDisabled(true);
+
+        m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(false);
+        m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(false);
+
 
     }
     m_allowSignalChange = true;
