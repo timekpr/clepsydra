@@ -32,7 +32,7 @@ HEADERS += \
     statustabwidget.h \
     limitstabwidget.h \
     config.h \
-    src/storage.h
+    storage.h
 
 SOURCES += \
     main.cpp \
@@ -43,7 +43,7 @@ SOURCES += \
     granttabwidget.cpp \
     statustabwidget.cpp \
     limitstabwidget.cpp \
-    src/storage.cpp
+    storage.cpp
 
 isEmpty(PREFIX) {
     PREFIX = /etc/

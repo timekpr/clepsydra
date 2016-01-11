@@ -19,7 +19,7 @@
 
 #include "user.h"
 #include "config.h"
-#include "src/storage.h"
+#include "storage.h"
 #include "mainwindow.h"
 
 #include "mainwindow.h"

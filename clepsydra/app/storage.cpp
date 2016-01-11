@@ -22,8 +22,6 @@
 #include "config.h"
 #include "storage.h"
 
-
-
 Storage::Storage(QObject *parent) :
     QObject(parent)
 {
@@ -75,7 +73,6 @@ QVariantMap& Storage::getDefaultLimits()
 {    
     return m_defaultLimits;
 }
-
 
 bool Storage::getUserLimits (const QString& user, QVariantMap& target)
 {
@@ -132,5 +129,3 @@ void Storage::readGroups2Map(QVariantMap& target, const QString &file)
     }
     delete limits;
 }
-
-

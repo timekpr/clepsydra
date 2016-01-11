@@ -22,7 +22,7 @@
 #include "limitstabwidget.h"
 #include "statustabwidget.h"
 #include "accounts.h"
-#include "src/storage.h"
+#include "storage.h"
 
 namespace Ui {
     class Form;
