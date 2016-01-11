@@ -29,7 +29,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
-    m_limits = new LimitsMapper(this);
+    m_limits = new Storage(this);
     m_grantWidget = new GrantTabWidget(this);    
     m_statusWidget = new StatusTabWidget(this);
     m_limitWidget =  new LimitsTabWidget(this);
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
             User* anuser = m_accounts->getUser(i);
             QVariantMap map4user;
             // Get users limits !
-            bool found = m_limits->json2Map(anuser->UserName(), map4user );
+            bool found = m_limits->getUserLimits(anuser->UserName(), map4user );
             if (!found)  {
                 map4user = m_limits->getDefaultLimits();
             }

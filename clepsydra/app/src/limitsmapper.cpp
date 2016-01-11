@@ -24,13 +24,13 @@
 
 
 
-LimitsMapper::LimitsMapper(QObject *parent) :
+Storage::Storage(QObject *parent) :
     QObject(parent)
 {
     readDefaultLimits ();
 }
 
-void LimitsMapper::readDefaultLimits()
+void Storage::readDefaultLimits()
 {
     QString filename = QString(CLEPSYDRA_CONFIG_FOLDER).append(CLEPSYDRA_JSON_DEFAULTS_FILENAME);
     QFile file;
@@ -54,7 +54,7 @@ void LimitsMapper::readDefaultLimits()
 }
 
 // This method save all users limists to working dir and file
-void LimitsMapper::map2Json(const QVariantMap& map )
+void Storage::saveLimits(const QVariantMap& map )
 {
     QJsonDocument d = QJsonDocument::fromVariant(map);
     if (d.isEmpty())  {
@@ -71,13 +71,13 @@ void LimitsMapper::map2Json(const QVariantMap& map )
     }
 }
 
-QVariantMap& LimitsMapper::getDefaultLimits()
+QVariantMap& Storage::getDefaultLimits()
 {    
     return m_defaultLimits;
 }
 
 
-bool LimitsMapper::json2Map (const QString& user, QVariantMap& target)
+bool Storage::getUserLimits (const QString& user, QVariantMap& target)
 {
     QString val;
     QFile file;
@@ -113,7 +113,7 @@ bool LimitsMapper::json2Map (const QString& user, QVariantMap& target)
     return true;
 }
 
-void LimitsMapper::readGroups2Map(QVariantMap& target, const QString &file)
+void Storage::readGroups2Map(QVariantMap& target, const QString &file)
 {
     target.clear();
     QSettings* limits = new QSettings (file, QSettings::IniFormat, this);

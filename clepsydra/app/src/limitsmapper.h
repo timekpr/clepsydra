@@ -17,22 +17,22 @@
 #include <QVariantMap>
 #include <QObject>
 
-class LimitsMapper : public QObject
+class Storage : public QObject
 {
     Q_OBJECT
 public:
-    explicit LimitsMapper(QObject *parent = 0);  
+    explicit Storage(QObject *parent = 0);  
 
 public:
     void getLimits (const QString&, const QString&);
 
     void readGroups2Map (QVariantMap&, const QString&);
     //
-    void map2Json(const QVariantMap& map);
+    void saveLimits(const QVariantMap& map);
 
     // Return false if user not found or error occurs otherwise true
     // if limists found for user.
-    bool json2Map (const QString& user, QVariantMap&);
+    bool getUserLimits (const QString& user, QVariantMap&);
 
     //
     QVariantMap&    getDefaultLimits ();
