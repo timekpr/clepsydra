@@ -20,7 +20,7 @@
 #include <QJsonDocument>
 
 #include "config.h"
-#include "limitsmapper.h"
+#include "storage.h"
 
 
 
