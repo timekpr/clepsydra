@@ -284,8 +284,6 @@ void LimitsTabWidget::disableCorrectControlsBasedOnCheckbox ()
 
         m_limitTab->chLimitAccessTimeFramePerDay->setDisabled(false);
         m_limitTab->ckLimitAccessTimeFrameEachDay->setDisabled(false);
-
-
     }
     m_allowSignalChange = true;
 }
