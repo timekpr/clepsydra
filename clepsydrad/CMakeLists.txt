@@ -20,6 +20,7 @@ SET(SRC_LIST
 )
 
 if(NOT NO_PAM)
+    MESSAGE(STATUS "PAM LIB REQUIRED ")
     find_package(PAM REQUIRED)
     if(PAM_FOUND)
         add_definitions(-DUSE_PAM)
@@ -28,6 +29,7 @@ endif()
 
 if (NOT NO_JSON)
    #find_package(JSON REQUIRED)
+   MESSAGE(STATUS "JSON LIB REQUIRED ")
    if(JSON_FOUND)
        add_definitions(-DUSE_JSON)
    endif()
