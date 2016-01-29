@@ -1,11 +1,1 @@
-*~
-Makefile
-ui_*
-/app/tmp/
-*.ui.autosave
-*.o
-*.pro.user
-moc_*
-clepsydrad/CMakeLists.txt.user
-build-*/
-clepsydrad/build/*
+*.user*
