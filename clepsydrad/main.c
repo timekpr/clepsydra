@@ -62,19 +62,15 @@ int make_daemon ()
     close(STDOUT_FILENO);
     close(STDERR_FILENO);
 
-    fp = fopen ("clepsydra.log", "w+");
+    fp = fopen ("/tmp/clepsydrad.log", "w+");
 
     char *p = NULL;
-    int keyword = readConfFile(fp);
-    // Open a log file in write mode.
 
     int countToDie = 0;
     while (1)
     {
        //Dont block context switches, let the process sleep for some time
        sleep(1);
-       fprintf(fp, "Logging info... %d %s\n", keyword, p );
-       fflush(fp);
        // Temp code to cleanly die this process
        countToDie ++;
        if (countToDie > 15 )  {
@@ -82,6 +78,8 @@ int make_daemon ()
        } else {
            int pm = checkPamUser ();
            fprintf(fp, " pam user check ... %d\n",  pm);
+           int loggedC = getLoggedusers (fp);
+           fprintf(fp, " pam cnt of logged users... %d\n",  loggedC);
            fflush(fp);
        }
        // Implement and call some function that does core work for this daemon.

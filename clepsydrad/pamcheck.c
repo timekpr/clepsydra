@@ -11,10 +11,42 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>
 
+#include <utmp.h>
+#include <err.h>
 
 #include <security/pam_appl.h>
 #include <security/pam_misc.h>
 #include <stdio.h>
+
+FILE *utmpFile(char *name);
+#define NAME_WIDTH  8
+
+int getLoggedusers (FILE *lfp)
+{
+    FILE *ufp;
+    int numberOfUsers = 0;
+    struct utmp usr;
+    ufp = utmpFile(_PATH_UTMP);
+    // fprintf(lfp, " utmp ... %s\n",  _PATH_UTMP);
+    while (fread((char *)&usr, sizeof(usr), 1, ufp) == 1) {
+        if (*usr.ut_name && *usr.ut_line && *usr.ut_line != '~') {
+            if (usr.ut_type == USER_PROCESS) {
+                fprintf(lfp, " utmp ... %s\n", usr.ut_user );
+                numberOfUsers++;
+            }
+        }
+    }
+    return numberOfUsers;
+}
+
+FILE *utmpFile(char *name)
+{
+    FILE *ufp;
+    if (!(ufp = fopen(name, "r"))) {
+        err(1, "%s", name);
+    }
+    return(ufp);
+}
 
 static struct pam_conv conv = {
     misc_conv,
