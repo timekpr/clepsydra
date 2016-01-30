@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+_Name=Clepsydra
+_Comment=Clepsydra Client
+Icon=clepsydra.svg
+Exec=clepsydra
+Terminal=false
+Type=Application
+Categories=
+
