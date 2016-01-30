@@ -1,10 +1,8 @@
 [Desktop Entry]
-Encoding=UTF-8
 Name=Clepsydra
 Comment=Clepsydra Client
-Icon=clepsydra
 Exec=/usr/local/bin/clepsydra
+Icon=/usr/share/pixmaps/clepsydra.svg
 Terminal=false
 Type=Application
-Categories=
-
+Categories=Utility;

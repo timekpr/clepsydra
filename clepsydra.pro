@@ -39,8 +39,8 @@ LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
 application_desktop.path = /usr/share/applications
 application_desktop.files = data/clepsydra.desktop
 
-application_icon.path = /usr/share/icons/hicolor/48x48/apps
-application_icon.files = data/clepsydra.png
+application_icon.path = /usr/share/pixmaps
+application_icon.files = data/clepsydra.svg
 
 CONFIG(debug, debug|release) {
     application_bin.files +=   build/debug/clepsydra
