@@ -19,9 +19,17 @@ FORMS  = ui/main.ui ui/grant.ui ui/limits.ui ui/status.ui
 QT += dbus
 QT += widgets
 
-RCC_DIR = tmp
-OBJECTS_DIR = tmp
-MOC_DIR = tmp
+CONFIG(debug, debug|release) {
+    DESTDIR = ../build/debug
+    RCC_DIR = ../build/debug/tmp
+    OBJECTS_DIR = ../build/debug/tmp
+    MOC_DIR = ../build/debug/tmp
+} else {
+    DESTDIR = ../build/release
+    RCC_DIR = ../build/release/tmp
+    OBJECTS_DIR = ../build/release/tmp
+    MOC_DIR = ../build/release/tmp
+}
 
 HEADERS += \
     accounts.h \

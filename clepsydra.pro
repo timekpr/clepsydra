@@ -16,6 +16,7 @@ CONFIG += debug_and_release
 CONFIG += ordered
 SUBDIRS =  app
 
+
 isEmpty(ETC_PREFIX) {
     ETC_PREFIX = /etc
 }
@@ -29,6 +30,12 @@ WORKING_FOLDER = $$VAR_PREFIX/clepsydra
 
 LOGRORATEDIR = $$ETC_PREFIX/logrotate.d
 
+application_desktop.path = /usr/share/applications
+application_desktop.files = data/clepsydra.desktop
+
+application_icon.path = /usr/share/icons/hicolor/48x48/apps/
+application_icon.files = data/clepsydra.svg
+
 settings_target.path = $$FILESETTINGDIR
 settings_target.files += config/clepsydra/clepsydra.conf
 settings_target.files += config/clepsydra/clepsydradefault.json
@@ -40,6 +47,7 @@ logrotate_target.path = $$LOGRORATEDIR
 logrotate_target.files = config/logrotate.d/clepsydra
 
 OTHER_FILES +=  config/clepsydra/clepsydra.conf
+OTHER_FILES +=  data/*
 OTHER_FILES +=  config/clepsydra/clepsydradefault.json
 OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
@@ -47,4 +55,4 @@ CONFIG(debug) {
     message (debug build)
 }
 
-INSTALLS += settings_target working_lib_target logrotate_target
+INSTALLS += settings_target working_lib_target logrotate_target application_desktop application_icon
