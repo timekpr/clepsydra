@@ -21,14 +21,16 @@ QT += widgets
 
 CONFIG(debug, debug|release) {
     DESTDIR = ../build/debug
-    RCC_DIR = ../build/debug/tmp
-    OBJECTS_DIR = ../build/debug/tmp
-    MOC_DIR = ../build/debug/tmp
+    RCC_DIR = ../build/debug/.qrc
+    UI_DIR = ../build/debug/.ui
+    OBJECTS_DIR = ../build/debug/.obj
+    MOC_DIR = ../build/debug/.moc
 } else {
     DESTDIR = ../build/release
-    RCC_DIR = ../build/release/tmp
-    OBJECTS_DIR = ../build/release/tmp
-    MOC_DIR = ../build/release/tmp
+    RCC_DIR = ../build/release/.qrc
+    UI_DIR = ../build/release/.ui
+    OBJECTS_DIR = ../build/release/.obj
+    MOC_DIR = ../build/release/.moc
 }
 
 HEADERS += \
