@@ -36,6 +36,11 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     QString weekData = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString();
     if (time.length())  {
         QStringList times = weekData.split (",");
+
+        // Decided later on
+        // QTime limit = QTime (0, 10, 0, 0);
+        // m_limitTab->sbLimitAccessDurarationEveryDay->setMinimumTime(limit);
+
         m_limitTab->sbLimit_mon->setTime(QTime().fromString(times[0]));
         m_limitTab->sbLimit_tue->setTime(QTime().fromString(times[1]));
         m_limitTab->sbLimit_wed->setTime(QTime().fromString(times[2]));
