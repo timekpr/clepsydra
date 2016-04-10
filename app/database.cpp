@@ -30,7 +30,6 @@ Database::Database(QObject *parent) : QObject(parent)
     else  {
        qDebug() << "Database: connection ok";
     }
-
     // Just making application working for smoother.
     getDefaults ();
 }
@@ -50,11 +49,41 @@ void Database::getLimits(const QString &name, QVariantMap &map)
         }
     } else  {
         map = m_map;
+        addLimits(name, map);
     }
 }
 
-void Database::addLimits(const QString &, const QVariantMap &)
+void Database::addLimits(const QString &name, const QVariantMap &map)
 {
+    QSqlQuery query;
+    query.prepare("INSERT INTO limits (account, active, bounded, boundedByDay, limitAccessOnDuration, limitAccessOnDurationEachDay, " \
+        "limitAccessOnDurationEachDayTime, limitAccessOnDurationPerDay, limitAccessOnDurationPerDayTime,limitAccessOnTimeFrame, " \
+        "limitAccessOnTimeFrameEachDay, limitAccessOnTimeFramePerDay,limitAccessOnTimeFrameEachDayTime, limitAccessOnTimeFramePerDayTime ) " \
+        "VALUES (:account, :active, :bounded, :boundedByDay, :limitAccessOnDuration, :limitAccessOnDurationEachDay  "\
+        ":limitAccessOnDurationEachDayTime, :limitAccessOnDurationPerDay, :limitAccessOnDurationPerDayTime, :limitAccessOnTimeFrame, " \
+        ":limitAccessOnTimeFrameEachDay, :limitAccessOnTimeFramePerDay, :limitAccessOnTimeFrameEachDayTime, :limitAccessOnTimeFramePerDayTime ); ");
+
+    query.bindValue(":account", map.value("account"));
+    query.bindValue(":active", map.value("active"));
+    query.bindValue(":bounded", map.value("bounded"));
+    query.bindValue(":boundedByDay", map.value("boundedByDay"));
+    query.bindValue(":limitAccessOnDuration", map.value("limitAccessOnDuration"));
+    query.bindValue(":limitAccessOnDurationEachDay", map.value("limitAccessOnDurationEachDay"));
+    query.bindValue(":limitAccessOnDurationEachDayTime", map.value("limitAccessOnDurationEachDayTime"));
+    query.bindValue(":limitAccessOnDurationPerDay", map.value("limitAccessOnDurationPerDay"));
+    query.bindValue(":limitAccessOnDurationPerDayTime", map.value("limitAccessOnDurationPerDayTime"));
+    query.bindValue(":limitAccessOnTimeFrame", map.value("limitAccessOnTimeFrame"));
+    query.bindValue(":limitAccessOnTimeFrameEachDay", map.value("limitAccessOnTimeFrameEachDay"));
+    query.bindValue(":limitAccessOnTimeFramePerDay", map.value("limitAccessOnTimeFramePerDay"));
+    query.bindValue(":limitAccessOnTimeFrameEachDayTime", map.value("limitAccessOnTimeFrameEachDayTime"));
+    query.bindValue(":limitAccessOnTimeFramePerDayTime", map.value("limitAccessOnTimeFramePerDayTime"));
+
+    bool success = query.exec();
+    if (success)  {
+        qDebug () << "Db row inserted " << map.value("account");
+    } else {
+        qDebug () << query.lastError();
+    }
 }
 
 void Database::updateLimits(const QString &, const QVariantMap &)
