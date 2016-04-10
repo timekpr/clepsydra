@@ -35,11 +35,11 @@ Database::Database(QObject *parent) : QObject(parent)
     getDefaults ();
 }
 
-void Database::getLimits(const QString & name, QVariantMap &map)
+void Database::getLimits(const QString &name, QVariantMap &map)
 {
     QSqlQuery query;
-    query.prepare("SELECT FROM limits WHERE user = (:name)");
-    query.bindValue(":name", name);
+    query.prepare("SELECT FROM limits WHERE account = (:account)");
+    query.bindValue(":account", name);
     bool success = query.exec();
     if(!success)  {
         QSqlRecord record = query.record();
@@ -48,6 +48,8 @@ void Database::getLimits(const QString & name, QVariantMap &map)
                 m_map.insert(record.fieldName(i++), query.value(i));
             }
         }
+    } else  {
+        map = m_map;
     }
 }
 
@@ -70,7 +72,5 @@ void Database::getDefaults()
             m_map.insert(record.fieldName(i++), query.value(i));
         }
     }
-    qDebug() << query.lastError().text();
-    qDebug () << m_map;
 }
 
