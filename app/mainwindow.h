@@ -22,6 +22,7 @@
 #include "limitstabwidget.h"
 #include "statustabwidget.h"
 #include "accounts.h"
+#include "database.h"
 #include "storage.h"
 
 namespace Ui {
@@ -71,6 +72,7 @@ private:
     LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
     QVariantMap m_settingsMap;
+    Database *m_db;
     Storage* m_limits;
     QVariantMap m_defaultLimitsMap;
     int m_curUserIndex;

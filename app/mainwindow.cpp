@@ -19,16 +19,15 @@
 
 #include "user.h"
 #include "config.h"
+#include "ui_main.h"
 #include "storage.h"
 #include "mainwindow.h"
-
-#include "mainwindow.h"
-#include "ui_main.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
+    m_db = new Database ();
     m_limits = new Storage(this);
     m_grantWidget = new GrantTabWidget(this);    
     m_statusWidget = new StatusTabWidget(this);

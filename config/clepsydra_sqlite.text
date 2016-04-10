@@ -1,0 +1,16 @@
+create table limits (
+    user TEXT,
+    active FALSE,
+    bounded INTEGER,
+    boundedbyday INTEGER,
+    limitaccessonduration INTEGER,
+    limitaccessondurationeachday INTEGER,
+    limitaccessondurationeachdaytime TEXT,
+    limitaccessondurationperday INTEGER,
+    limitaccessondurationperdaytime TEXT,
+    limitaccessontimeframe INTEGER,
+    limitaccessontimeframeeachday INTEGER,
+    limitaccessontimeframeeachdaytime TEXT,
+    limitaccessontimeframeperday INTEGER,
+    limitaccessontimeframeperdaytime TEXT
+    );

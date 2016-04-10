@@ -1,6 +1,8 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 
+#include <QSqlDatabase>
+#include <QVariantMap>
 #include <QObject>
 
 class Database : public QObject
@@ -25,6 +27,7 @@ private:
 
 private:
     QSqlDatabase m_db;
+    QVariantMap  m_map;
 
 };
 

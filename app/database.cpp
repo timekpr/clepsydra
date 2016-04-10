@@ -11,14 +11,19 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#include <QDebug>
+#include <QSqlError>
+#include <QSqlQuery>
+#include <QSqlRecord>
 #include "config.h"
 #include "database.h"
 
 Database::Database(QObject *parent) : QObject(parent)
 {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
+    // TODO Change working folder name for real folder name later on !!!!!
     QString path = QString().append(CLEPSYDRA_WORKING_FOLDER).append(CLEPSYDRA_SQLITE_FILE);
-    m_db->setDatabaseName (path);
+    m_db.setDatabaseName (path);
     if (!m_db.open())  {
        qDebug() << "Error: connection with database fail";
     }
@@ -35,12 +40,12 @@ void Database::getLimits(const QString & name, QVariantMap &map)
     QSqlQuery query;
     query.prepare("SELECT FROM limits WHERE user = (:name)");
     query.bindValue(":name", name);
-    success = query.exec();
+    bool success = query.exec();
     if(!success)  {
         QSqlRecord record = query.record();
         if (query.next()) {
             for (int i=0; i<record.count(); ++i) {
-                map.insert(record.fieldName(i++), query.value(i));
+                m_map.insert(record.fieldName(i++), query.value(i));
             }
         }
     }
@@ -52,5 +57,20 @@ void Database::addLimits(const QString &, const QVariantMap &)
 
 void Database::updateLimits(const QString &, const QVariantMap &)
 {
+}
+
+void Database::getDefaults()
+{
+    QSqlQuery query;
+    query.exec("SELECT * FROM defaults");
+    while (query.next()) {
+        QSqlRecord record = query.record();
+        m_map.clear();
+        for (int i=0; i<record.count(); ++i) {
+            m_map.insert(record.fieldName(i++), query.value(i));
+        }
+    }
+    qDebug() << query.lastError().text();
+    qDebug () << m_map;
 }
 

@@ -52,6 +52,7 @@ application_bin.path = /usr/local/bin
 
 settings_target.path = $$FILESETTINGDIR
 settings_target.files += config/clepsydra/clepsydra.conf
+settings_target.files += config/clepsydra.db
 settings_target.files += config/clepsydra/clepsydradefault.json
 
 working_lib_target.path = $$WORKING_FOLDER
