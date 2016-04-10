@@ -1,8 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-#define MAP_SETTINGS_INFO       "var"
-
+#define MAP_SETTINGS_INFO               "var"
 #define KEY_ACCOUNT_LOCKED              "AccountLocked"
 
 #define CLEPSYDRADIR                    "CLEPSYDRADIR"          // i.e etc/clepsydra
@@ -30,15 +29,16 @@
 #define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY     "limitAccessOnDurationPerDay"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME "limitAccessOnDurationPerDayTime"
 
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME             "LimitAccessOnTimeFrame"
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY    "LimitAccessOnTimeFrameEachDay"
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY     "LimitAccessOnTimeFramePerDay"
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME "LimitAccessOnTimeFrameEachDayTime"
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME "LimitAccessOnTimeFramePerDayTime"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME                     "limitAccessOnTimeFrame"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY            "limitAccessOnTimeFrameEachDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY             "limitAccessOnTimeFramePerDay"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME       "limitAccessOnTimeFrameEachDayTime"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME        "limitAccessOnTimeFramePerDayTime"
 
 #define CLEPSYDRA_CONFIG_FOLDER             "/etc/clepsydra/"
 //#define CLEPSYDRA_WORKING_FOLDER            "/var/lib/clepsydra/"
 #define CLEPSYDRA_WORKING_FOLDER            "/tmp/"
+#define CLEPSYDRA_SQLITE_FILE               "clepsydra.db"
 #define CLEPSYDRA_CONFIG_FILENAME           "clepsydra.conf"
 #define CLEPSYDRA_JSON_DEFAULTS_FILENAME    "clepsydradefault.json"
 #define CLEPSYDRA_JSON_USERDATA_FILENAME    "clepsydralimits.json"

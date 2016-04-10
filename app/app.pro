@@ -16,7 +16,7 @@ TEMPLATE = app
 TARGET = clepsydra
 FORMS  = ui/main.ui ui/grant.ui ui/limits.ui ui/status.ui
 
-QT += dbus
+QT += dbus sql
 QT += widgets
 
 CONFIG(debug, debug|release) {
@@ -42,7 +42,8 @@ HEADERS += \
     statustabwidget.h \
     limitstabwidget.h \
     config.h \
-    storage.h
+    storage.h \
+    database.h
 
 SOURCES += \
     main.cpp \
@@ -53,7 +54,8 @@ SOURCES += \
     granttabwidget.cpp \
     statustabwidget.cpp \
     limitstabwidget.cpp \
-    storage.cpp
+    storage.cpp \
+    database.cpp
 
 isEmpty(PREFIX) {
     PREFIX = /etc/

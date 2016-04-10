@@ -62,6 +62,7 @@ logrotate_target.files = config/logrotate.d/clepsydra
 
 OTHER_FILES +=  config/clepsydra/clepsydra.conf
 OTHER_FILES +=  data/*
+OTHER_FILES +=  config/*
 OTHER_FILES +=  config/clepsydra/clepsydradefault.json
 OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
