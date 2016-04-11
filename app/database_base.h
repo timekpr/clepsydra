@@ -1,4 +1,4 @@
-// Copyright (c) 2014-2016 Olli-Pekka Wallin <opwallin@gmail.com>
+// Copyright (c) 2014 Olli-Pekka Wallin <opwallin@gmail.com>
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,8 +11,8 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef __STORAGE_H__
-#define __STORAGE_H__
+#ifndef LIMITSMAPPER_H
+#define LIMITSMAPPER_H
 
 #include <QVariantMap>
 #include <QObject>
@@ -24,15 +24,16 @@ public:
     explicit Storage(QObject *parent = 0);  
 
 public:
-    void getLimits (const QString&, const QString&);
 
-    void readGroups2Map (QVariantMap&, const QString&);
+    virtual void getLimits (const QString&, const QString&)=0;
+
+    virtual void readGroups2Map (QVariantMap&, const QString&)=0;
     //
-    void saveLimits(const QVariantMap& map);
+    virtual void saveLimits(const QVariantMap& map)=0;
 
     // Return false if user not found or error occurs otherwise true
     // if limists found for user.
-    bool getUserLimits (const QString& user, QVariantMap&);
+    virtual bool getUserLimits (const QString& user, QVariantMap&)=0;
 
     //
     QVariantMap&    getDefaultLimits ();
@@ -47,4 +48,4 @@ private:
     
 };
 
-#endif // __STORAGE_H__
+#endif // LIMITSMAPPER_H
