@@ -30,7 +30,6 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     m_allowSignalChange = false;
     bool vcurValue = false;
     // Set first values to Time edit controls (Access Duration side)
-    qDebug () << limitMap;
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
     m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, FORMAT_STRING_FMT ));
     QString weekData = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString();
