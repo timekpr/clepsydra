@@ -3,9 +3,9 @@
 
 #include <QSqlDatabase>
 #include <QVariantMap>
-#include <QObject>
+#include <database_base.h>
 
-class Database : public QObject
+class Database : public QObject, public DatabaseBase
 {
     Q_OBJECT
 public:
@@ -18,9 +18,13 @@ public:
     // the new limits for user will be inserted and default limits returned for caller.
     //
 
-    void getLimits (const QString&, QVariantMap&);
-    void addLimits (const QString&, const QVariantMap&);
+    bool getUserLimits (const QString&, QVariantMap&);
+    //
+    void saveLimits (const QVariantMap&);
+
     void updateLimits (const QString&, const QVariantMap&);
+
+    QVariantMap& getDefaultLimits () {return m_map;}
 
 private:
     void getDefaults ();

@@ -18,7 +18,7 @@
 #include "config.h"
 #include "database.h"
 
-Database::Database(QObject *parent) : QObject(parent)
+Database::Database(QObject *parent) : QObject (parent)
 {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
     // TODO Change working folder name for real folder name later on !!!!!
@@ -34,7 +34,7 @@ Database::Database(QObject *parent) : QObject(parent)
     getDefaults ();
 }
 
-void Database::getLimits(const QString &name, QVariantMap &map)
+bool Database::getUserLimits(const QString &name, QVariantMap &map)
 {
     QSqlQuery query;
     query.prepare("SELECT FROM limits WHERE account = (:account)");
@@ -49,11 +49,11 @@ void Database::getLimits(const QString &name, QVariantMap &map)
         }
     } else  {
         map = m_map;
-        addLimits(name, map);
     }
+    return true;
 }
 
-void Database::addLimits(const QString &name, const QVariantMap &map)
+void Database::saveLimits (const QVariantMap &map)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO limits (account, active, bounded, boundedByDay, limitAccessOnDuration, limitAccessOnDurationEachDay, " \

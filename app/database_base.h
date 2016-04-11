@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Olli-Pekka Wallin <opwallin@gmail.com>
+// Copyright (c) 2016 Olli-Pekka Wallin <opwallin@gmail.com>
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -11,23 +11,16 @@
 // You should have received a copy of the GNU General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef LIMITSMAPPER_H
-#define LIMITSMAPPER_H
+#ifndef __DATABASE_BASE_H__
+#define __DATABASE_BASE_H__
 
 #include <QVariantMap>
 #include <QObject>
 
-class Storage : public QObject
+class DatabaseBase
 {
-    Q_OBJECT
-public:
-    explicit Storage(QObject *parent = 0);  
-
 public:
 
-    virtual void getLimits (const QString&, const QString&)=0;
-
-    virtual void readGroups2Map (QVariantMap&, const QString&)=0;
     //
     virtual void saveLimits(const QVariantMap& map)=0;
 
@@ -36,16 +29,8 @@ public:
     virtual bool getUserLimits (const QString& user, QVariantMap&)=0;
 
     //
-    QVariantMap&    getDefaultLimits ();
-
-private :
-
-    void  readDefaultLimits ();
-
-private:
-    QVariantMap m_groupMaps;
-    QVariantMap m_defaultLimits;
+    virtual QVariantMap&    getDefaultLimits ()=0;
     
 };
 
-#endif // LIMITSMAPPER_H
+#endif // __DATABASE_BASE_H__

@@ -43,6 +43,7 @@ HEADERS += \
     limitstabwidget.h \
     config.h \
     storage.h \
+    database_base.h \
     database.h
 
 SOURCES += \
