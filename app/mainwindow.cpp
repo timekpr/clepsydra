@@ -27,8 +27,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
 {
     m_ui->setupUi(this);
-    m_db = new Database ();
-    m_limits = new Storage(this);
+    m_limits = new Database ();
     m_grantWidget = new GrantTabWidget(this);    
     m_statusWidget = new StatusTabWidget(this);
     m_limitWidget =  new LimitsTabWidget(this);
@@ -50,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_accounts = new Accounts(this);
 
     int count = m_accounts->usersCount();
+    qDebug () << count;
     // Fill required widgets components to account names
     if (count)  {
         for (int i=0; i < count; i++) {
@@ -84,7 +84,7 @@ MainWindow::MainWindow(QWidget *parent) :
     setCurrentUserIndex (userIndex);
 
     // Read application settings
-    m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    //m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
 
     }
 

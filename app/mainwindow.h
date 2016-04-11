@@ -72,8 +72,8 @@ private:
     LimitsTabWidget* m_limitWidget;
     Accounts* m_accounts;
     QVariantMap m_settingsMap;
-    Database *m_db;
-    Storage* m_limits;
+    Database *m_limits;
+    // Storage* m_limits;
     QVariantMap m_defaultLimitsMap;
     int m_curUserIndex;
 };

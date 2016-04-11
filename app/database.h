@@ -28,11 +28,12 @@ public:
 
 private:
     void getDefaults ();
+    bool checkDbExists ();
 
 private:
     QSqlDatabase m_db;
     QVariantMap  m_map;
-
+    QString m_path;
 };
 
 #endif // DATABASE_H

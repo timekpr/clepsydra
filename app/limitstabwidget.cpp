@@ -75,36 +75,37 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->sbEveryTo->setTime(QTime::fromString(list[1], FORMAT_STRING_FMT));
     }
 
-    QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME).toStringList();
-    if (time_from.length())  {
+    // QString test ("02:00.12:00, 03:00.13:00, 04:00.14:00, 05:00.15:00, 06:00.16:00,07:00.17:00,08:00.18:00");
+    QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME).toString().split(",");
+    if (time_from.length() == 7)  {
         // Monday
         QString timeMon = time_from[0];
-        m_limitTab->sbFrom_mon->setTime(QTime::fromString(timeMon.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_mon->setTime(QTime::fromString(timeMon.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_mon->setTime(QTime::fromString(timeMon.split(".")[0].trimmed(), FORMAT_STRING_FMT));
+        m_limitTab->sbTo_mon->setTime(QTime::fromString(timeMon.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Tuesday
         QString timeTue = time_from[1];
-        m_limitTab->sbFrom_tue->setTime(QTime::fromString(timeTue.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_tue->setTime(QTime::fromString(timeTue.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_tue->setTime(QTime::fromString(timeTue.split(".")[0].trimmed(), FORMAT_STRING_FMT));
+        m_limitTab->sbTo_tue->setTime(QTime::fromString(timeTue.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Wednesday
         QString timeWed = time_from[2];
-        m_limitTab->sbFrom_wed->setTime(QTime::fromString(timeWed.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_wed->setTime(QTime::fromString(timeWed.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_wed->setTime(QTime::fromString(timeWed.split(".")[0].trimmed(), FORMAT_STRING_FMT));
+        m_limitTab->sbTo_wed->setTime(QTime::fromString(timeWed.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Thursday
         QString timeThu = time_from[3];
-        m_limitTab->sbFrom_thu->setTime(QTime::fromString(timeThu.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeThu.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_thu->setTime(QTime::fromString(timeThu.split(".")[0].trimmed(),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeThu.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Friday
         QString timeFri = time_from[4];
-        m_limitTab->sbFrom_fri->setTime(QTime::fromString(timeFri.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeFri.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_fri->setTime(QTime::fromString(timeFri.split(".")[0].trimmed(),FORMAT_STRING_FMT));
+        m_limitTab->sbTo_thu->setTime(QTime::fromString(timeFri.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Saturday
         QString timeSat = time_from[5];
-        m_limitTab->sbFrom_sat->setTime(QTime::fromString(timeSat.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_sat->setTime(QTime::fromString(timeSat.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_sat->setTime(QTime::fromString(timeSat.split(".")[0].trimmed(), FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sat->setTime(QTime::fromString(timeSat.split(".")[1].trimmed(),FORMAT_STRING_FMT));
         // Sunday
         QString timeSun = time_from[6];
-        m_limitTab->sbFrom_sun->setTime(QTime::fromString(timeSun.split(",")[0], FORMAT_STRING_FMT));
-        m_limitTab->sbTo_sun->setTime(QTime::fromString(timeSun.split(",")[1],FORMAT_STRING_FMT));
+        m_limitTab->sbFrom_sun->setTime(QTime::fromString(timeSun.split(".")[0].trimmed(), FORMAT_STRING_FMT));
+        m_limitTab->sbTo_sun->setTime(QTime::fromString(timeSun.split(".")[1].trimmed(),FORMAT_STRING_FMT));
     }
 
     vcurValue = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY).toBool();

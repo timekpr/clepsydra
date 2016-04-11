@@ -12,6 +12,7 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <QDebug>
+#include <QFile>
 #include <QSqlError>
 #include <QSqlQuery>
 #include <QSqlRecord>
@@ -22,8 +23,12 @@ Database::Database(QObject *parent) : QObject (parent)
 {
     m_db = QSqlDatabase::addDatabase("QSQLITE");
     // TODO Change working folder name for real folder name later on !!!!!
-    QString path = QString().append(CLEPSYDRA_WORKING_FOLDER).append(CLEPSYDRA_SQLITE_FILE);
-    m_db.setDatabaseName (path);
+    m_path = QString().append(CLEPSYDRA_WORKING_FOLDER).append(CLEPSYDRA_SQLITE_FILE);
+    if (!checkDbExists())  {
+        qDebug() << "Error: Database cannot be found !!!! ";
+        return;
+    }
+    m_db.setDatabaseName (m_path);
     if (!m_db.open())  {
        qDebug() << "Error: connection with database fail";
     }
@@ -46,10 +51,11 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
             for (int i=0; i<record.count(); ++i) {
                 m_map.insert(record.fieldName(i++), query.value(i));
             }
+        } else {
+            map = m_map;
         }
-    } else  {
-        map = m_map;
     }
+    qDebug () << name << " " << map;
     return true;
 }
 
@@ -88,6 +94,12 @@ void Database::saveLimits (const QVariantMap &map)
 
 void Database::updateLimits(const QString &, const QVariantMap &)
 {
+}
+
+bool Database::checkDbExists()
+{
+    QFile file(m_path);
+    return file.exists();
 }
 
 void Database::getDefaults()

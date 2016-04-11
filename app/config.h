@@ -38,7 +38,7 @@
 
 
 #define CLEPSYDRA_CONFIG_FOLDER             "/etc/clepsydra/"
-//#define CLEPSYDRA_WORKING_FOLDER            "/var/lib/clepsydra/"
+//#define CLEPSYDRA_WORKING_FOLDER          "/var/lib/clepsydra/"
 #define CLEPSYDRA_WORKING_FOLDER            "/tmp/"
 #define CLEPSYDRA_SQLITE_FILE               "clepsydra.db"
 #define CLEPSYDRA_CONFIG_FILENAME           "clepsydra.conf"
