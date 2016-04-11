@@ -49,7 +49,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_accounts = new Accounts(this);
 
     int count = m_accounts->usersCount();
-    qDebug () << count;
     // Fill required widgets components to account names
     if (count)  {
         for (int i=0; i < count; i++) {

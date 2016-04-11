@@ -49,13 +49,13 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
         QSqlRecord record = query.record();
         if (query.next()) {
             for (int i=0; i<record.count(); ++i) {
-                m_map.insert(record.fieldName(i++), query.value(i));
+                qDebug () << record.fieldName(i);
+                m_map.insert(record.fieldName(i), query.value(i));
             }
         } else {
             map = m_map;
         }
     }
-    qDebug () << name << " " << map;
     return true;
 }
 
@@ -110,7 +110,7 @@ void Database::getDefaults()
         QSqlRecord record = query.record();
         m_map.clear();
         for (int i=0; i<record.count(); ++i) {
-            m_map.insert(record.fieldName(i++), query.value(i));
+            m_map.insert(record.fieldName(i), query.value(i));
         }
     }
 }

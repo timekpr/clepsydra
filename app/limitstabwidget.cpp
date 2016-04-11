@@ -30,11 +30,11 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
     m_allowSignalChange = false;
     bool vcurValue = false;
     // Set first values to Time edit controls (Access Duration side)
+    qDebug () << limitMap;
     QString time = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString();
     m_limitTab->sbLimitAccessDurarationEveryDay->setTime(QTime().fromString(time, FORMAT_STRING_FMT ));
-
     QString weekData = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString();
-    if (time.length())  {
+    if (weekData.length())  {
         QStringList times = weekData.split (",");
 
         // Decided later on
@@ -75,13 +75,13 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->sbEveryTo->setTime(QTime::fromString(list[1], FORMAT_STRING_FMT));
     }
 
-    // QString test ("02:00.12:00, 03:00.13:00, 04:00.14:00, 05:00.15:00, 06:00.16:00,07:00.17:00,08:00.18:00");
     QStringList time_from = limitMap.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME).toString().split(",");
     if (time_from.length() == 7)  {
         // Monday
         QString timeMon = time_from[0];
         m_limitTab->sbFrom_mon->setTime(QTime::fromString(timeMon.split(".")[0].trimmed(), FORMAT_STRING_FMT));
         m_limitTab->sbTo_mon->setTime(QTime::fromString(timeMon.split(".")[1].trimmed(),FORMAT_STRING_FMT));
+
         // Tuesday
         QString timeTue = time_from[1];
         m_limitTab->sbFrom_tue->setTime(QTime::fromString(timeTue.split(".")[0].trimmed(), FORMAT_STRING_FMT));
