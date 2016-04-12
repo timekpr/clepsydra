@@ -60,30 +60,33 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
     return true;
 }
 
+
 void Database::saveLimits (const QVariantMap &map)
 {
     QSqlQuery query;
-    query.prepare("INSERT INTO limits (account, active, bounded, boundedByDay, limitAccessOnDuration, limitAccessOnDurationEachDay, " \
-        "limitAccessOnDurationEachDayTime, limitAccessOnDurationPerDay, limitAccessOnDurationPerDayTime,limitAccessOnTimeFrame, " \
-        "limitAccessOnTimeFrameEachDay, limitAccessOnTimeFramePerDay,limitAccessOnTimeFrameEachDayTime, limitAccessOnTimeFramePerDayTime ) " \
-        "VALUES (:account, :active, :bounded, :boundedByDay, :limitAccessOnDuration, :limitAccessOnDurationEachDay  "\
-        ":limitAccessOnDurationEachDayTime, :limitAccessOnDurationPerDay, :limitAccessOnDurationPerDayTime, :limitAccessOnTimeFrame, " \
-        ":limitAccessOnTimeFrameEachDay, :limitAccessOnTimeFramePerDay, :limitAccessOnTimeFrameEachDayTime, :limitAccessOnTimeFramePerDayTime ); ");
+    qDebug () << map;
 
-    query.bindValue(":account", map.value("account"));
-    query.bindValue(":active", map.value("active"));
-    query.bindValue(":bounded", map.value("bounded"));
-    query.bindValue(":boundedByDay", map.value("boundedByDay"));
+    query.prepare("INSERT INTO limits (account, active, bounded, boundedByDay )  " \
+        "VALUES (:account, :active, :bounded, :boundedByDay );" \
+                 " " );
+
+    query.bindValue(":account", map.value("account").toString());
+    query.bindValue(":active", map.value("active").toBool());
+    query.bindValue(":bounded", map.value("bounded").toBool());
+    query.bindValue(":boundedByDay", map.value("boundedByDay").toBool());
+
     query.bindValue(":limitAccessOnDuration", map.value("limitAccessOnDuration"));
-    query.bindValue(":limitAccessOnDurationEachDay", map.value("limitAccessOnDurationEachDay"));
-    query.bindValue(":limitAccessOnDurationEachDayTime", map.value("limitAccessOnDurationEachDayTime"));
-    query.bindValue(":limitAccessOnDurationPerDay", map.value("limitAccessOnDurationPerDay"));
-    query.bindValue(":limitAccessOnDurationPerDayTime", map.value("limitAccessOnDurationPerDayTime"));
-    query.bindValue(":limitAccessOnTimeFrame", map.value("limitAccessOnTimeFrame"));
-    query.bindValue(":limitAccessOnTimeFrameEachDay", map.value("limitAccessOnTimeFrameEachDay"));
-    query.bindValue(":limitAccessOnTimeFramePerDay", map.value("limitAccessOnTimeFramePerDay"));
-    query.bindValue(":limitAccessOnTimeFrameEachDayTime", map.value("limitAccessOnTimeFrameEachDayTime"));
-    query.bindValue(":limitAccessOnTimeFramePerDayTime", map.value("limitAccessOnTimeFramePerDayTime"));
+    // query.bindValue(":limitAccessOnDurationEachDay", map.value("limitAccessOnDurationEachDay"));
+    // query.bindValue(":limitAccessOnDurationEachDayTime", map.value("limitAccessOnDurationEachDayTime"));
+    // query.bindValue(":limitAccessOnDurationPerDay", map.value("limitAccessOnDurationPerDay"));
+    //query.bindValue(":limitAccessOnDurationPerDayTime", map.value("limitAccessOnDurationPerDayTime"));
+
+    // query.bindValue(":limitAccessOnTimeFrame", map.value("limitAccessOnTimeFrame"));
+
+    //query.bindValue(":limitAccessOnTimeFrameEachDay", map.value("limitAccessOnTimeFrameEachDay"));
+    //query.bindValue(":limitAccessOnTimeFramePerDay", map.value("limitAccessOnTimeFramePerDay"));
+    //query.bindValue(":limitAccessOnTimeFrameEachDayTime", map.value("limitAccessOnTimeFrameEachDayTime"));
+    //query.bindValue(":limitAccessOnTimeFramePerDayTime", map.value("limitAccessOnTimeFramePerDayTime"));
 
     bool success = query.exec();
     if (success)  {
