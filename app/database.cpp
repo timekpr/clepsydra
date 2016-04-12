@@ -42,20 +42,22 @@ Database::Database(QObject *parent) : QObject (parent)
 bool Database::getUserLimits(const QString &name, QVariantMap &map)
 {
     QSqlQuery query;
-    query.prepare("SELECT * FROM limits WHERE account = (:account);");
+    query.prepare("SELECT * FROM limits WHERE account = :account;");
     query.bindValue(":account", name);
+    qDebug () << name;
     bool success = query.exec();
-    if(!success)  {
-        QSqlRecord record = query.record();
-        if (query.next()) {
+    if(success)  {
+        while (query.next()) {
+            QSqlRecord record = query.record();
+            map.clear();
             for (int i=0; i<record.count(); ++i) {
-                m_map.insert(record.fieldName(i), query.value(i));
+                map.insert(record.fieldName(i), query.value(i));
             }
-        } else {            
-            map = m_map;
-            map.insert( ("account"), name);
-            saveLimits(map);
         }
+    } else {
+        map = m_map;
+        map.insert( ("account"), name);
+        saveLimits(map);
     }
     return true;
 }
@@ -108,7 +110,7 @@ bool Database::checkDbExists()
 void Database::getDefaults()
 {
     QSqlQuery query;
-    query.exec("SELECT * FROM defaults");
+    query.exec("SELECT * FROM defaults;");
     while (query.next()) {
         QSqlRecord record = query.record();
         m_map.clear();
