@@ -49,11 +49,12 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
         QSqlRecord record = query.record();
         if (query.next()) {
             for (int i=0; i<record.count(); ++i) {
-                qDebug () << record.fieldName(i);
                 m_map.insert(record.fieldName(i), query.value(i));
             }
-        } else {
+        } else {            
             map = m_map;
+            map.insert( ("account"), name);
+            saveLimits(map);
         }
     }
     return true;
