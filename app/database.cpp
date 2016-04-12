@@ -64,12 +64,12 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
 void Database::saveLimits (const QVariantMap &map)
 {
     QSqlQuery query;
-    qDebug () << map;
-
     query.prepare("INSERT INTO limits (account, active, bounded, boundedByDay,limitAccessOnDuration, limitAccessOnDurationEachDay, " \
-                  " limitAccessOnDurationEachDayTime ) "
+                  " limitAccessOnDurationEachDayTime,limitAccessOnDurationPerDay,limitAccessOnDurationPerDayTime, limitAccessOnTimeFrame, limitAccessOnTimeFrameEachDay, " \
+                  "limitAccessOnTimeFrame, limitAccessOnTimeFrameEachDay, limitAccessOnTimeFrameEachDayTime, limitAccessOnTimeFramePerDay, limitAccessOnTimeFramePerDayTime ) "
         "VALUES (:account, :active, :bounded, :boundedByDay, :limitAccessOnDuration, :limitAccessOnDurationEachDay, " \
-                 " :limitAccessOnDurationEachDayTime );" );
+                 " :limitAccessOnDurationEachDayTime, :limitAccessOnDurationPerDay, :limitAccessOnDurationPerDayTime, :limitAccessOnTimeFrame, :limitAccessOnTimeFrameEachDay," \
+                  " :limitAccessOnTimeFrame, :limitAccessOnTimeFrameEachDay, :limitAccessOnTimeFrameEachDayTime, :limitAccessOnTimeFramePerDay, :limitAccessOnTimeFramePerDayTime );" );
 
     query.bindValue(":account", map.value(CLEPSYDRA_ACCOUNT).toString());
     query.bindValue(":active", map.value(CLEPSYDRA_ACTIVE).toBool());
@@ -78,17 +78,14 @@ void Database::saveLimits (const QVariantMap &map)
     query.bindValue(":limitAccessOnDuration", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION).toBool());
     query.bindValue(":limitAccessOnDurationEachDay", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY).toBool());
     query.bindValue(":limitAccessOnDurationEachDayTime", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME).toString());
+    query.bindValue(":limitAccessOnDurationPerDay", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY).toBool());
+    query.bindValue(":limitAccessOnDurationPerDayTime", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_PER_DAY_TIME).toString());
 
-    // query.bindValue(":limitAccessOnDurationEachDayTime", map.value("limitAccessOnDurationEachDayTime"));
-    // query.bindValue(":limitAccessOnDurationPerDay", map.value("limitAccessOnDurationPerDay"));
-    //query.bindValue(":limitAccessOnDurationPerDayTime", map.value("limitAccessOnDurationPerDayTime"));
-
-    // query.bindValue(":limitAccessOnTimeFrame", map.value("limitAccessOnTimeFrame"));
-
-    //query.bindValue(":limitAccessOnTimeFrameEachDay", map.value("limitAccessOnTimeFrameEachDay"));
-    //query.bindValue(":limitAccessOnTimeFramePerDay", map.value("limitAccessOnTimeFramePerDay"));
-    //query.bindValue(":limitAccessOnTimeFrameEachDayTime", map.value("limitAccessOnTimeFrameEachDayTime"));
-    //query.bindValue(":limitAccessOnTimeFramePerDayTime", map.value("limitAccessOnTimeFramePerDayTime"));
+    query.bindValue(":limitAccessOnTimeFrame", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME).toBool());
+    query.bindValue(":limitAccessOnTimeFrameEachDay", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY).toBool());
+    query.bindValue(":limitAccessOnTimeFrameEachDayTime", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME).toString());
+    query.bindValue(":limitAccessOnTimeFramePerDay", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY).toBool());
+    query.bindValue(":limitAccessOnTimeFramePerDayTime", map.value(CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME).toString());
 
     bool success = query.exec();
     if (success)  {

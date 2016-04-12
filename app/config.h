@@ -25,8 +25,8 @@
 
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME                 "limitAccessOnTimeFrame"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY        "limitAccessOnTimeFrameEachDay"
-#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY         "limitAccessOnTimeFramePerDay"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_EACH_DAY_TIME   "limitAccessOnTimeFrameEachDayTime"
+#define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY         "limitAccessOnTimeFramePerDay"
 #define CLEPSYDRA_LIMIT_ACCESS_ON_TIMEFRAME_PER_DAY_TIME    "limitAccessOnTimeFramePerDayTime"
 
 // CHECK NEXT !!!!
