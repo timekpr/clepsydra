@@ -42,7 +42,7 @@ Database::Database(QObject *parent) : QObject (parent)
 bool Database::getUserLimits(const QString &name, QVariantMap &map)
 {
     QSqlQuery query;
-    query.prepare("SELECT FROM limits WHERE account = (:account)");
+    query.prepare("SELECT * FROM limits WHERE account = (:account);");
     query.bindValue(":account", name);
     bool success = query.exec();
     if(!success)  {
