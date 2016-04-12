@@ -35,7 +35,7 @@ Database::Database(QObject *parent) : QObject (parent)
     else  {
        qDebug() << "Database: connection ok";
     }
-    // Just making application working for smoother.
+    // Just making application work for more smoother.
     getDefaults ();
 }
 
@@ -44,7 +44,6 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
     QSqlQuery query;
     query.prepare("SELECT * FROM limits WHERE account = :account;");
     query.bindValue(":account", name);
-    qDebug () << name;
     bool success = query.exec();
     if(success)  {
         while (query.next()) {
