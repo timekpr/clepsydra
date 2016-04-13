@@ -105,15 +105,20 @@ void Database::updateLimits(const QString &, const QVariantMap &)
 bool Database::updateAccountValues(const QString &name, const QString &key, const QVariant& value)
 {
     bool retValue = false;
+    if (key == CLEPSYDRA_ACCOUNT)  {
+        qDebug() << "it's account key";
+        return false;
+    }
     QString sql ("UPDATE limits SET ");
     if (value.type() == QVariant::Bool )  {
-        sql.append (key).append (" = '" ).append(value.toBool()).append("' where account= '").append(name).append("';");
+        sql.append (key).append (" = '" ).append(QString::number(value.toBool())).append("' where account= '").append(name).append("';");
     } else {
         // Should be QVariant::String
         sql.append (key).append (" = '" ).append(value.toString()).append("' where account = '").append(name).append("';");
     }
     QSqlQuery query(sql);
     bool success = query.exec();
+    qDebug () << query.lastQuery();
     if (success) {
         retValue = true;
     }
