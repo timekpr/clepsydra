@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     /////
 
-    m_limits->updateAccountValues("opwallin", CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME, "03:30");
+    m_limits->updateAccountValues("mattimeikalainen", CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME, "03:30");
 
     /////
 

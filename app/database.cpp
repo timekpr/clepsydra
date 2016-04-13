@@ -107,14 +107,12 @@ bool Database::updateAccountValues(const QString &name, const QString &key, cons
     bool retValue = false;
     QString sql ("UPDATE limits SET ");
     if (value.type() == QVariant::Bool )  {
-        sql.append (key).append ("=" ).append(value.toBool()).append(" where account=:account;") ;
+        sql.append (key).append (" = '" ).append(value.toBool()).append("' where account= '").append(name).append("';");
     } else {
         // Should be QVariant::String
-        sql.append (key).append ("=" ).append(value.toString()).append(" where account=:account;") ;
+        sql.append (key).append (" = '" ).append(value.toString()).append("' where account = '").append(name).append("';");
     }
-    qDebug() << sql;
     QSqlQuery query(sql);
-    query.bindValue(":account", name);
     bool success = query.exec();
     if (success) {
         retValue = true;
