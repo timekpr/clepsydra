@@ -26,6 +26,13 @@ public:
 
     QVariantMap& getDefaultLimits () {return m_map;}
 
+    //
+    // Update account information based on given value
+    //
+    // Return true if update was successful
+    //
+    bool updateAccountValues (const QString&, const QString&, const QVariant&);
+
 private:
     void getDefaults ();
     bool checkDbExists ();

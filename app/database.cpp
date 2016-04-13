@@ -45,15 +45,16 @@ bool Database::getUserLimits(const QString &name, QVariantMap &map)
     query.prepare("SELECT * FROM limits WHERE account = :account;");
     query.bindValue(":account", name);
     bool success = query.exec();
+    map.clear();
     if(success)  {
         while (query.next()) {
             QSqlRecord record = query.record();
-            map.clear();
             for (int i=0; i<record.count(); ++i) {
                 map.insert(record.fieldName(i), query.value(i));
             }
         }
-    } else {
+    }
+    if (map.isEmpty())  {
         map = m_map;
         map.insert( ("account"), name);
         saveLimits(map);
@@ -98,6 +99,27 @@ void Database::saveLimits (const QVariantMap &map)
 
 void Database::updateLimits(const QString &, const QVariantMap &)
 {
+}
+
+
+bool Database::updateAccountValues(const QString &name, const QString &key, const QVariant& value)
+{
+    bool retValue = false;
+    QString sql ("UPDATE limits SET ");
+    if (value.type() == QVariant::Bool )  {
+        sql.append (key).append ("=" ).append(value.toBool()).append(" where account=:account;") ;
+    } else {
+        // Should be QVariant::String
+        sql.append (key).append ("=" ).append(value.toString()).append(" where account=:account;") ;
+    }
+    qDebug() << sql;
+    QSqlQuery query(sql);
+    query.bindValue(":account", name);
+    bool success = query.exec();
+    if (success) {
+        retValue = true;
+    }
+    return retValue;
 }
 
 bool Database::checkDbExists()

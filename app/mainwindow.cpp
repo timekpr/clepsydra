@@ -28,6 +28,15 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     m_ui->setupUi(this);
     m_limits = new Database ();
+
+
+    /////
+
+    m_limits->updateAccountValues("opwallin", CLEPSYDRA_LIMIT_ACCESS_ON_DURATION_EACH_DAY_TIME, "03:30");
+
+    /////
+
+
     m_grantWidget = new GrantTabWidget(this);    
     m_statusWidget = new StatusTabWidget(this);
     m_limitWidget =  new LimitsTabWidget(this);
