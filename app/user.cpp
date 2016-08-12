@@ -50,21 +50,26 @@ bool User::isAdmin()
     return reply;
 }
 
-void User::setValue (const QString& settings, bool newVal)
+void User::setValue (const QString& key, bool newVal)
 {
-    if (settings == CLEPSYDRA_LOCKED && m_isAdmin)  {
+    if (key == CLEPSYDRA_LOCKED && m_isAdmin)  {
         // Make sure that admin accounts are not locked
         m_isLocked = false;
         return;
     } else {
         m_isLocked = newVal;
     }
-    m_accountLimits.insert(settings, m_isLocked);
+    m_accountLimits.insert(key, m_isLocked);
 }
 
 bool User::isLocked()
 {
     return m_isLocked;
+}
+
+bool User::isBounded ()
+{
+    return m_accountLimits.value(CLEPSYDRA_LIMIT_BOUNDED).toBool();
 }
 
 QString User::UserName() const

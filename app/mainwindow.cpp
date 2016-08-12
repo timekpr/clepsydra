@@ -22,6 +22,7 @@
 #include "ui_main.h"
 #include "storage.h"
 #include "mainwindow.h"
+#include "logging.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QWidget(parent), m_ui(new Ui::Form)
@@ -84,6 +85,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Read application settings
     //m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
+    Logging  log = new Logging (this);
+    log.setFileName (QString("musteri.log"));
 
     }
 
@@ -141,18 +144,18 @@ void MainWindow::btnClearBypassClicked()
 void MainWindow::btnLockAccountClicked ()
 {
      m_accounts->getUser(m_curUserIndex)
-             ->setValue(QString(CLEPSYDRA_LOCKED), true );
-//     m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
-//        m_accounts->getUser(m_curUserIndex)->getUserLimits());
+             ->setValue(QString(CLEPSYDRA_LIMIT_BOUNDED), true );
+     m_limits->updateAccountValues(m_accounts->getUser(m_curUserIndex)->UserName(),
+        CLEPSYDRA_LIMIT_BOUNDED, QVariant(true));
      m_grantWidget->enableLockButton (true);
 }
 
 void MainWindow::btnUnlockAccountClicked ()
 {
     m_accounts->getUser(m_curUserIndex)
-            ->setValue(CLEPSYDRA_LOCKED, false);
-//    m_limits->map2Json(m_accounts->getUser(m_curUserIndex)->UserName(),
-//       m_accounts->getUser(m_curUserIndex)->getUserLimits());
+            ->setValue(CLEPSYDRA_LIMIT_BOUNDED, false);
+    m_limits->updateAccountValues(m_accounts->getUser(m_curUserIndex)->UserName(),
+        CLEPSYDRA_LIMIT_BOUNDED, QVariant(false));
     m_grantWidget->enableLockButton (false);
 }
 

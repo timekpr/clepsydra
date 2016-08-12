@@ -33,10 +33,13 @@ CONFIG(debug, debug|release) {
     MOC_DIR = ../build/release/.moc
 }
 
+DEPENDPATH  += .
+INCLUDEPATH += .
+
 HEADERS += \
     accounts.h \
     user.h \
-    src/helper.h \
+    config.h \
     mainwindow.h \
     granttabwidget.h \
     statustabwidget.h \
@@ -50,13 +53,23 @@ SOURCES += \
     main.cpp \
     accounts.cpp \
     user.cpp \
-    src/helper.cpp \
     mainwindow.cpp  \
     granttabwidget.cpp \
     statustabwidget.cpp \
     limitstabwidget.cpp \
     storage.cpp \
     database.cpp
+
+DEPENDPATH  += src
+INCLUDEPATH += src
+
+HEADERS += \
+    src/helper.h \
+    src/logging.h
+
+SOURCES += \
+    src/helper.cpp \
+    src/logging.cpp
 
 isEmpty(PREFIX) {
     PREFIX = /etc/
