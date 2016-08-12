@@ -85,9 +85,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Read application settings
     //m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
-    Logging  log = new Logging (this);
-    log.setFileName (QString("musteri.log"));
+    Logging*  log = new Logging ();
+    log->setFileName (QString("musteri.log"));
 
+    delete log;
     }
 
 void MainWindow::setCurrentUserIndex(int nwIndex)
