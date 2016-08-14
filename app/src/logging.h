@@ -12,7 +12,7 @@ public:
 
     void setFileName (const QString&);
     void logHexData (const QString&, const QString&);
-    void logByteData (char *, int len);
+    void logByteData (unsigned char *, int len);
 
 #if (defined (LINUX) || defined (__linux__))
     const QByteArray&  getRandomData (int len);

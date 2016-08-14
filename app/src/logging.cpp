@@ -47,17 +47,29 @@ void Logging::logHexData (const QString& data, const QString& /*header*/)
     m_logger.close();
 }
 
-void Logging::logByteData (char *array, int len)
+void Logging::logByteData (unsigned char *array, int len)
 {
     QString result;
+    uint dd = 10;
+    int numInLine = 0;
     result.reserve(3 * len - 1);
-    for(char* i = array, end = array + len; i < end; ++i) {
+    for(unsigned char* i = array, *end = array + len; i < end; ++i, ++numInLine) {
         if(!result.isEmpty()) {
             result += QLatin1Char(' ');
         }
+        if (numInLine >= 20 )  {
+            result += QLatin1Char('\n');
+            numInLine = 0;
+        }
         result += QString("%1").arg(static_cast<uint>(*i), 2, 16, QLatin1Char('0'));
     }
-    hexLineEdit->setText(result);
+    result += QLatin1Char('\n');
+    if (dd) {
+        dd++;
+    }
+    qDebug () << result;
+    logHexData(result, "foof");
+    // m_hexConversion.setText(result);
 }
 
 #if (defined (LINUX) || defined (__linux__))
