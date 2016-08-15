@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Olli-Pekka Wallin <opwallin@gmail.com>
+// Copyright (c) 2016 Olli-Pekka Wallin <opwallin@gmail.com>
 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
