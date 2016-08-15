@@ -56,6 +56,9 @@ settings_target.files += config/clepsydra/clepsydra.conf
 settings_target.files += config/clepsydra.db
 settings_target.files += config/clepsydra/clepsydradefault.json
 
+development.path = /tmp
+development.files += config/clepsydra.db
+
 working_lib_target.path = $$WORKING_FOLDER
 working_lib_target.files += config/clepsydra/clepsydralimits.json
 
@@ -69,3 +72,7 @@ OTHER_FILES +=  config/clepsydra/clepsydradefault.json
 OTHER_FILES +=  config/clepsydra/clepsydralimits.json
 
 INSTALLS += settings_target working_lib_target logrotate_target application_bin application_desktop application_icon
+
+QMAKE_INSTALL_FILE    = install -m 755 -p -o $$(USER) -g $$(USER)
+
+INSTALLS += development
