@@ -25,7 +25,7 @@ Database::Database(QObject *parent) : QObject (parent)
     // TODO Change working folder name for real folder name later on !!!!!
     m_path = QString().append(CLEPSYDRA_WORKING_FOLDER).append(CLEPSYDRA_SQLITE_FILE);
     if (!checkDbExists())  {
-        qDebug() << "Error: Database cannot be found !!!! ";
+        qDebug() << "Error: Database cannot be found !!!! " << m_path;
         return;
     }
     m_db.setDatabaseName (m_path);
