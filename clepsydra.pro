@@ -13,7 +13,6 @@
 
 TEMPLATE = subdirs
 CONFIG += debug_and_release
-#CONFIG += debug
 CONFIG += ordered
 SUBDIRS =  app
 

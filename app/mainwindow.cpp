@@ -85,14 +85,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // Read application settings
     //m_limits->readGroups2Map(m_settingsMap, "/etc/clepsydra/clepsydra.conf");
-    Logging*  log = new Logging ();
-
-    QString foo = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget metus vel leo varius consectetur a efficitur nulla. Cras vulputate augue eu nisi pharetra, a varius felis vehicula. Nunc aliquet at nisi vel suscipit. Ut auctor elementum turpis, nec facilisis ipsum laoreet nec. Vivamus consequat ornare congue. Sed vitae nisl vitae nunc rhoncus placerat. Sed posuere, magna at ullamcorper pulvinar, nunc tortor pellentesque risus, at scelerisque augue metus id diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam nec fermentum ex. Maecenas ullamcorper, purus nec dapibus maximus, leo metus viverra ante, a semper arcu metus a erat. Pellentesque at massa ut dolor vestibulum congue. Phasellus in tellus non odio laoreet lobortis vitae vel dolor.";
-    log->setFileName (QString("musteri.log"));
-    log->logByteData((unsigned char*)log->getRandomData(128).toStdString().c_str(), 128);
-    //log->logHexData(foo, "not used");
-
-    delete log;
     }
 
 void MainWindow::setCurrentUserIndex(int nwIndex)

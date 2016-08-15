@@ -30,9 +30,9 @@ void Logging::setFileName(const QString &name)
 }
 
 
-void Logging::logHexData (const QString& data, const QString& /*header*/)
+void Logging::logHexData (const QString& data, const QString& header)
 {
-    m_logger.open(QIODevice::WriteOnly);
+    m_logger.open(QIODevice::Append);
     /* Check it opened OK */
     if(!m_logger.isOpen()){
         qDebug()  << "- Error, unable to open" << m_logger.fileName() << "for output";
@@ -42,7 +42,12 @@ void Logging::logHexData (const QString& data, const QString& /*header*/)
     /* Point a QTextStream object at the file */
     QTextStream outStream(&m_logger);
     /* Write the line to the file */
+
+    outStream << "\n" << header << "\n\n" ;
+
     outStream << data;
+
+    outStream << "\n\n ";
     // m_logger.write(data.toStdString().c_str(), data.length() );
     m_logger.close();
 }
@@ -64,12 +69,7 @@ void Logging::logByteData (unsigned char *array, int len)
         result += QString("%1").arg(static_cast<uint>(*i), 2, 16, QLatin1Char('0'));
     }
     result += QLatin1Char('\n');
-    if (dd) {
-        dd++;
-    }
-    qDebug () << result;
     logHexData(result, "foof");
-    // m_hexConversion.setText(result);
 }
 
 #if (defined (LINUX) || defined (__linux__))
