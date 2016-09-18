@@ -20,17 +20,17 @@ QT += dbus sql
 QT += widgets
 
 CONFIG(debug, debug|release) {
-    DESTDIR = ../build/debug
-    RCC_DIR = ../build/debug/.qrc
-    UI_DIR = ../build/debug/.ui
-    OBJECTS_DIR = ../build/debug/.obj
-    MOC_DIR = ../build/debug/.moc
+    DESTDIR = ../bin/debug
+    RCC_DIR = ../bin/debug/.qrc
+    UI_DIR = ../bin/debug/.ui
+    OBJECTS_DIR = ../bin/debug/.obj
+    MOC_DIR = ../bin/debug/.moc
 } else {
-    DESTDIR = ../build/release
-    RCC_DIR = ../build/release/.qrc
-    UI_DIR = ../build/release/.ui
-    OBJECTS_DIR = ../build/release/.obj
-    MOC_DIR = ../build/release/.moc
+    DESTDIR = ../bin/release
+    RCC_DIR = ../bin/release/.qrc
+    UI_DIR = ../bin/release/.ui
+    OBJECTS_DIR = ../bin/release/.obj
+    MOC_DIR = ../bin/release/.moc
 }
 
 DEPENDPATH  += .

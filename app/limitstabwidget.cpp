@@ -131,7 +131,10 @@ void LimitsTabWidget::setLimits (const QVariantMap& limitMap)
         m_limitTab->ckLimitAccessTimeDuration->setChecked(false);
         m_limitTab->ckLimitAccessTimeFrame->setChecked(true);
     }
+
+    m_limitMap = limitMap;
     m_allowSignalChange = true;
+
 }
 
 void LimitsTabWidget::getLimits(QVariantMap &map)

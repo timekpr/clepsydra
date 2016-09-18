@@ -79,6 +79,7 @@ private:
 private:
     Ui_limitForm *m_limitTab;
     bool m_allowSignalChange;
+    QVariantMap m_limitMap;
 };
 
 #endif // LIMITSTABWIDGET_H

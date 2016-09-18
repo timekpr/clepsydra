@@ -43,11 +43,11 @@ application_icon.path = /usr/share/pixmaps
 application_icon.files = data/clepsydra.svg
 
 CONFIG(debug, debug|release) {
-    application_bin.files += build/debug/clepsydra
+    application_bin.files += bin/debug/clepsydra
 }
 
 CONFIG(release, debug|release) {
-    application_bin.files +=   build/release/clepsydra
+    application_bin.files +=   bin/release/clepsydra
 }
 application_bin.path = /usr/local/bin
 
