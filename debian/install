@@ -1,4 +1,4 @@
-timekpr usr/bin
+clepsydra usr/bin
 timekpr-gui usr/bin
 timekpr-client usr/bin
 timekpr*.py usr/share/python-support/timekpr

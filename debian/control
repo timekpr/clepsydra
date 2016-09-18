@@ -1,14 +1,14 @@
-Source: timekpr
+Source: clepsydra
 Section: admin
 Priority: extra
-Maintainer: Savvas Radevic <vicedar@gmail.com>
-Uploaders: Even Nedberg <code@nedberg.net>
+Maintainer: Olli-Pekka Wallin <opwallin@gmail.com>
+Uploaders: Olli-Pekka Wallin <opwallin@gmail.com>
 Build-Depends: debhelper (>= 7), python-dev, python-support (>= 0.5.3), po-debconf
 Standards-Version: 3.8.0
 XS-Python-Version: >= 2.5
 Vcs-Bzr: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
 Vcs-Browser: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
-Homepage: http://launchpad.net/timekpr/
+Homepage: http://github.com/timekpr/
 
 Package: timekpr
 Architecture: all

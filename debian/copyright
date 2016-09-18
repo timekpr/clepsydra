@@ -1,11 +1,10 @@
 Format-Specification: http://dep.debian.net/deps/dep5/
-Name: timekpr
-Maintainer: Even Nedberg <code@nedberg.net>
-            Savvas Radevic <vicedar@gmail.com>
-Source: http://launchpad.net/timekpr/+download
+Name: clepsydra
+Maintainer: Olli-Pekka Wallin <opwallin@gmail.com>
+Source: http://launchpad.net/clepsydra/+download
 
 Files: *, doc/*, data/*, i18n/*, scripts/*
-Copyright: Savvas Radevic <vicedar@gmail.com>
+Copyright: Olli-Pekka Wallin <opwallin@gmail.com>
 License: GPL-3+
 
 Files: artwork/*
@@ -13,8 +12,8 @@ License: other
     Released into the Public Domain
 
 Files: debian/*
-Copyright: 2008-2009, Savvas Radevic <vicedar@gmail.com>
-           2008-2009, Even Nedberg <code@nedberg.net>
+Copyright: 2016, Olli-Pekka Wallin <opwallin@gmail.com>
+
 License: GPL-3+
 
 License: GPL-3+

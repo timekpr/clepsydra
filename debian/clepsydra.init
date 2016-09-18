@@ -6,18 +6,18 @@
 # Required-Stop:     $remote_fs
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Timekpr - Keep control of computer usage
+# Short-Description: Clepsydra - Keep control of computer usage
 # Description:       This program will track and control the computer usage
 #                    of your kids. You can limit their daily usage and
 #                    configure periods when they cannot log in.
 ### END INIT INFO
 
-# Author: Savvas Radevic <vicedar@gmail.com>
+# Author: Olli-Pekka Wallin <opwallin@gmail.com>
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="computer usage control daemon"
-NAME=timekpr
+NAME=clepsydra
 DAEMON=/usr/bin/$NAME
 PIDFILE=/var/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME

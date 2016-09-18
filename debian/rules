@@ -5,6 +5,7 @@ DEB_PYTHON_SYSTEM=pysupport
 clean:
 	dh $@
 	rm -rf ".bzr"
+        rm -rf ".git"
 
 %:
 	dh $@
