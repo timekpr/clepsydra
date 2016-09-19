@@ -10,13 +10,11 @@ Vcs-Bzr: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
 Vcs-Browser: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
 Homepage: http://github.com/timekpr/
 
-Package: timekpr
+Package: clepsydra
 Architecture: all
 XB-Python-Version: ${python:Versions}
 Depends: ${misc:Depends}, ${python:Depends}, python-gtk2, python-glade2, procps, libnotify-bin, python-distutils-extra, python-pyparsing, login, libpam-modules, gksu | kdesu
-Provides: timekpr
-Conflicts: timekpr (< 0.2.2)
-Replaces: timekpr (< 0.2.2)
+Provides: clepsydra
 Recommends: gdm | kdm
 Description: Keep control of computer usage
  This program will track and control the computer usage of
@@ -25,4 +23,4 @@ Description: Keep control of computer usage
  when they can or cannot log in.
  .
  Any bugs should be reported to our bug tracker:
- https://bugs.launchpad.net/timekpr/+bugs
+ https://bugs.launchpad.net/clepsydra/+bugs

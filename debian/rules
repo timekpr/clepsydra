@@ -1,11 +1,9 @@
 #!/usr/bin/make -f
 
-DEB_PYTHON_SYSTEM=pysupport
-
 clean:
 	dh $@
 	rm -rf ".bzr"
-        rm -rf ".git"
+    rm -rf ".git"
 
 %:
 	dh $@

@@ -70,31 +70,31 @@ afile='/etc/security/access.conf'
 if [ -e $afile ] ; then
   x=$(grep -c "^###\? TIMEKPR START" $afile)
   if [ $x -ge 1 ] ; then
-    #Found timekpr section, fix if commented (after removal, see postrm)
-    sed -i -e '/^### TIMEKPR START/,/^### TIMEKPR END/ s/^#//g' $afile
+    #Found CLEPSYDRA section, fix if commented (after removal, see postrm)
+    sed -i -e '/^### CLEPSYDRA START/,/^### CLEPSYDRA END/ s/^#//g' $afile
   else
-    #No timekpr section
-    sed -i -e '$s/$/\n## TIMEKPR START\n## TIMEKPR END/' $afile
+    #No CLEPSYDRA section
+    sed -i -e '$s/$/\n## CLEPSYDRA START\n## CLEPSYDRA END/' $afile
   fi
 else
   #Create access.conf
   touch $afile
-  sed -i -e '$s/$/\n## TIMEKPR START\n## TIMEKPR END/' $afile
+  sed -i -e '$s/$/\n## CLEPSYDRA START\n## CLEPSYDRA END/' $afile
 fi
 
 if [ -e $tfile ] ; then
-  x=$(grep -c "^###\? TIMEKPR START" $tfile)
+  x=$(grep -c "^###\? CLEPSYDRA START" $tfile)
   if [ $x -ge 1 ] ; then
-    #Found timekpr section, fix if commented (after removal, see postrm)
-    sed -i -e '/^### TIMEKPR START/,/^### TIMEKPR END/ s/^#//g' $tfile
+    #Found CLEPSYDRA section, fix if commented (after removal, see postrm)
+    sed -i -e '/^### CLEPSYDRA START/,/^### CLEPSYDRA END/ s/^#//g' $tfile
   else
-    #No timekpr section
-    sed -i -e '$s/$/\n## TIMEKPR START\n## TIMEKPR END/' $tfile
+    #No CLEPSYDRA section
+    sed -i -e '$s/$/\n## CLEPSYDRA START\n## CLEPSYDRA END/' $tfile
   fi
 else
   #Create access.conf
   touch $tfile
-  sed -i -e '$s/$/\n## TIMEKPR START\n## TIMEKPR END/' $tfile
+  sed -i -e '$s/$/\n## CLEPSYDRA START\n## CLEPSYDRA END/' $tfile
 fi
 
 #DEBHELPER#
