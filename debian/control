@@ -3,17 +3,13 @@ Section: admin
 Priority: extra
 Maintainer: Olli-Pekka Wallin <opwallin@gmail.com>
 Uploaders: Olli-Pekka Wallin <opwallin@gmail.com>
-Build-Depends: qt5-qmake, libqt5-dev, libmagick++-dev, debhelper (>= 8)
-Standards-Version: 3.8.0
-XS-Python-Version: >= 2.5
-Vcs-Bzr: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
-Vcs-Browser: https://code.launchpad.net/~timekpr-maintainers/timekpr/trunk
-Homepage: http://github.com/timekpr/
+Build-Depends: qt5-qmake, libqt5-dev, libmagick++-dev, debhelper (>= 9)
+Standards-Version: 3.9.6
+Homepage: https://github.com/timekpr
 
 Package: clepsydra
 Architecture: all
-XB-Python-Version: ${python:Versions}
-Depends: ${misc:Depends}, procps, libnotify-bin, login, libpam-modules, gksu | kdesu
+Depends: ${misc:Depends}, libqt5svg5, ${shlibs:Depends}, procps, libnotify-bin, login, libpam-modules, gksu | kdesu
 Provides: clepsydra
 Recommends: gdm | kdm
 Description: Keep control of computer usage
