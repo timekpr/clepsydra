@@ -175,6 +175,8 @@ void LimitsTabWidget::getLimits(QVariantMap &map)
     limitsList.append( m_limitTab->sbTo_sun->time().toString(FORMAT_STRING_FMT));
 
     map.insert(CLEPSYDRA_LIMIT_TIME_TO, limitsList);
+
+    m_limitMap = map;
 }
 
 void LimitsTabWidget::disableAccessDurationControls (bool toEnable, EnableMode mode)
