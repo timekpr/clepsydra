@@ -1,33 +1,40 @@
 include copperspice.am
- 
-# path to gcc (windows)
-gccpath=/c/MingW/bin
- 
+
+if OSTYPE_LINUX
+  gccpath = gcc
+
+endif
+
+if OSTYPE_WIN
+  # path to gcc (windows)
+  gccpath=/c/MingW/bin
+endif
+
 # list of gcc libraries (windows)
 gcclibs=libgcc_s_sjlj-1  libstdc++-6  libwinpthread-1
- 
+
 # list of CopperSpice libraries
 cslibs=Core Gui
- 
+
 # location of includes
 AM_CXXFLAGS+=-I..
 
 if OSTYPE_WIN
     # disable console on window
     AM_CXXFLAGS+=-mwindows
- 
-    # location for 'make install'
+
+   # location for 'make install'
     installdir=$(abs_top_builddir)/install
  endif
 
- # target app name
- bin_PROGRAMS = clepsydra
+# target app name
+bin_PROGRAMS = clepsydra
 
- # copy required CopperSpice and gcc files for deployment
- .PHONY: deploy
+# copy required CopperSpice and gcc files for deployment
+.PHONY: deploy
 
- if OSTYPE_LINUX
- deploy : all
+if OSTYPE_LINUX
+deploy : all
          mkdir -p $(deploydir)
 
          $(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deploydir)
@@ -77,35 +84,35 @@ if OSTYPE_WIN
  
  endif
  
- if OSTYPE_WIN
- deploy : all
+if OSTYPE_WIN
+deploy : all
          mkdir -p $(deploydir)
- 
+
          $(LIBTOOL) --mode=install cp $(bin_PROGRAMS) $(deploydir)
- 
+
          rsync -W -a --modify-window=2 $(patsubst %,$(gccpath)/%.dll,$(gcclibs)) $(deploydir)
          rsync -W -a --modify-window=2 $(patsubst %,$(CS_HOME)/bin/libCs%1-0.dll,$(cslibs)) $(deploydir)
- endif
+endif
 
- # search path for source
- VPATH = ../
+# search path for source
+VPATH = .
 
- # linking
- HelloLunch_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
+# linking
+HelloLunch_LDFLAGS=$(AM_LDFLAGS) $(patsubst %,-lCs%1,$(cslibs))
 
- # source
- HelloLunch_SOURCES = main.cpp lunch.cpp
+# source
+HelloLunch_SOURCES = main.cpp lunch.cpp
 
- noinst_HEADERS = lunch.h
- 
- FORMS = forms/lunch.ui
- 
- TRANSLATIONS =
-  
- RESOURCES = hellolunch.qrc
- 
- # use wilcard to obtain the dependency list
- qrc_hellolunch.cpp: hellolunch.qrc   $(wildcard ../resources/*)
- 
- # required to compile qrc
- nodist_HelloLunch_SOURCES+=qrc_hellolunch.cpp
+noinst_HEADERS = lunch.h
+
+FORMS = forms/lunch.ui
+
+TRANSLATIONS =
+
+RESOURCES = hellolunch.qrc
+
+# use wilcard to obtain the dependency list
+qrc_hellolunch.cpp: hellolunch.qrc   $(wildcard ../resources/*)
+
+# required to compile qrc
+nodist_HelloLunch_SOURCES+=qrc_hellolunch.cpp
